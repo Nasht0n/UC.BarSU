@@ -1,0 +1,46 @@
+﻿@model Web.ViewModels.LoginViewModel
+
+@{
+    ViewBag.Title = "SignIn";
+    Layout = "~/Views/Shared/_MainPage.cshtml";
+}
+
+<main id="main">
+    <section id="signIn" class="signIn d-flex align-items-center">
+        <div class="container">
+            <div class="section-title">
+                <h2>Вход в систему</h2>
+                <hr />
+                <p class="small">
+                    Пожалуйста, заполните поля для авторизации пользователя в системе
+                </p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 offset-lg-4">
+
+                    @using (Html.BeginForm("SignIn", "UC", FormMethod.Post, new { id = "signinform" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", placeholder = "Введите логин пользователя" } })
+                            @Html.ValidationMessageFor(model => model.Username)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Введите пароль пользователя" } })
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+
+                        <div class="text-center">
+                            <input type="submit" value="Вход в систему" />
+                        </div>
+                    }
+                </div>
+            </div>
+            <hr />
+        </div>
+    </section>
+</main>
+
