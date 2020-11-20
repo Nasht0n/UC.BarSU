@@ -51,10 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Feedback.cs" />
-    <Compile Include="Entities\Permsission.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\UserPermissions.cs" />
+    <Compile Include="Entities\AppFeedback.cs" />
+    <Compile Include="Entities\AppPermission.cs" />
+    <Compile Include="Entities\AppUser.cs" />
+    <Compile Include="Entities\AppUserPermissions.cs" />
     <Compile Include="Migrations\202011191234362_AddUserModels.cs" />
     <Compile Include="Migrations\202011191234362_AddUserModels.designer.cs">
       <DependentUpon>202011191234362_AddUserModels.cs</DependentUpon>

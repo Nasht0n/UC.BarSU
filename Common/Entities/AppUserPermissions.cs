@@ -2,15 +2,14 @@
 
 namespace Common.Entities
 {
-    [Table("AppUserPermissions")]
-    public class UserPermissions
+    public class AppUserPermissions
     {
         public int UserId { get; set; }
         public int PermissionId { get; set; }
 
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public AppUser User { get; set; }
         [ForeignKey("PermissionId")]
-        public Permsission Permsission { get; set; }
+        public AppPermission Permsission { get; set; }
     }
 }

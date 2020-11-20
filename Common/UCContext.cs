@@ -10,14 +10,14 @@ namespace Common
 
         }
 
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Permsission> Permsissions { get; set; }
-        public virtual DbSet<Feedback> Feedbacks { get; set; }
-        public virtual DbSet<UserPermissions> UserPermissions { get; set; }
+        public virtual DbSet<AppUser> Users { get; set; }
+        public virtual DbSet<AppPermission> Permissions { get; set; }
+        public virtual DbSet<AppFeedback> Feedbacks { get; set; }
+        public virtual DbSet<AppUserPermissions> UserPermissions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserPermissions>().HasKey(c=> new { c.UserId, c.PermissionId });
+            modelBuilder.Entity<AppUserPermissions>().HasKey(c=> new { c.UserId, c.PermissionId });
         }
     }
 }

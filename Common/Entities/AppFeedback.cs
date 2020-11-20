@@ -3,8 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Common.Entities
 {
-    [Table("AppFeedback")]
-    public class Feedback
+    public class AppFeedback
     {
         [Key]
         public int Id { get; set; }
