@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<section id="ScienceProjectIndex">
+    <div class="container">
+        <div class="section-title">
+            <h2>Научные проекты</h2>
+        </div>
+
+        <div class="d-flex">
+            <div class="mr-auto py-2">
+                <button type="button" id="create-btn" data-toggle="modal" data-target="#createScienceProjectModal">
+                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                    <span class="mx-1">Подать заявку</span>
+                </button>
+            </div>
+        </div>
+        <hr />
+        <table class="table table-hover" id="tblProjects">
+            <thead class="table-bg">
+                <tr class="text-white">
+                    <td></td>
+                    <td class="w-50">Наименование проекта</td>
+                    <td class="w-50">Программа проекта</td>
+                    <td class="w-25">Стоимость</td>
+                </tr>
+            </thead>
+            <tbody>
+                @*@foreach (var item in Model.Projects)
+                {
+                    <tr onclick="location.href = '@Url.Action("Details", "Project", new { id=item.Id })'">
+                        <td>
+                            @if (item.StatusId == (int)ProjectState.JustCreated)
+                            {
+                                <span class="badge badge-info">Подана заявка</span>
+                            }
+                            @if (item.StatusId == (int)ProjectState.Approved)
+                            {
+                                <span class="badge badge-primary">Одобрен</span>
+                            }
+                            @if (item.StatusId == (int)ProjectState.Finished)
+                            {
+                                <span class="badge badge-success">Завершен</span>
+                            }
+                        </td>
+                        <td>
+                            <span class="ml-3">@item.Name</span>
+                        </td>
+                        <td>
+                            <span>@item.Program</span>
+                        </td>
+                        <td>
+                            <span>@item.Price</span>
+                        </td>
+                    </tr>
+                }*@
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+
+

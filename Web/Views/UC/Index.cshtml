@@ -62,7 +62,6 @@
                     <li><a href="#features">Возможности</a></li>
                     <li><a href="#faq">F.A.Q</a></li>
                     <li><a href="#contact">Контакты</a></li>
-
                     <li class="get-started"><a href="@Url.Action("SignIn","UC")">Вход в систему</a></li>
                 </ul>
             </nav><!-- .nav-menu -->
@@ -74,6 +73,16 @@
     <section id="hero" class="d-flex align-items-center">
 
         <div class="container">
+
+            @if (ViewBag.AccessCode == false)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Для вашей учётной записи не настроены права доступа системы. Обратитесь к администратору
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
 
             @if (ViewBag.FeedbackCode == 1)
             {

@@ -10,23 +10,23 @@ using System.Threading.Tasks;
 
 namespace Repository.Concrete
 {
-    public class FeedbackRepository : IFeedbackRepository
+    public class FacultyRepository : IFacultyRepository
     {
         private readonly UCContext context;
 
-        public FeedbackRepository(UCContext context)
+        public FacultyRepository(UCContext context)
         {
             this.context = context;
         }
 
-        public void Delete(AppFeedback feedback)
+        public void Delete(Faculty faculty)
         {
             try
             {
-                var deleted = context.Feedbacks.SingleOrDefault(f => f.Id == feedback.Id);
+                var deleted = context.Faculties.SingleOrDefault(d => d.Id == faculty.Id);
                 if (deleted != null)
                 {
-                    context.Feedbacks.Remove(deleted);
+                    context.Faculties.Remove(deleted);
                     context.SaveChanges();
                 }
             }
@@ -36,14 +36,14 @@ namespace Repository.Concrete
             }
         }
 
-        public async Task DeleteAsync(AppFeedback feedback)
+        public async Task DeleteAsync(Faculty faculty)
         {
             try
             {
-                var deleted = await context.Feedbacks.SingleOrDefaultAsync(f => f.Id == feedback.Id);
+                var deleted = await context.Faculties.SingleOrDefaultAsync(d => d.Id == faculty.Id);
                 if (deleted != null)
                 {
-                    context.Feedbacks.Remove(deleted);
+                    context.Faculties.Remove(deleted);
                     await context.SaveChangesAsync();
                 }
             }
@@ -53,73 +53,71 @@ namespace Repository.Concrete
             }
         }
 
-        public AppFeedback GetFeedback(int id)
+        public List<Faculty> GetFaculties()
         {
             try
             {
-                return context.Feedbacks.SingleOrDefault(f => f.Id == id);
+                return context.Faculties.ToList();
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("GetFeedback error: " + ex.InnerException.Message);
+                Console.WriteLine("GetFaculties error: " + ex.InnerException.Message);
                 return null;
             }
         }
 
-        public async Task<AppFeedback> GetFeedbackAsync(int id)
+        public async Task<List<Faculty>> GetFacultiesAsync()
         {
             try
             {
-                return await context.Feedbacks.SingleOrDefaultAsync(f => f.Id == id);
+                return await context.Faculties.ToListAsync();
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("GetFeedbackAsync error: " + ex.InnerException.Message);
+                Console.WriteLine("GetFacultiesAsync error: " + ex.InnerException.Message);
                 return null;
             }
         }
 
-        public List<AppFeedback> GetFeedbacks()
+        public Faculty GetFaculty(int id)
         {
             try
             {
-                return context.Feedbacks.ToList();
+                return context.Faculties.SingleOrDefault(f => f.Id == id);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("GetFeedbacks error: " + ex.InnerException.Message);
+                Console.WriteLine("GetFaculty error: " + ex.InnerException.Message);
                 return null;
             }
         }
 
-        public async Task<List<AppFeedback>> GetFeedbacksAsync()
+        public async Task<Faculty> GetFacultyAsync(int id)
         {
             try
             {
-                return await context.Feedbacks.ToListAsync();
+                return await context.Faculties.SingleOrDefaultAsync(f => f.Id == id);
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("GetFeedbacksAsync error: " + ex.InnerException.Message);
+                Console.WriteLine("GetFacultyAsync error: " + ex.InnerException.Message);
                 return null;
             }
         }
 
-        public AppFeedback Save(AppFeedback feedback)
+        public Faculty Save(Faculty faculty)
         {
             try
             {
-                var saved = context.Feedbacks.SingleOrDefault(f => f.Id == feedback.Id);
+                var saved = context.Faculties.SingleOrDefault(f => f.Id == faculty.Id);
                 if (saved != null)
                 {
-                    saved.Name = feedback.Name;
-                    saved.Message = feedback.Message;
-                    saved.Title = feedback.Title;
-                    saved.Email = feedback.Email;
+                    saved.Fullname = faculty.Fullname;
+                    saved.Shortname = faculty.Shortname;
                 }
                 else
                 {
-                    saved = context.Feedbacks.Add(feedback);
+                    saved = context.Faculties.Add(faculty);
                 }
                 context.SaveChanges();
                 return saved;
@@ -131,28 +129,26 @@ namespace Repository.Concrete
             }
         }
 
-        public async Task<AppFeedback> SaveAsync(AppFeedback feedback)
+        public async Task<Faculty> SaveAsync(Faculty faculty)
         {
             try
             {
-                var saved = await context.Feedbacks.SingleOrDefaultAsync(f => f.Id == feedback.Id);
+                var saved = await context.Faculties.SingleOrDefaultAsync(f => f.Id == faculty.Id);
                 if (saved != null)
                 {
-                    saved.Name = feedback.Name;
-                    saved.Message = feedback.Message;
-                    saved.Title = feedback.Title;
-                    saved.Email = feedback.Email;
+                    saved.Fullname = faculty.Fullname;
+                    saved.Shortname = faculty.Shortname;
                 }
                 else
                 {
-                    saved = context.Feedbacks.Add(feedback);
+                    saved = context.Faculties.Add(faculty);
                 }
                 await context.SaveChangesAsync();
                 return saved;
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("SaveAsync error: " + ex.InnerException.Message);
+                Console.WriteLine("Save error: " + ex.InnerException.Message);
                 return null;
             }
         }

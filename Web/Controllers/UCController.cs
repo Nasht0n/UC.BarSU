@@ -1,10 +1,12 @@
 ﻿using Common.Entities;
 using Microsoft.Owin.Security;
 using Repository.Abstract;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using Web.Data;
+using Web.Models.Enum;
 using Web.ViewModels;
 
 namespace Web.Controllers
@@ -16,13 +18,7 @@ namespace Web.Controllers
         private readonly IUserPermissionsRepository userPermissionsRepository;
         private readonly IUserRepository userRepository;
 
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
 
         public UCController(IFeedbackRepository feedbackRepository, IPermissionRepository permissionRepository, IUserPermissionsRepository userPermissionsRepository, IUserRepository userRepository)
@@ -33,8 +29,10 @@ namespace Web.Controllers
             this.userRepository = userRepository;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int feedbackCode = 0, bool? accessCode = null)
         {
+            ViewBag.FeedbackCode = feedbackCode;
+            ViewBag.AccessCode = accessCode;
             return View();
         }
 
@@ -52,8 +50,7 @@ namespace Web.Controllers
 
         public ActionResult SignIn()
         {
-            int userId = User.Identity.GetUserId<int>();
-            if (userId != 0) return RedirectToAction("Dashboard", "UC");
+            AuthenticationManager.SignOut();
             LoginViewModel model = new LoginViewModel();
             return View(model);
         }
@@ -61,12 +58,17 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult SignIn(LoginViewModel model)
         {
+            
             if (ModelState.IsValid)
-            {                
+            {
                 AppUser user = userRepository.GetUser(model.Username, model.Password);
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "Неверный логин или пароль.");
+                    ModelState.AddModelError("", "Неверный логин или пароль");
+                }
+                else if (!user.IsEnabled)
+                {
+                    ModelState.AddModelError("", "Учетная запись заблокирована");
                 }
                 else
                 {
@@ -79,7 +81,28 @@ namespace Web.Controllers
                     {
                         IsPersistent = true
                     }, claim);
-                    return RedirectToAction("Index", "Dashboard");
+
+                    List<AppUserPermissions> userPermissions = userPermissionsRepository.GetUserPermissions(user);
+                    foreach (var permission in userPermissions)
+                    {
+                        switch (permission.PermissionId)
+                        {
+                            case (int)PermissionType.SP_ACCESS:
+                                {
+                                    return RedirectToAction("Index", "ScienceProject");
+                                }
+                            case (int)PermissionType.IA_ACCESS:
+                                {
+                                    return RedirectToAction("Index", "ImplementationAct");
+                                }
+                            case (int)PermissionType.BY_ACCESS:
+                                {
+                                    return RedirectToAction("Index", "BankYouth");
+                                }
+                        }
+                    }
+                    
+                    return RedirectToAction("Index", "UC", new { accessCode = false });
                 }
             }
             return View();

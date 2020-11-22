@@ -51,12 +51,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ICastRepository.cs" />
+    <Compile Include="Abstract\IDepartmentRepository.cs" />
+    <Compile Include="Abstract\IFacultyRepository.cs" />
     <Compile Include="Abstract\IFeedbackRepository.cs" />
     <Compile Include="Abstract\IPermissionRepository.cs" />
+    <Compile Include="Abstract\IProjectStateRepository.cs" />
+    <Compile Include="Abstract\IScienceProjectReportRepository.cs" />
+    <Compile Include="Abstract\IScienceProjectRepository.cs" />
+    <Compile Include="Abstract\IStageRepository.cs" />
+    <Compile Include="Abstract\IStageTypeRepository.cs" />
     <Compile Include="Abstract\IUserPermissionsRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
+    <Compile Include="Concrete\CastRepository.cs" />
+    <Compile Include="Concrete\DepartmentRepository.cs" />
+    <Compile Include="Concrete\FacultyRepository.cs" />
     <Compile Include="Concrete\FeedbackRepository.cs" />
     <Compile Include="Concrete\PermissionRepository.cs" />
+    <Compile Include="Concrete\ProjectStateRepository.cs" />
     <Compile Include="Concrete\UserPermissionRepository.cs" />
     <Compile Include="Concrete\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

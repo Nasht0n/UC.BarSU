@@ -55,9 +55,25 @@
     <Compile Include="Entities\AppPermission.cs" />
     <Compile Include="Entities\AppUser.cs" />
     <Compile Include="Entities\AppUserPermissions.cs" />
+    <Compile Include="Entities\Cast.cs" />
+    <Compile Include="Entities\Department.cs" />
+    <Compile Include="Entities\Faculty.cs" />
+    <Compile Include="Entities\ProjectState.cs" />
+    <Compile Include="Entities\ScienceProject.cs" />
+    <Compile Include="Entities\ScienceProjectReport.cs" />
+    <Compile Include="Entities\Stage.cs" />
+    <Compile Include="Entities\StageType.cs" />
     <Compile Include="Migrations\202011191234362_AddUserModels.cs" />
     <Compile Include="Migrations\202011191234362_AddUserModels.designer.cs">
       <DependentUpon>202011191234362_AddUserModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011211113512_AppChanges.cs" />
+    <Compile Include="Migrations\202011211113512_AppChanges.designer.cs">
+      <DependentUpon>202011211113512_AppChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011221955532_ScienceProjectDataInit.cs" />
+    <Compile Include="Migrations\202011221955532_ScienceProjectDataInit.designer.cs">
+      <DependentUpon>202011221955532_ScienceProjectDataInit.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +86,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011191234362_AddUserModels.resx">
       <DependentUpon>202011191234362_AddUserModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011211113512_AppChanges.resx">
+      <DependentUpon>202011211113512_AppChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011221955532_ScienceProjectDataInit.resx">
+      <DependentUpon>202011221955532_ScienceProjectDataInit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
