@@ -14,7 +14,7 @@ namespace Repository.Abstract
         Task<ScienceProjectReport> GetReportAsync(int id);
         List<ScienceProjectReport> GetReports();
         Task<List<ScienceProjectReport>> GetReportsAsync();
-        List<ScienceProjectReport> GetReports(Stage stage);
-        Task<List<ScienceProjectReport>> GetReportsAsync(Stage stage);
+        List<ScienceProjectReport> GetReports(ScienceProject project);
+        Task<List<ScienceProjectReport>> GetReportsAsync(ScienceProject project);
     }
 }

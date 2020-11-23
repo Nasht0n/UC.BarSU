@@ -10,8 +10,8 @@ namespace Repository.Abstract
         Task<Stage> SaveAsync(Stage stage);
         void Delete(Stage stage);
         Task DeleteAsync(Stage stage);
-        Stage GetStage(ScienceProject project, StageType type);
-        Task<Stage> GetStageAsync(ScienceProject project, StageType type);
+        Stage GetStage(int id);
+        Task<Stage> GetStageAsync(int id);
         List<Stage> GetStages(ScienceProject project);
         Task<List<Stage>> GetStagesAsync(ScienceProject project);
     }

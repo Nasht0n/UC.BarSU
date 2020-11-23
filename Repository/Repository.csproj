@@ -69,6 +69,10 @@
     <Compile Include="Concrete\FeedbackRepository.cs" />
     <Compile Include="Concrete\PermissionRepository.cs" />
     <Compile Include="Concrete\ProjectStateRepository.cs" />
+    <Compile Include="Concrete\ScienceProjectReportRepository.cs" />
+    <Compile Include="Concrete\ScienceProjectRepository.cs" />
+    <Compile Include="Concrete\StageRepository.cs" />
+    <Compile Include="Concrete\StageTypeRepository.cs" />
     <Compile Include="Concrete\UserPermissionRepository.cs" />
     <Compile Include="Concrete\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

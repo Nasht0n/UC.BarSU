@@ -19,10 +19,23 @@ namespace Web.Infrastructure
 
         private void AddBindings()
         {
+            #region App Repository
             kernel.Bind<IFeedbackRepository>().To<FeedbackRepository>();
             kernel.Bind<IPermissionRepository>().To<PermissionRepository>();
             kernel.Bind<IUserPermissionsRepository>().To<UserPermissionRepository>();
             kernel.Bind<IUserRepository>().To<UserRepository>();
+            #endregion
+
+            #region SP Repository
+            kernel.Bind<ICastRepository>().To<CastRepository>();
+            kernel.Bind<IDepartmentRepository>().To<DepartmentRepository>();
+            kernel.Bind<IFacultyRepository>().To<FacultyRepository>();
+            kernel.Bind<IProjectStateRepository>().To<ProjectStateRepository>();
+            kernel.Bind<IScienceProjectReportRepository>().To<ScienceProjectReportRepository>();
+            kernel.Bind<IScienceProjectRepository>().To<ScienceProjectRepository>();
+            kernel.Bind<IStageRepository>().To<StageRepository>();
+            kernel.Bind<IStageTypeRepository>().To<StageTypeRepository>();
+            #endregion
         }
 
         public object GetService(Type serviceType)

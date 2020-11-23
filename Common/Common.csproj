@@ -63,17 +63,9 @@
     <Compile Include="Entities\ScienceProjectReport.cs" />
     <Compile Include="Entities\Stage.cs" />
     <Compile Include="Entities\StageType.cs" />
-    <Compile Include="Migrations\202011191234362_AddUserModels.cs" />
-    <Compile Include="Migrations\202011191234362_AddUserModels.designer.cs">
-      <DependentUpon>202011191234362_AddUserModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011211113512_AppChanges.cs" />
-    <Compile Include="Migrations\202011211113512_AppChanges.designer.cs">
-      <DependentUpon>202011211113512_AppChanges.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011221955532_ScienceProjectDataInit.cs" />
-    <Compile Include="Migrations\202011221955532_ScienceProjectDataInit.designer.cs">
-      <DependentUpon>202011221955532_ScienceProjectDataInit.cs</DependentUpon>
+    <Compile Include="Migrations\202011230815209_SPInit.cs" />
+    <Compile Include="Migrations\202011230815209_SPInit.designer.cs">
+      <DependentUpon>202011230815209_SPInit.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,14 +76,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011191234362_AddUserModels.resx">
-      <DependentUpon>202011191234362_AddUserModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011211113512_AppChanges.resx">
-      <DependentUpon>202011211113512_AppChanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011221955532_ScienceProjectDataInit.resx">
-      <DependentUpon>202011221955532_ScienceProjectDataInit.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011230815209_SPInit.resx">
+      <DependentUpon>202011230815209_SPInit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

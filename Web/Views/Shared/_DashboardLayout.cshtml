@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -21,7 +20,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome-all.min.css" rel="stylesheet" />
 
     <!-- Vendor CSS Files -->
     <link href="~/Content/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +32,8 @@
 
     <!-- Template Main CSS File -->
     <link href="~/Content/assets/css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/b-1.6.5/b-colvis-1.6.5/r-2.2.6/sb-1.0.0/sp-1.2.1/sl-1.3.1/datatables.min.css" />
 
     <!-- Datatables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
@@ -65,16 +66,16 @@
                 <ul>
                     @if (ViewBag.SP_ACCESS == true)
                     {
-                        <li><a href="@Url.Action("Index","ScienceProject")">Научные проекты</a></li>
+                        <li><a href="@Url.Action("Index","SP")">Научные проекты</a></li>
                     }
 
                     @if (ViewBag.IA_ACCESS == true)
                     {
-                        <li><a href="@Url.Action("Index","ImplementationAct")">Акты внедрения</a></li>
+                        <li><a href="@Url.Action("Index","IA")">Акты внедрения</a></li>
                     }
                     @if (ViewBag.BY_ACCESS == true)
                     {
-                        <li><a href="@Url.Action("Index","BankYouth")">Одаренная молодежь</a></li>
+                        <li><a href="@Url.Action("Index","BY")">Одаренная молодежь</a></li>
                     }
                     <li class="get-started"><a href="@Url.Action("Logout","UC")" class="text-center">Выход из системы</a></li>
                 </ul>
@@ -106,11 +107,13 @@
     <script src="~/Content/assets/vendor/venobox/venobox.min.js"></script>
     <script src="~/Content/assets/vendor/aos/aos.js"></script>
     <script src="~/Scripts/umd/popper.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="~/Scripts/sp/spscripts.js"></script>
+
+    <!-- DATA TABLES SCRIPTS-->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/b-1.6.5/b-colvis-1.6.5/r-2.2.6/sb-1.0.0/sp-1.2.1/sl-1.3.1/datatables.min.js"></script>
 
     <!-- Template Main JS File -->
     <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Scripts/app/sp/datatables.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 

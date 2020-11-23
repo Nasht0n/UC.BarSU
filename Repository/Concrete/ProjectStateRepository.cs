@@ -3,8 +3,9 @@ using Common.Entities;
 using Repository.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository.Concrete
@@ -20,42 +21,134 @@ namespace Repository.Concrete
 
         public void Delete(ProjectState state)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var deleted = context.ProjectStates.SingleOrDefault(s=>s.Id == state.Id);
+                if (deleted != null)
+                {
+                    context.ProjectStates.Remove(state);
+                    context.SaveChanges();
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("Delete error: "+ex.InnerException.Message);
+            }
         }
 
-        public Task DeleteAsync(ProjectState state)
+        public async Task DeleteAsync(ProjectState state)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var deleted = await context.ProjectStates.SingleOrDefaultAsync(s => s.Id == state.Id);
+                if (deleted != null)
+                {
+                    context.ProjectStates.Remove(state);
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("DeleteAsync error: " + ex.InnerException.Message);
+            }
         }
 
         public ProjectState GetState(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return context.ProjectStates.SingleOrDefault(s=>s.Id == id);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetState error: " + ex.InnerException.Message);
+                return null;
+            }
         }
 
-        public Task<ProjectState> GetStateAsync(int id)
+        public async Task<ProjectState> GetStateAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await context.ProjectStates.SingleOrDefaultAsync(s => s.Id == id);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetStateAsync error: " + ex.InnerException.Message);
+                return null;
+            }
         }
 
         public List<ProjectState> GetStates()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return context.ProjectStates.ToList();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetStates error: " + ex.InnerException.Message);
+                return null;
+            }
         }
 
-        public Task<List<ProjectState>> GetStatesAsync()
+        public async Task<List<ProjectState>> GetStatesAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await context.ProjectStates.ToListAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetStatesAsync error: " + ex.InnerException.Message);
+                return null;
+            }
         }
 
         public ProjectState Save(ProjectState state)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var saved = context.ProjectStates.SingleOrDefault(s => s.Id == state.Id);
+                if(saved != null)
+                {
+                    saved.Name = state.Name;
+                }
+                else
+                {
+                    saved = context.ProjectStates.Add(state);
+                }
+                context.SaveChanges();
+                return saved;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("Save error: " + ex.InnerException.Message);
+                return null;
+            }
         }
 
-        public Task<ProjectState> SaveAsync(ProjectState state)
+        public async Task<ProjectState> SaveAsync(ProjectState state)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var saved = await context.ProjectStates.SingleOrDefaultAsync(s => s.Id == state.Id);
+                if (saved != null)
+                {
+                    saved.Name = state.Name;
+                }
+                else
+                {
+                    saved = context.ProjectStates.Add(state);
+                }
+                await context.SaveChangesAsync();
+                return saved;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("Save error: " + ex.InnerException.Message);
+                return null;
+            }
         }
     }
 }

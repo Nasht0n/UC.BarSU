@@ -5,6 +5,8 @@ namespace Common.Entities
 {
     public class Stage
     {
+        [Key]
+        public int Id { get; set; }
         public int ProjectId { get; set; }
         public int StageTypeId { get; set; }
 

@@ -89,15 +89,15 @@ namespace Web.Controllers
                         {
                             case (int)PermissionType.SP_ACCESS:
                                 {
-                                    return RedirectToAction("Index", "ScienceProject");
+                                    return RedirectToAction("Index", "SP");
                                 }
                             case (int)PermissionType.IA_ACCESS:
                                 {
-                                    return RedirectToAction("Index", "ImplementationAct");
+                                    return RedirectToAction("Index", "IA");
                                 }
                             case (int)PermissionType.BY_ACCESS:
                                 {
-                                    return RedirectToAction("Index", "BankYouth");
+                                    return RedirectToAction("Index", "BY");
                                 }
                         }
                     }
