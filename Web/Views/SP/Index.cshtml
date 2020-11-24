@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Web.ViewModels.ScienceProjectListViewModel
+@using Web.Models.Enum
+@{
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
@@ -10,13 +12,14 @@
 
         <div class="d-flex">
             <div class="mr-auto py-2">
-                <a href="#" class="rounded-btn">
+                <a href="@Url.Action("Create","SP")" class="rounded-btn">
                     <i class="fa fa-file"></i>
                     <span class="ml-1">Новая заявка</span>
                 </a>
             </div>
         </div>
         <hr class="my-3 px-5" />
+
         <table class="table table-hover" id="sp_table">
             <thead>
                 <tr class="text-white">
@@ -27,6 +30,34 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach(var item in Model.ScienceProjects)
+                {
+                <tr onclick="location.href = '@Url.Action("Details", "SP", new { id=item.Id })'">
+                    <td>
+                        @if (item.StateId == (int)ProjectState.JustCreated)
+                        {
+                            <span class="badge badge-info">Подана заявка</span>
+                        }
+                        @if (item.StateId == (int)ProjectState.Approved)
+                        {
+                            <span class="badge badge-primary">Одобрен</span>
+                        }
+                        @if (item.StateId == (int)ProjectState.Finished)
+                        {
+                            <span class="badge badge-success">Завершен</span>
+                        }
+                    </td>
+                    <td>
+                        <span class="ml-3">@item.Name</span>
+                    </td>
+                    <td>
+                        <span>@item.Program</span>
+                    </td>
+                    <td>
+                        <span>@item.Price</span>
+                    </td>
+                </tr>
+                }
             </tbody>
         </table>
     </div>

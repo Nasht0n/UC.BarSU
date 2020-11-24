@@ -162,6 +162,24 @@ namespace Repository.Concrete
             }
         }
 
+        public List<ScienceProject> GetProjects(AppUser user)
+        {
+            try
+            {
+                return context.ScienceProjects
+                    .Include(p => p.Department)
+                    .Include(p => p.Department.Faculty)
+                    .Include(p => p.ProjectState)
+                    .Include(p => p.User)
+                    .Where(p => p.UserId == user.Id).ToList();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetProjects by user error: " + ex.InnerException.Message);
+                return null;
+            }
+        }
+
         public async Task<List<ScienceProject>> GetProjectsAsync()
         {
             try
@@ -230,6 +248,24 @@ namespace Repository.Concrete
             catch (SqlException ex)
             {
                 Console.WriteLine("GetProjects between date error: " + ex.InnerException.Message);
+                return null;
+            }
+        }
+
+        public async Task<List<ScienceProject>> GetProjectsAsync(AppUser user)
+        {
+            try
+            {
+                return await context.ScienceProjects
+                    .Include(p => p.Department)
+                    .Include(p => p.Department.Faculty)
+                    .Include(p => p.ProjectState)
+                    .Include(p => p.User)
+                    .Where(p => p.UserId == user.Id).ToListAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetProjectsAsync by user error: " + ex.InnerException.Message);
                 return null;
             }
         }

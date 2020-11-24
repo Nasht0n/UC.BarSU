@@ -1,0 +1,197 @@
+﻿@model Web.ViewModels.SPDetailsViewModel
+@using Web.Models.Enum
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<section id="sp_details">
+    <div class="container">
+        <div class="d-flex my-1">
+            @if (Model.Project.StateId == (int)ProjectState.JustCreated)
+            {
+                <div class="py-2">
+                    <a class="rounded-btn mr-2" href="@Url.Action("ApproveProject", "Project", new { id = Model.Project.Id })">Согласовать</a>
+                </div>
+            }
+
+            @if (Model.Project.StateId != (int)ProjectState.Finished)
+            {
+                <div class="py-2">
+                    <a class="rounded-btn" href="@Url.Action("Edit", "Project", new { id = Model.Project.Id })">Редактировать</a>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <div>
+                            @if (Model.Project.StateId == (int)ProjectState.JustCreated)
+                            {
+                                <span class="badge badge-info">Подана заявка</span>
+                            }
+                            @if (Model.Project.StateId == (int)ProjectState.Approved)
+                            {
+                                <span class="badge badge-primary">Одобрен</span>
+                            }
+                            @if (Model.Project.StateId == (int)ProjectState.Finished)
+                            {
+                                <span class="badge badge-success">Завершен</span>
+                            }
+                        </div>
+
+                        <div>
+                            <h3>@Model.Project.Name</h3>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Программа проекта</h5>
+                        <h6 class="card-subtitle text-muted">@Model.Project.Program</h6>
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><b>Приказ </b> №@Model.Project.OrderNumber от @Model.Project.OrderDate.ToShortDateString()</li>
+                        <li class="list-group-item"><b>Государственная регистрация</b> №@Model.Project.RegistrationNumber от @Model.Project.RegistrationDate.ToShortDateString()</li>
+                        @if (Model.Project.Casts.FirstOrDefault(c => c.IsManager) != null)
+                        {
+                            <li class="list-group-item">
+                                <b>Руководитель проекта:</b><br />
+                                @Model.Project.Casts.FirstOrDefault(c => c.IsManager).Fullname, @Model.Project.Casts.FirstOrDefault(c => c.IsManager).Degree, @Model.Project.Casts.FirstOrDefault(c => c.IsManager).Status, @Model.Project.Casts.FirstOrDefault(c => c.IsManager).Post
+                            </li>
+                        }
+                        <li class="list-group-item">
+                            <b>Состав лиц, работающих над проектом:</b>
+                            <ul class="list-group list-group-flush">
+                                @foreach (var cast in Model.Project.Casts.Where(p => !p.IsManager))
+                                {
+                                    <li class="list-group-item">@cast.Fullname, @cast.Degree, @cast.Status, @cast.Post</li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="list-group-item"><b>Срок работы:</b> от @Model.Project.StartDate.ToShortDateString() до @Model.Project.EndDate.ToShortDateString()</li>
+                        <li class="list-group-item"><b>Стоимость проекта:</b> @Model.Project.Price</li>
+                    </ul>
+                    <div class="card-footer text-muted">
+                        <div class="d-flex">
+                            <div class="ml-auto">
+                                Добавил в систему: @Model.User.Fullname
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (Model.Project.StateId == (int)ProjectState.Approved)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex">
+                                <div class="p-2">
+                                    <h4>Этапы выполнения проекта</h4>
+                                </div>
+
+
+                                <div class="ml-auto p-2">
+                                    <button class="btn btn-solid" data-toggle="modal" data-target="#addStageModal">Добавить этап</button>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div id="accordion">
+                            @{
+                                int index = 1;
+                                foreach (var stage in Model.Stages)
+                                {
+                                    string cardHeading = $"heading{index}";
+                                    string collapseControl = $"collapse{index}";
+                                    <div class="card">
+                                        <div class="card-header" id="@cardHeading">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse" data-target="#@collapseControl" aria-expanded="true" aria-controls="@collapseControl">
+                                                    @stage.StageType.Name №@index
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div id="@collapseControl" class="collapse" aria-labelledby="@cardHeading" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <ul class="list-group list-group-flush">
+                                                    @foreach (var file in Model.Reports.Where(r => r.StageId == stage.Id))
+                                                    {
+                                                        <li class="list-group-item">
+                                                            <a href="#">
+                                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                                                <span class="ml-1">@file.Filename</span>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    index++;
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</section>
+
+<div class="modal fade" id="addStageModal" tabindex="-1" role="dialog" aria-labelledby="addStageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStageModalLabel">Новый этап научного проекта</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                @using (Html.BeginForm("AddStage", "SP", FormMethod.Post, new { id = "addStageForm", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Project.Id, htmlAttributes: new { id = "Id", Name = "Model.Project.Id" })
+                        <div class="form-group">
+                            @Html.LabelFor(x => Model.SelectedStageType, htmlAttributes: new { @class = "control-label col-md" })
+                            <div class="col-md-12">
+                                @Html.DropDownListFor(x => Model.SelectedStageType, new SelectList(Model.StageTypes, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "StageType", Name = "Model.SelectedStageType" })
+                                @Html.ValidationMessageFor(x => x.SelectedStageType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Report.Path, htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-12">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputFile" onchange="" name="Model.Files" lang="ru" multiple required accept=".pdf, .xls, .xlsx, .doc, .docx, .txt">
+                                    <label class="custom-file-label" for="inputFile">Выберите загружаемые файлы</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="files">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

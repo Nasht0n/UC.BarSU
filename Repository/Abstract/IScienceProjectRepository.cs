@@ -17,6 +17,8 @@ namespace Repository.Abstract
         Task<List<ScienceProject>> GetProjectsAsync();
         List<ScienceProject> GetProjects(ProjectState state);
         Task<List<ScienceProject>> GetProjectsAsync(ProjectState state);
+        List<ScienceProject> GetProjects(AppUser user);
+        Task<List<ScienceProject>> GetProjectsAsync(AppUser user);
         List<ScienceProject> GetProjects(Department department);
         Task<List<ScienceProject>> GetProjectsAsync(Department department);
         List<ScienceProject> GetProjects(DateTime start, DateTime end);

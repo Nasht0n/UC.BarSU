@@ -1394,7 +1394,34 @@ section {
     background: #5777ba;
 }
 
+    #sp_table th {
+        color: #5777ba;
+        font-weight: 400;
+        font-size: 12px;
+    }
+
     #sp_table tbody:hover {
+        cursor: pointer;
+        background: #e8ecf5;
+    }
+
+#tblEmployees {
+}
+
+    #tblEmployees th {
+        color: #5777ba;
+        font-weight: 400;
+        font-size: 12px;
+    }
+
+    #tblEmployees td {
+        color: #5777ba;
+        font-weight: 400;
+        font-size: 14px;
+        text-align:center;
+    }
+
+    #tblEmployees tbody:hover {
         cursor: pointer;
         background: #e8ecf5;
     }
@@ -1404,7 +1431,7 @@ section {
 }
 
 div.dataTables_wrapper div.dataTables_length select {
-    width: 100px !important;
+    width: 60px !important;
 }
 
 #sp_table_filter input {
@@ -1416,3 +1443,26 @@ div.dataTables_wrapper div.dataTables_length select {
     #sp_table_filter input:focus {
         border-color: #5777ba;
     }
+
+.container input {
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
+}
+
+.container select {
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
+}
+
+    .container select:focus {
+        border-color: #5777ba;
+        box-shadow: 0 0 0 0.1rem rgb(87,119,186,.4);
+    }
+
+
+.container input:focus, .container textarea:focus {
+    border-color: #5777ba;
+    box-shadow: 0 0 0 0.1rem rgb(87,119,186,.4);    
+}

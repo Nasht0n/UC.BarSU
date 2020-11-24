@@ -41,7 +41,7 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                AppFeedback newFeedback = Converter.FeedbackModel.GetFeedback(model);
+                AppFeedback newFeedback = ModelConverter.FeedbackModel.GetFeedback(model);
                 feedbackRepository.Save(newFeedback);
                 return RedirectToAction("Index", "UC", new { feedbackCode = 1 });
             }
@@ -57,8 +57,7 @@ namespace Web.Controllers
 
         [HttpPost]
         public ActionResult SignIn(LoginViewModel model)
-        {
-            
+        {            
             if (ModelState.IsValid)
             {
                 AppUser user = userRepository.GetUser(model.Username, model.Password);
