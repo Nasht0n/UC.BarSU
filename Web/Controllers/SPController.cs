@@ -10,7 +10,6 @@ using System.Web.Mvc;
 using Web.Data;
 using Web.Models.Enum;
 using Web.ViewModels;
-using ProjectStates = Web.Models.Enum.ProjectStates;
 
 namespace Web.Controllers
 {
