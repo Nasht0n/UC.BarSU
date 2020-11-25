@@ -8,17 +8,17 @@
 <section id="sp_details">
     <div class="container">
         <div class="d-flex my-1">
-            @if (Model.Project.StateId == (int)ProjectState.JustCreated)
+            @if (Model.Project.StateId == (int)ProjectStates.JustCreated && ViewBag.SP_CAN_APPROVED)
             {
                 <div class="py-2">
-                    <a class="rounded-btn mr-2" href="@Url.Action("ApproveProject", "Project", new { id = Model.Project.Id })">Согласовать</a>
+                    <a class="rounded-btn mr-2" href="@Url.Action("ApproveProject", "SP", new { id = Model.Project.Id })">Согласовать</a>
                 </div>
             }
 
-            @if (Model.Project.StateId != (int)ProjectState.Finished)
+            @if (Model.Project.StateId != (int)ProjectStates.Finished && (ViewBag.SP_CAN_EDIT_ALL || Model.User.Id == ViewBag.UserID ))
             {
                 <div class="py-2">
-                    <a class="rounded-btn" href="@Url.Action("Edit", "Project", new { id = Model.Project.Id })">Редактировать</a>
+                    <a class="rounded-btn" href="@Url.Action("Edit", "SP", new { id = Model.Project.Id })">Редактировать</a>
                 </div>
             }
         </div>
@@ -27,15 +27,15 @@
                 <div class="card mb-3">
                     <div class="card-header">
                         <div>
-                            @if (Model.Project.StateId == (int)ProjectState.JustCreated)
+                            @if (Model.Project.StateId == (int)ProjectStates.JustCreated)
                             {
                                 <span class="badge badge-info">Подана заявка</span>
                             }
-                            @if (Model.Project.StateId == (int)ProjectState.Approved)
+                            @if (Model.Project.StateId == (int)ProjectStates.Approved)
                             {
                                 <span class="badge badge-primary">Одобрен</span>
                             }
-                            @if (Model.Project.StateId == (int)ProjectState.Finished)
+                            @if (Model.Project.StateId == (int)ProjectStates.Finished)
                             {
                                 <span class="badge badge-success">Завершен</span>
                             }
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-        @if (Model.Project.StateId == (int)ProjectState.Approved)
+        @if (Model.Project.StateId != (int)ProjectStates.JustCreated)
         {
             <div class="row">
                 <div class="col-md-12">
@@ -95,13 +95,14 @@
                                     <h4>Этапы выполнения проекта</h4>
                                 </div>
 
+                                @if (Model.Project.StateId != (int)ProjectStates.Finished)
+                                {
+                                    <div class="ml-auto ">
+                                        <button class="rounded-btn" data-toggle="modal" data-target="#addStageModal">Добавить этап</button>
+                                    </div>
+                                }
 
-                                <div class="ml-auto p-2">
-                                    <button class="btn btn-solid" data-toggle="modal" data-target="#addStageModal">Добавить этап</button>
                                 </div>
-
-
-                            </div>
                         </div>
                         <div id="accordion">
                             @{
@@ -125,7 +126,7 @@
                                                     @foreach (var file in Model.Reports.Where(r => r.StageId == stage.Id))
                                                     {
                                                         <li class="list-group-item">
-                                                            <a href="#">
+                                                            <a href="@Url.Action("DownloadFile","SP",new { id = file.Id })">
                                                                 <i class="fa fa-download" aria-hidden="true"></i>
                                                                 <span class="ml-1">@file.Filename</span>
                                                             </a>
@@ -173,8 +174,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Report.Path, htmlAttributes: new { @class = "control-label" })
+                            
                             <div class="col-md-12">
+                                @Html.LabelFor(model => model.Report, htmlAttributes: new { @class = "control-label" })
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="inputFile" onchange="" name="Model.Files" lang="ru" multiple required accept=".pdf, .xls, .xlsx, .doc, .docx, .txt">
                                     <label class="custom-file-label" for="inputFile">Выберите загружаемые файлы</label>

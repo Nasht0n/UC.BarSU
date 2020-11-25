@@ -18,6 +18,7 @@ namespace Web.ViewModels
         public List<ScienceProjectReport> Reports{ get; set; }
         public Stage Stage { get; set; }
         public List<Stage> Stages { get; set; }
+        [Display(Name = "Путь к файлам")]
         public ScienceProjectReport Report { get; set; }
         public HttpPostedFileBase[] Files { get; set; }
     }

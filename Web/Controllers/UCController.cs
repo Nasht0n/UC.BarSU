@@ -86,15 +86,15 @@ namespace Web.Controllers
                     {
                         switch (permission.PermissionId)
                         {
-                            case (int)PermissionType.SP_ACCESS:
+                            case (int)PermissionTypes.SP_ACCESS:
                                 {
                                     return RedirectToAction("Index", "SP");
                                 }
-                            case (int)PermissionType.IA_ACCESS:
+                            case (int)PermissionTypes.IA_ACCESS:
                                 {
                                     return RedirectToAction("Index", "IA");
                                 }
-                            case (int)PermissionType.BY_ACCESS:
+                            case (int)PermissionTypes.BY_ACCESS:
                                 {
                                     return RedirectToAction("Index", "BY");
                                 }

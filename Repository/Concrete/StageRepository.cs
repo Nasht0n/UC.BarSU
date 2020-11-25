@@ -121,7 +121,7 @@ namespace Repository.Concrete
         {
             try
             {
-                var saved = context.Stages.SingleOrDefault(s => s.ProjectId == stage.ProjectId && s.StageTypeId == stage.StageTypeId);
+                var saved = context.Stages.SingleOrDefault(s => s.Id == stage.Id);
                 if (saved != null)
                 {
                     saved.ProjectId = stage.ProjectId;
@@ -145,7 +145,7 @@ namespace Repository.Concrete
         {
             try
             {
-                var saved = await context.Stages.SingleOrDefaultAsync(s => s.ProjectId == stage.ProjectId && s.StageTypeId == stage.StageTypeId);
+                var saved = await context.Stages.SingleOrDefaultAsync(s => s.Id == stage.Id);
                 if (saved != null)
                 {
                     saved.ProjectId = stage.ProjectId;

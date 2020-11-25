@@ -1,6 +1,6 @@
 ﻿namespace Web.Models.Enum
 {
-    public enum ProjectState
+    public enum ProjectStates
     {
         JustCreated = 1,
         Approved = 2,

@@ -34,15 +34,15 @@
                 {
                 <tr onclick="location.href = '@Url.Action("Details", "SP", new { id=item.Id })'">
                     <td>
-                        @if (item.StateId == (int)ProjectState.JustCreated)
+                        @if (item.StateId == (int)ProjectStates.JustCreated)
                         {
                             <span class="badge badge-info">Подана заявка</span>
                         }
-                        @if (item.StateId == (int)ProjectState.Approved)
+                        @if (item.StateId == (int)ProjectStates.Approved)
                         {
                             <span class="badge badge-primary">Одобрен</span>
                         }
-                        @if (item.StateId == (int)ProjectState.Finished)
+                        @if (item.StateId == (int)ProjectStates.Finished)
                         {
                             <span class="badge badge-success">Завершен</span>
                         }

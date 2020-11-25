@@ -362,6 +362,7 @@
     <Content Include="Scripts\app\sp\cast.data.js" />
     <Content Include="Scripts\app\sp\datatables.js" />
     <Content Include="Scripts\app\sp\selectlist.init.js" />
+    <Content Include="Scripts\app\sp\stages.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -599,8 +600,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Models\Enum\PermissionType.cs" />
-    <Compile Include="Models\Enum\ProjectState.cs" />
+    <Compile Include="Models\Enum\PermissionTypes.cs" />
+    <Compile Include="Models\Enum\ProjectStates.cs" />
+    <Compile Include="Models\Enum\StageTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -620,6 +622,7 @@
     <Content Include="Views\SP\Index.cshtml" />
     <Content Include="Views\SP\Create.cshtml" />
     <Content Include="Views\SP\Details.cshtml" />
+    <Content Include="Views\SP\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

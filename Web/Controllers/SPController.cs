@@ -3,14 +3,14 @@ using Microsoft.Owin.Security;
 using Repository.Abstract;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Web.Data;
 using Web.Models.Enum;
 using Web.ViewModels;
-using ProjectState = Web.Models.Enum.ProjectState;
+using ProjectStates = Web.Models.Enum.ProjectStates;
 
 namespace Web.Controllers
 {
@@ -25,13 +25,14 @@ namespace Web.Controllers
         private readonly IStageRepository stageRepository;
         private readonly IScienceProjectReportRepository reportRepository;
         private readonly IStageTypeRepository stageTypeRepository;
+        private readonly ICastRepository castRepository;
         private readonly SelectListHelper helper;
 
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         public SPController(IUserRepository userRepository, IUserPermissionsRepository userPermissionsRepository, IFacultyRepository facultyRepository,
                             IDepartmentRepository departmentRepository, IScienceProjectRepository projectRepository, IStageRepository stageRepository,
-                            IScienceProjectReportRepository reportRepository, IStageTypeRepository stageTypeRepository)
+                            IScienceProjectReportRepository reportRepository, IStageTypeRepository stageTypeRepository, ICastRepository castRepository)
         {
             this.userRepository = userRepository;
             this.userPermissionsRepository = userPermissionsRepository;
@@ -41,6 +42,7 @@ namespace Web.Controllers
             this.stageRepository = stageRepository;
             this.reportRepository = reportRepository;
             this.stageTypeRepository = stageTypeRepository;
+            this.castRepository = castRepository;
             helper = new SelectListHelper();
         }
 
@@ -58,7 +60,7 @@ namespace Web.Controllers
         {
             List<ScienceProject> result = new List<ScienceProject>();
             var permissions = userPermissionsRepository.GetUserPermissions(user);            
-            var all = permissions.Any(p => p.PermissionId == (int)PermissionType.SP_PROJECTLISTVIEW_ALL);
+            var all = permissions.Any(p => p.PermissionId == (int)PermissionTypes.SP_PROJECTLISTVIEW_ALL);
             if (all) result = projectRepository.GetProjects();
             else result = projectRepository.GetProjects(user);
             return result;
@@ -92,7 +94,7 @@ namespace Web.Controllers
         {
             var user = GetUserInfo();
             model.UserId = user.Id;
-            model.StateId = (int)ProjectState.JustCreated;
+            model.StateId = (int)ProjectStates.JustCreated;
             var project = ModelConverter.ScienceProjectModel.GetScienceProject(model);
             projectRepository.Save(project);
             return Json("OK", JsonRequestBehavior.AllowGet);
@@ -113,28 +115,50 @@ namespace Web.Controllers
 
         private void SetViewBags(AppUser user)
         {
-            InitializeNavMenuViewBags(user);
+            ViewBag.UserID = user.Id;
+            InitializePermissionsViewBags(user);
         }
-        private void InitializeNavMenuViewBags(AppUser user)
+
+        private void InitializePermissionsViewBags(AppUser user)
         {
             List<AppUserPermissions> userPermissions = userPermissionsRepository.GetUserPermissions(user);
             foreach (var permission in userPermissions)
             {
                 switch (permission.PermissionId)
                 {
-                    case (int)PermissionType.SP_ACCESS:
+                    case (int)PermissionTypes.SP_ACCESS:
                         {
                             ViewBag.SP_ACCESS = true;
                             break;
                         }
-                    case (int)PermissionType.IA_ACCESS:
+                    case (int)PermissionTypes.IA_ACCESS:
                         {
                             ViewBag.IA_ACCESS = true;
                             break;
                         }
-                    case (int)PermissionType.BY_ACCESS:
+                    case (int)PermissionTypes.BY_ACCESS:
                         {
                             ViewBag.BY_ACCESS = true;
+                            break;
+                        }
+                    case (int)PermissionTypes.SP_PROJECTLISTVIEW_ALL:
+                        {
+                            ViewBag.SP_PROJECTLISTVIEW_ALL = true;
+                            break;
+                        }
+                    case (int)PermissionTypes.SP_PROJECTLISTVIEW_OWN:
+                        {
+                            ViewBag.SP_PROJECTLISTVIEW_OWN = true;
+                            break;
+                        }
+                    case (int)PermissionTypes.SP_CAN_APPROVED:
+                        {
+                            ViewBag.SP_CAN_APPROVED = true;
+                            break;
+                        }
+                    case (int)PermissionTypes.SP_CAN_EDIT_ALL:
+                        {
+                            ViewBag.SP_CAN_EDIT_ALL = true;
                             break;
                         }
                 }
@@ -144,6 +168,107 @@ namespace Web.Controllers
         {
             int userId = User.Identity.GetUserId<int>();
             return userRepository.GetUser(userId);
+        }
+
+        public ActionResult ApproveProject(int id)
+        {
+            var project = projectRepository.GetProject(id);
+            project.StateId = (int)ProjectStates.Approved;
+            projectRepository.Save(project);
+            return RedirectToAction("Details", "SP", new { id = project.Id });
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var project = projectRepository.GetProject(id);
+            ScienceProjectViewModel model = new ScienceProjectViewModel
+            {
+                Faculties = helper.GetFaculties(facultyRepository),
+                Departments = helper.GetDepartments(project.Department.FacultyId.ToString(), departmentRepository),                
+                SelectedDepartment = project.DepartmentId,
+                SelectedFaculty = project.Department.FacultyId
+            };
+            model.Casts = model.Casts.OrderBy(c => c.IsManager).ToList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ScienceProjectViewModel model)
+        {
+            var project = ModelConverter.ScienceProjectModel.GetScienceProject(model);
+            projectRepository.Save(project);
+
+            var casts = castRepository.GetCasts(project);
+            foreach (var item in casts)
+            {
+                castRepository.Delete(item);
+            }
+
+            foreach (var item in model.Casts)
+            {
+                var cast = new Cast { Degree = item.Degree, Status = item.Status, Fullname = item.Fullname, Post = item.Post, IsManager = item.IsManager };
+                cast.ProjectId = project.Id;
+                castRepository.Save(cast);
+            }
+
+            return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult AddStage(SPDetailsViewModel model)
+        {
+            Stage stage = new Stage
+            {
+                ProjectId = model.Project.Id,
+                StageTypeId = model.SelectedStageType
+            };           
+            stage = stageRepository.Save(stage);            
+            // путь к сохранению файлов
+            string uploadPath = Server.MapPath("~/Files/SP/") + $"{model.Project.Id}";
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+            foreach (var file in model.Files)
+            {
+                // получаем имя файла
+                string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                // получаем расширение файла
+                string fileExtension = Path.GetExtension(file.FileName);                             
+                // получение полного пути к файлу
+                var filePath = uploadPath + fileName.Trim() + "_" + stage.Id + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + fileExtension;
+                file.SaveAs(filePath);
+
+                ScienceProjectReport report = new ScienceProjectReport
+                {
+                    Filename = fileName,
+                    Path = filePath,
+                    StageId = stage.Id,
+                    UploadDate = DateTime.Now
+                };
+                reportRepository.Save(report);
+            }
+
+            if (stage.StageTypeId == (int) StageTypes.Final)
+            {
+                var project = projectRepository.GetProject(model.Project.Id);
+                project.StateId = (int)ProjectStates.Finished;
+                projectRepository.Save(project);
+            }
+
+            return RedirectToAction("Details", "SP", new { id = model.Project.Id });
+        }
+
+        public FileResult DownloadFile(int id)
+        {
+            // получение данных о прикрепленном файле
+            var file = reportRepository.GetReport(id);
+            // инициализация наименование файла
+            string filename = file.Filename + Path.GetExtension(file.Path);
+            // получение типа файла
+            string file_type = MimeMapping.GetMimeMapping(filename);
+            // скачиваем выбранный файл с сервера
+            return File(file.Path, file_type, filename);
         }
     }
 }

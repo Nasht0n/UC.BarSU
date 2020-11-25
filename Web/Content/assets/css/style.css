@@ -1466,3 +1466,18 @@ div.dataTables_wrapper div.dataTables_length select {
     border-color: #5777ba;
     box-shadow: 0 0 0 0.1rem rgb(87,119,186,.4);    
 }
+
+.btn-link {
+    font-weight:500;
+    color: #5777ba;
+}
+
+.btn:focus{
+    box-shadow:none !important;
+}
+
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover, .dataTables_wrapper .dataTables_paginate .paginate_button:focus {
+    border: none !important;
+    background: none !important;
+}
