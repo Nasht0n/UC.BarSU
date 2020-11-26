@@ -1,0 +1,57 @@
+﻿@model Web.ViewModels.IA.Students.IAStudentListViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<section id="ia_students">
+    <div class="container">
+        <h2 class="section-title">
+            Акты внедрения результатов работ студентов
+        </h2>
+
+        <div class="d-flex">
+            <div class="mr-auto py-2">
+                <a href="@Url.Action("Create","IAS")" class="rounded-btn">
+                    <i class="fa fa-file"></i>
+                    <span class="ml-1">Новая заявка</span>
+                </a>
+            </div>
+        </div>
+        <hr class="my-3 px-5" />
+
+        <table class="table table-hover" id="sp_table">
+            <thead>
+                <tr class="text-white">
+                    <td class="w-25">Наименование проекта</td>
+                    <td class="w-25">Организация (подразделение)</td>
+                    <td class="w-25">ФИО автора</td>
+                    <td class="w-25">Дата регистрации</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.StudentActs)
+                {
+                    <tr onclick="location.href = '@Url.Action("Details", "IAS", new { id=item.Id })'">
+                        <td>
+                            @item.ProjectName
+                        </td>
+                        <td>
+                            @item.Department
+                        </td>
+                        <td>
+                            @item.Author
+                        </td>
+                        <td>
+                            @item.RegisterDate.ToShortDateString()
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+

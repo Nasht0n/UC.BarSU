@@ -58,6 +58,9 @@
     <Compile Include="Entities\Cast.cs" />
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Faculty.cs" />
+    <Compile Include="Entities\ImplementationStudentAct.cs" />
+    <Compile Include="Entities\ImplementationStudentActComission.cs" />
+    <Compile Include="Entities\ImplementationStudentActLifeCycle.cs" />
     <Compile Include="Entities\ProjectState.cs" />
     <Compile Include="Entities\ScienceProject.cs" />
     <Compile Include="Entities\ScienceProjectReport.cs" />

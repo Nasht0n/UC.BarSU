@@ -55,6 +55,9 @@
     <Compile Include="Abstract\IDepartmentRepository.cs" />
     <Compile Include="Abstract\IFacultyRepository.cs" />
     <Compile Include="Abstract\IFeedbackRepository.cs" />
+    <Compile Include="Abstract\IImplementationStudentActComissionRepository.cs" />
+    <Compile Include="Abstract\IImplementationStudentActLifeCycleRepository.cs" />
+    <Compile Include="Abstract\IImplementationStudentActRepository.cs" />
     <Compile Include="Abstract\IPermissionRepository.cs" />
     <Compile Include="Abstract\IProjectStateRepository.cs" />
     <Compile Include="Abstract\IScienceProjectReportRepository.cs" />
@@ -67,6 +70,9 @@
     <Compile Include="Concrete\DepartmentRepository.cs" />
     <Compile Include="Concrete\FacultyRepository.cs" />
     <Compile Include="Concrete\FeedbackRepository.cs" />
+    <Compile Include="Concrete\ImplementationStudentActComissionRepository.cs" />
+    <Compile Include="Concrete\ImplementationStudentActLifeCycleRepository.cs" />
+    <Compile Include="Concrete\ImplementationStudentActRepository.cs" />
     <Compile Include="Concrete\PermissionRepository.cs" />
     <Compile Include="Concrete\ProjectStateRepository.cs" />
     <Compile Include="Concrete\ScienceProjectReportRepository.cs" />

@@ -1,0 +1,174 @@
+﻿@model Web.ViewModels.IA.Students.IAStudentViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<section id="ias_create">
+    <h2 class="section-title">
+        Регистрация акта внедрения работы студента
+    </h2>
+    <div class="container">
+        @using (Html.BeginForm("Create", "IAS", FormMethod.Post, new { id = "ias_createform" }))
+        {
+            @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(x => x.Id, htmlAttributes: new { id = "Id" })
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="col-12">
+                            @Html.LabelFor(model => model.ProtocolDate, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ProtocolDate, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "ScopeOfApplication" } })
+                            @Html.ValidationMessageFor(model => model.ProtocolDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="col-12">
+                            @Html.LabelFor(model => model.ProtocolNumber, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ProtocolNumber, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "ScopeOfApplication" } })
+                            @Html.ValidationMessageFor(model => model.ProtocolNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 offset-md-3">
+                    <div class="form-group">
+                        <div class="col-12">
+                            @Html.LabelFor(model => model.RegisterDate, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.RegisterDate, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "ScopeOfApplication", disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.RegisterDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <div class="col-12">
+                            @Html.LabelFor(model => model.ScopeOfApplication, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ScopeOfApplication, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "ScopeOfApplication" } })
+                            @Html.ValidationMessageFor(model => model.ScopeOfApplication, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-12">
+                            @Html.LabelFor(model => model.NumberOfPeople, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.NumberOfPeople, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "ScopeOfApplication" } })
+                            @Html.ValidationMessageFor(model => model.NumberOfPeople, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Name" } })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Result, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Result, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Name" } })
+                    @Html.ValidationMessageFor(model => model.Result, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-12">
+                            @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "ScopeOfApplication" } })
+                            @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <div class="col-12">
+                            @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "ScopeOfApplication" } })
+                            @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.PracticalTasks, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.PracticalTasks, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Name" } })
+                    @Html.ValidationMessageFor(model => model.PracticalTasks, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.EconomicEfficiency, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.EconomicEfficiency, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Name" } })
+                    @Html.ValidationMessageFor(model => model.EconomicEfficiency, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div id="cast">
+                <h5 class="text-center">Члены комиссии</h5>
+            </div>
+
+            <div class="form-group">
+                <table class="table" id="tblEmployees">
+                    <thead class="thead-light">
+                        <tr class="text-center">
+                            <th class="w-25" scope="col">ФИО</th>
+                            <th class="w-50" scope="col">Должность</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr class="text-center">
+                            <td>
+                                <input class="form-control" type="text" id="txtFullname" autocomplete="off" />
+                            </td>
+                            <td>
+                                <input class="form-control" type="text" id="txtPost" autocomplete="off" />
+                            </td>
+                            <td>
+                                <input class="form-control btn btn-primary" type="button" id="btnAdd" value="Добавить" />
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <hr />
+            <div class="d-flex">
+                <div class="ml-auto p-2">
+                    <a href="@Url.Action("Index","IAS")" class="btn btn-outline-secondary">Вернуться к списку актов внедрения</a>
+                </div>
+                <div class="p-2">
+                    <button type="button" id="btnSave" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                        <span class="ml-1">Сохранить</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        }
+    </div>
+</section>
+

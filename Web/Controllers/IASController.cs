@@ -12,43 +12,63 @@ using Web.ViewModels.IA.Students;
 namespace Web.Controllers
 {
     [Authorize]
-    public class IAController : Controller
+    public class IASController : Controller
     {
         private readonly IUserRepository userRepository;
         private readonly IUserPermissionsRepository userPermissionsRepository;
 
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
-        public IAController(IUserRepository userRepository, IUserPermissionsRepository userPermissionsRepository)
+        public IASController(IUserRepository userRepository, IUserPermissionsRepository userPermissionsRepository)
         {
             this.userRepository = userRepository;
             this.userPermissionsRepository = userPermissionsRepository;
         }
 
-        #region Student implementation acts
-
-        public ActionResult StudentActs()
+        public ActionResult Index()
         {
             AppUser user = GetUserInfo();
             SetViewBags(user);
             IAStudentListViewModel model = new IAStudentListViewModel();
+            model.StudentActs = new List<IAStudentViewModel>();
+            return View(model);
+        }
+
+        public ActionResult Details(int id)
+        {
+            AppUser user = GetUserInfo();
+            SetViewBags(user);
+            IAStudentDetailsViewModel model = new IAStudentDetailsViewModel();
 
             return View(model);
         }
 
-
-        
-
-        #endregion
-
-
-        #region Research work acts
-        public ActionResult ResearchActs()
+        public ActionResult Create()
         {
-            return View();
-        }
-        #endregion
+            AppUser user = GetUserInfo();
+            SetViewBags(user);
+            IAStudentViewModel model = new IAStudentViewModel();
 
+            return View(model);
+        }
+        [HttpPost]
+        public JsonResult Create(IAStudentViewModel model)
+        {
+            return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Edit()
+        {
+            AppUser user = GetUserInfo();
+            SetViewBags(user);
+            IAStudentViewModel model = new IAStudentViewModel();
+            return View(model);
+        }
+        [HttpPost]
+        public JsonResult Edit(IAStudentViewModel model)
+        {
+            return Json("OK", JsonRequestBehavior.AllowGet);
+        }
 
         #region Help methods
         private void SetViewBags(AppUser user)

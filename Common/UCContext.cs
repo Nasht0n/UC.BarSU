@@ -16,7 +16,6 @@ namespace Common
         public virtual DbSet<AppUserPermissions> UserPermissions { get; set; }
         #endregion
 
-
         #region ScienceProjects
         public virtual DbSet<Cast> Casts { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
@@ -26,6 +25,14 @@ namespace Common
         public virtual DbSet<ScienceProjectReport> ScienceProjectReports { get; set; }
         public virtual DbSet<Stage> Stages { get; set; }
         public virtual DbSet<StageType> StageTypes { get; set; }
+        #endregion
+
+        #region Implementation Student Acts
+
+        public virtual DbSet<ImplementationStudentAct> StudentActs { get; set; }
+        public virtual DbSet<ImplementationStudentActComission> StudentActComissions { get; set; }
+        public virtual DbSet<ImplementationStudentActLifeCycle> StudentActLifeCycles { get; set; }
+
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

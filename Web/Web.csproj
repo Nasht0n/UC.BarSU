@@ -590,7 +590,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
-    <Compile Include="Controllers\IAController.cs" />
+    <Compile Include="Controllers\IASController.cs" />
     <Compile Include="Controllers\SPController.cs" />
     <Compile Include="Controllers\UCController.cs" />
     <Compile Include="Data\DataConverter.cs" />
@@ -630,6 +630,10 @@
     <Content Include="Views\SP\Create.cshtml" />
     <Content Include="Views\SP\Details.cshtml" />
     <Content Include="Views\SP\Edit.cshtml" />
+    <Content Include="Views\IAS\Index.cshtml" />
+    <Content Include="Views\IAS\Details.cshtml" />
+    <Content Include="Views\IAS\Create.cshtml" />
+    <Content Include="Views\IAS\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -640,7 +644,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\SP\" />
-    <Folder Include="Views\IA\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

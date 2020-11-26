@@ -36,6 +36,12 @@ namespace Web.Infrastructure
             kernel.Bind<IStageRepository>().To<StageRepository>();
             kernel.Bind<IStageTypeRepository>().To<StageTypeRepository>();
             #endregion
+
+            #region IAS Repository
+            kernel.Bind<IImplementationStudentActComissionRepository>().To<ImplementationStudentActComissionRepository>();
+            kernel.Bind<IImplementationStudentActLifeCycleRepository>().To<ImplementationStudentActLifeCycleRepository>();
+            kernel.Bind<IImplementationStudentActRepository>().To<ImplementationStudentActRepository>();
+            #endregion
         }
 
         public object GetService(Type serviceType)
