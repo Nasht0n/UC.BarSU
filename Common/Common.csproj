@@ -66,9 +66,9 @@
     <Compile Include="Entities\ScienceProjectReport.cs" />
     <Compile Include="Entities\Stage.cs" />
     <Compile Include="Entities\StageType.cs" />
-    <Compile Include="Migrations\202011230815209_SPInit.cs" />
-    <Compile Include="Migrations\202011230815209_SPInit.designer.cs">
-      <DependentUpon>202011230815209_SPInit.cs</DependentUpon>
+    <Compile Include="Migrations\202011261926151_Init.cs" />
+    <Compile Include="Migrations\202011261926151_Init.designer.cs">
+      <DependentUpon>202011261926151_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,8 +79,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011230815209_SPInit.resx">
-      <DependentUpon>202011230815209_SPInit.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011261926151_Init.resx">
+      <DependentUpon>202011261926151_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

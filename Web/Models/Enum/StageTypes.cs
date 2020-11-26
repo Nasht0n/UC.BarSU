@@ -2,7 +2,7 @@
 {
     public enum StageTypes
     {
-        Intermediate = 1,
-        Final = 2
+        Intermediate = 1, // Промежуточный этап
+        Final = 2 // Заключительный этап
     }
 }

@@ -59,7 +59,6 @@ namespace Repository.Concrete
             {
                 return context.StudentActLifeCycles
                     .Include(lc => lc.Act)
-                    .Include(lc => lc.User)
                     .SingleOrDefault(lc => lc.Id == id);
             }
             catch (SqlException ex)
@@ -75,7 +74,6 @@ namespace Repository.Concrete
             {
                 return await context.StudentActLifeCycles
                     .Include(lc => lc.Act)
-                    .Include(lc => lc.User)
                     .SingleOrDefaultAsync(lc => lc.Id == id);
             }
             catch (SqlException ex)
@@ -91,7 +89,6 @@ namespace Repository.Concrete
             {
                 return context.StudentActLifeCycles
                     .Include(lc => lc.Act)
-                    .Include(lc => lc.User)
                     .Where(lc => lc.ActId == act.Id)
                     .ToList();
             }
@@ -108,7 +105,6 @@ namespace Repository.Concrete
             {
                 return await context.StudentActLifeCycles
                     .Include(lc => lc.Act)
-                    .Include(lc => lc.User)
                     .Where(lc => lc.ActId == act.Id)
                     .ToListAsync();
             }
@@ -129,7 +125,6 @@ namespace Repository.Concrete
                     saved.ActId = lifeCycle.ActId;
                     saved.Date = lifeCycle.Date;
                     saved.Message = lifeCycle.Message;
-                    saved.UserId = lifeCycle.UserId;
                 }
                 else
                 {
@@ -155,7 +150,6 @@ namespace Repository.Concrete
                     saved.ActId = lifeCycle.ActId;
                     saved.Date = lifeCycle.Date;
                     saved.Message = lifeCycle.Message;
-                    saved.UserId = lifeCycle.UserId;
                 }
                 else
                 {

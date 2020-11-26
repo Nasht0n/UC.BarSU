@@ -145,11 +145,6 @@ namespace Web.Controllers
                             ViewBag.SP_PROJECTLISTVIEW_ALL = true;
                             break;
                         }
-                    case (int)PermissionTypes.SP_PROJECTLISTVIEW_OWN:
-                        {
-                            ViewBag.SP_PROJECTLISTVIEW_OWN = true;
-                            break;
-                        }
                     case (int)PermissionTypes.SP_CAN_APPROVED:
                         {
                             ViewBag.SP_CAN_APPROVED = true;

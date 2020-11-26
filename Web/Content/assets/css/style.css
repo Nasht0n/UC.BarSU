@@ -1390,6 +1390,22 @@ section {
         color: #fff;
     }
 
+.rounded-outline-btn {
+    background: #fff;
+    border: 1px solid #5777ba;
+    padding: 5px 24px;
+    color: #5777ba;
+    transition: 0.4s;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+    .rounded-outline-btn:hover {
+        border: 1px solid #5777ba;
+        background: #5777ba;
+        color: #fff;
+    }
+
 #sp_table {
     background: #5777ba;
 }

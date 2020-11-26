@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class SPInit : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -153,6 +153,53 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.ImplementationStudentActComissions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        ActId = c.Int(nullable: false),
+                        Fullname = c.String(nullable: false, maxLength: 255),
+                        Post = c.String(nullable: false, maxLength: 255),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ImplementationStudentActs", t => t.ActId, cascadeDelete: true)
+                .Index(t => t.ActId);
+            
+            CreateTable(
+                "dbo.ImplementationStudentActs",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.Int(nullable: false),
+                        Scope = c.String(nullable: false, maxLength: 255),
+                        Department = c.String(nullable: false),
+                        Result = c.String(nullable: false),
+                        Author = c.String(nullable: false, maxLength: 255),
+                        ProjectName = c.String(nullable: false),
+                        PracticalTasks = c.String(nullable: false),
+                        EconomicEfficiency = c.String(nullable: false),
+                        ProtocolDate = c.DateTime(nullable: false),
+                        ProtocolNumber = c.String(nullable: false),
+                        RegisterDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AppUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.ImplementationStudentActLifeCycles",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        ActId = c.Int(nullable: false),
+                        Date = c.DateTime(nullable: false),
+                        Message = c.String(nullable: false, maxLength: 255),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ImplementationStudentActs", t => t.ActId, cascadeDelete: true)
+                .Index(t => t.ActId);
+            
+            CreateTable(
                 "dbo.AppUserPermissions",
                 c => new
                     {
@@ -171,6 +218,9 @@
         {
             DropForeignKey("dbo.AppUserPermissions", "UserId", "dbo.AppUsers");
             DropForeignKey("dbo.AppUserPermissions", "PermissionId", "dbo.AppPermissions");
+            DropForeignKey("dbo.ImplementationStudentActs", "UserId", "dbo.AppUsers");
+            DropForeignKey("dbo.ImplementationStudentActLifeCycles", "ActId", "dbo.ImplementationStudentActs");
+            DropForeignKey("dbo.ImplementationStudentActComissions", "ActId", "dbo.ImplementationStudentActs");
             DropForeignKey("dbo.ScienceProjectReports", "StageId", "dbo.Stages");
             DropForeignKey("dbo.Stages", "StageTypeId", "dbo.StageTypes");
             DropForeignKey("dbo.Stages", "ProjectId", "dbo.ScienceProjects");
@@ -181,6 +231,9 @@
             DropForeignKey("dbo.Casts", "ProjectId", "dbo.ScienceProjects");
             DropIndex("dbo.AppUserPermissions", new[] { "PermissionId" });
             DropIndex("dbo.AppUserPermissions", new[] { "UserId" });
+            DropIndex("dbo.ImplementationStudentActLifeCycles", new[] { "ActId" });
+            DropIndex("dbo.ImplementationStudentActs", new[] { "UserId" });
+            DropIndex("dbo.ImplementationStudentActComissions", new[] { "ActId" });
             DropIndex("dbo.Stages", new[] { "StageTypeId" });
             DropIndex("dbo.Stages", new[] { "ProjectId" });
             DropIndex("dbo.ScienceProjectReports", new[] { "StageId" });
@@ -190,6 +243,9 @@
             DropIndex("dbo.ScienceProjects", new[] { "UserId" });
             DropIndex("dbo.Casts", new[] { "ProjectId" });
             DropTable("dbo.AppUserPermissions");
+            DropTable("dbo.ImplementationStudentActLifeCycles");
+            DropTable("dbo.ImplementationStudentActs");
+            DropTable("dbo.ImplementationStudentActComissions");
             DropTable("dbo.StageTypes");
             DropTable("dbo.Stages");
             DropTable("dbo.ScienceProjectReports");
