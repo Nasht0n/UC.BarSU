@@ -15,7 +15,7 @@
                 </div>
             }
 
-            @if (Model.Project.StateId != (int)ProjectStates.Finished && (ViewBag.SP_CAN_EDIT_ALL || Model.User.Id == ViewBag.UserID ))
+            @if (Model.Project.StateId != (int)ProjectStates.Finished && (ViewBag.SP_CAN_EDIT_ALL || Model.User.Id == ViewBag.UserID))
             {
                 <div class="py-2">
                     <a class="rounded-btn" href="@Url.Action("Edit", "SP", new { id = Model.Project.Id })">Редактировать</a>
@@ -102,7 +102,7 @@
                                     </div>
                                 }
 
-                                </div>
+                            </div>
                         </div>
                         <div id="accordion">
                             @{
@@ -174,7 +174,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            
+
                             <div class="col-md-12">
                                 @Html.LabelFor(model => model.Report, htmlAttributes: new { @class = "control-label" })
                                 <div class="custom-file">
@@ -197,3 +197,10 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/Scripts/app/sp/datatables.js"></script>
+    <script src="~/Scripts/app/sp/cast.data.js"></script>
+    <script src="~/Scripts/app/sp/selectlist.init.js"></script>
+    <script src="~/Scripts/app/sp/stages.js"></script>
+}

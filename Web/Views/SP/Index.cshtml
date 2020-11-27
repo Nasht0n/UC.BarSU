@@ -30,33 +30,33 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var item in Model.ScienceProjects)
+                @foreach (var item in Model.ScienceProjects)
                 {
-                <tr onclick="location.href = '@Url.Action("Details", "SP", new { id=item.Id })'">
-                    <td>
-                        @if (item.StateId == (int)ProjectStates.JustCreated)
-                        {
-                            <span class="badge badge-info">Подана заявка</span>
-                        }
-                        @if (item.StateId == (int)ProjectStates.Approved)
-                        {
-                            <span class="badge badge-primary">Одобрен</span>
-                        }
-                        @if (item.StateId == (int)ProjectStates.Finished)
-                        {
-                            <span class="badge badge-success">Завершен</span>
-                        }
-                    </td>
-                    <td>
-                        <span class="ml-3">@item.Name</span>
-                    </td>
-                    <td>
-                        <span>@item.Program</span>
-                    </td>
-                    <td>
-                        <span>@item.Price</span>
-                    </td>
-                </tr>
+                    <tr onclick="location.href = '@Url.Action("Details", "SP", new { id=item.Id })'">
+                        <td>
+                            @if (item.StateId == (int)ProjectStates.JustCreated)
+                            {
+                                <span class="badge badge-info">Подана заявка</span>
+                            }
+                            @if (item.StateId == (int)ProjectStates.Approved)
+                            {
+                                <span class="badge badge-primary">Одобрен</span>
+                            }
+                            @if (item.StateId == (int)ProjectStates.Finished)
+                            {
+                                <span class="badge badge-success">Завершен</span>
+                            }
+                        </td>
+                        <td>
+                            <span class="ml-3">@item.Name</span>
+                        </td>
+                        <td>
+                            <span>@item.Program</span>
+                        </td>
+                        <td>
+                            <span>@item.Price</span>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -64,5 +64,11 @@
 
 </section>
 
+@section Scripts{
+    <script src="~/Scripts/app/sp/datatables.js"></script>
+    <script src="~/Scripts/app/sp/cast.data.js"></script>
+    <script src="~/Scripts/app/sp/selectlist.init.js"></script>
+    <script src="~/Scripts/app/sp/stages.js"></script>
+}
 
 

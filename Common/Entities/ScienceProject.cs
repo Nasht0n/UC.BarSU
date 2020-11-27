@@ -51,6 +51,6 @@ namespace Common.Entities
         [ForeignKey("UserId")]
         public AppUser User { get; set; }
 
-        public virtual ICollection<Cast> Casts { get; set; }
+        public virtual IList<Cast> Casts { get; set; }
     }
 }

@@ -63,6 +63,7 @@ namespace Repository.Concrete
                     .Include(p=>p.Department.Faculty)
                     .Include(p=>p.ProjectState)
                     .Include(p=>p.User)
+                    .Include(p=>p.Casts)
                     .SingleOrDefault(p => p.Id == id);
             }
             catch (SqlException ex)
@@ -81,6 +82,7 @@ namespace Repository.Concrete
                     .Include(p => p.Department.Faculty)
                     .Include(p => p.ProjectState)
                     .Include(p => p.User)
+                    .Include(p => p.Casts)
                     .SingleOrDefaultAsync(p => p.Id == id);
             }
             catch (SqlException ex)
@@ -99,6 +101,7 @@ namespace Repository.Concrete
                     .Include(p => p.Department.Faculty)
                     .Include(p => p.ProjectState)
                     .Include(p => p.User)
+                    .Include(p => p.Casts)
                     .ToList();
             }
             catch (SqlException ex)
@@ -117,6 +120,7 @@ namespace Repository.Concrete
                     .Include(p => p.Department.Faculty)
                     .Include(p => p.ProjectState)
                     .Include(p => p.User)
+                    .Include(p => p.Casts)
                     .Where(p=>p.StateId == state.Id).ToList();
             }
             catch (SqlException ex)
@@ -135,6 +139,7 @@ namespace Repository.Concrete
                     .Include(p => p.Department.Faculty)
                     .Include(p => p.ProjectState)
                     .Include(p => p.User)
+                    .Include(p => p.Casts)
                     .Where(p => p.DepartmentId == department.Id).ToList();
             }
             catch (SqlException ex)
@@ -153,6 +158,7 @@ namespace Repository.Concrete
                     .Include(p => p.Department.Faculty)
                     .Include(p => p.ProjectState)
                     .Include(p => p.User)
+                    .Include(p => p.Casts)
                     .Where(p => p.StartDate >= start && p.EndDate<=end).ToList();
             }
             catch (SqlException ex)
@@ -171,6 +177,7 @@ namespace Repository.Concrete
                     .Include(p => p.Department.Faculty)
                     .Include(p => p.ProjectState)
                     .Include(p => p.User)
+                    .Include(p => p.Casts)
                     .Where(p => p.UserId == user.Id).ToList();
             }
             catch (SqlException ex)
@@ -189,6 +196,7 @@ namespace Repository.Concrete
                     .Include(p => p.Department.Faculty)
                     .Include(p => p.ProjectState)
                     .Include(p => p.User)
+                    .Include(p => p.Casts)
                     .ToListAsync();
             }
             catch (SqlException ex)
@@ -207,6 +215,7 @@ namespace Repository.Concrete
                     .Include(p => p.Department.Faculty)
                     .Include(p => p.ProjectState)
                     .Include(p => p.User)
+                    .Include(p => p.Casts)
                     .Where(p => p.StateId == state.Id).ToListAsync();
             }
             catch (SqlException ex)
@@ -225,6 +234,7 @@ namespace Repository.Concrete
                     .Include(p => p.Department.Faculty)
                     .Include(p => p.ProjectState)
                     .Include(p => p.User)
+                    .Include(p => p.Casts)
                     .Where(p => p.DepartmentId == department.Id).ToListAsync();
             }
             catch (SqlException ex)
@@ -243,6 +253,7 @@ namespace Repository.Concrete
                     .Include(p => p.Department.Faculty)
                     .Include(p => p.ProjectState)
                     .Include(p => p.User)
+                    .Include(p => p.Casts)
                     .Where(p => p.StartDate >= start && p.EndDate <= end).ToListAsync();
             }
             catch (SqlException ex)
@@ -261,6 +272,7 @@ namespace Repository.Concrete
                     .Include(p => p.Department.Faculty)
                     .Include(p => p.ProjectState)
                     .Include(p => p.User)
+                    .Include(p => p.Casts)
                     .Where(p => p.UserId == user.Id).ToListAsync();
             }
             catch (SqlException ex)

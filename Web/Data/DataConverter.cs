@@ -1,5 +1,6 @@
 ﻿using Common.Entities;
 using System.Collections.Generic;
+using System.Linq;
 using Web.ViewModels;
 
 namespace Web.Data
@@ -10,7 +11,7 @@ namespace Web.Data
         {
             public static ScienceProjectViewModel GetScienceProject(ScienceProject data)
             {
-                return new ScienceProjectViewModel
+                ScienceProjectViewModel model = new ScienceProjectViewModel()
                 {
                     Id = data.Id,
                     UserId = data.UserId,
@@ -25,8 +26,10 @@ namespace Web.Data
                     RegistrationDate = data.RegistrationDate,
                     Price = data.Price,
                     StartDate = data.StartDate,
-                    EndDate = data.EndDate
+                    EndDate = data.EndDate,
+                    Casts = data.Casts.ToList()
                 };
+                return model;
             }
 
             public static List<ScienceProjectViewModel> GetScienceProjects(List<ScienceProject> projects)

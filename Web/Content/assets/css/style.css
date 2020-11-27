@@ -1425,7 +1425,8 @@ section {
 }
 
     #tblEmployees th {
-        color: #5777ba;
+        background: #5777ba;
+        color: #fff;
         font-weight: 400;
         font-size: 12px;
     }
@@ -1437,7 +1438,7 @@ section {
         text-align:center;
     }
 
-    #tblEmployees tbody:hover {
+    #tblEmployees tbody tr:hover {
         cursor: pointer;
         background: #e8ecf5;
     }

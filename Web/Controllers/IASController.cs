@@ -47,8 +47,10 @@ namespace Web.Controllers
         {
             AppUser user = GetUserInfo();
             SetViewBags(user);
-            IAStudentViewModel model = new IAStudentViewModel();
-
+            IAStudentViewModel model = new IAStudentViewModel() { 
+                ProtocolDate = DateTime.Now,
+                RegisterDate = DateTime.Now
+            };
             return View(model);
         }
         [HttpPost]

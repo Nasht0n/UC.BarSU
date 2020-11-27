@@ -92,10 +92,26 @@ namespace Web.Controllers
         public JsonResult AddScienceProject(ScienceProjectViewModel model)
         {
             var user = GetUserInfo();
-            model.UserId = user.Id;
-            model.StateId = (int)ProjectStates.JustCreated;
-            var project = ModelConverter.ScienceProjectModel.GetScienceProject(model);
-            projectRepository.Save(project);
+
+            if(model.StateId == 0) {
+                model.UserId = user.Id;
+                model.StateId = (int)ProjectStates.JustCreated;
+            }
+
+            var project = projectRepository.GetProject(model.Id);
+            foreach (var item in project.Casts)
+            {
+                castRepository.Delete(item);
+            }
+
+            var saved = ModelConverter.ScienceProjectModel.GetScienceProject(model);
+            projectRepository.Save(saved);
+
+            foreach(var item in saved.Casts)
+            {
+                castRepository.Save(new Cast { Degree = item.Degree, Fullname = item.Fullname, IsManager = item.IsManager, Post = item.Post, ProjectId = saved.Id, Status = item.Status });
+            }
+
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
@@ -175,14 +191,11 @@ namespace Web.Controllers
         public ActionResult Edit(int id)
         {
             var project = projectRepository.GetProject(id);
-            ScienceProjectViewModel model = new ScienceProjectViewModel
-            {
-                Faculties = helper.GetFaculties(facultyRepository),
-                Departments = helper.GetDepartments(project.Department.FacultyId.ToString(), departmentRepository),                
-                SelectedDepartment = project.DepartmentId,
-                SelectedFaculty = project.Department.FacultyId
-            };
-            model.Casts = model.Casts.OrderBy(c => c.IsManager).ToList();
+            ScienceProjectViewModel model = new ScienceProjectViewModel();
+            model = DataConverter.ScienceProjectModel.GetScienceProject(project);
+            model.Faculties = helper.GetFaculties(facultyRepository);
+            model.Departments = helper.GetDepartments(project.Department.FacultyId.ToString(), departmentRepository);
+            model.Casts = model.Casts.OrderByDescending(c => c.IsManager).ToList();
             return View(model);
         }
 
