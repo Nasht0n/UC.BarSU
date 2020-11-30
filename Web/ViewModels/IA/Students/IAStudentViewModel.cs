@@ -46,6 +46,7 @@ namespace Web.ViewModels.IA.Students
         [Display(Name = "Дата протокола")]
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Укажите дату протокола заседания")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ProtocolDate { get; set; }
 
         [Display(Name = "Номер протокола")]
@@ -55,6 +56,7 @@ namespace Web.ViewModels.IA.Students
         [Display(Name = "Дата регистрации акта")]
         [Required(ErrorMessage = "Выберите дату регистрации акта")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime RegisterDate { get; set; }
 
 

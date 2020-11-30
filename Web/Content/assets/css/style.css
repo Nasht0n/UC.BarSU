@@ -1421,6 +1421,16 @@ section {
         background: #e8ecf5;
     }
 
+#sp_table_filter input {
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
+}
+
+    #sp_table_filter input:focus {
+        border-color: #5777ba;
+    }
+
 #tblEmployees {
 }
 
@@ -1451,15 +1461,7 @@ div.dataTables_wrapper div.dataTables_length select {
     width: 60px !important;
 }
 
-#sp_table_filter input {
-    border-radius: 0;
-    box-shadow: none;
-    font-size: 14px;
-}
 
-    #sp_table_filter input:focus {
-        border-color: #5777ba;
-    }
 
 .container input {
     border-radius: 0;
@@ -1498,3 +1500,28 @@ div.dataTables_wrapper div.dataTables_length select {
     border: none !important;
     background: none !important;
 }
+
+#ias_table {
+    background: #5777ba;
+}
+
+    #ias_table th {
+        color: #5777ba;
+        font-weight: 400;
+        font-size: 12px;
+    }
+
+    #ias_table tbody:hover {
+        cursor: pointer;
+        background: #e8ecf5;
+    }
+
+#ias_table_filter input {
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
+}
+
+    #ias_table_filter input:focus {
+        border-color: #5777ba;
+    }
