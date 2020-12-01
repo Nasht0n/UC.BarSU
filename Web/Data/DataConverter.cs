@@ -1,7 +1,9 @@
 ﻿using Common.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Web.ViewModels;
+using Web.ViewModels.IA.Students;
 
 namespace Web.Data
 {
@@ -41,6 +43,41 @@ namespace Web.Data
                     list.Add(item);
                 }
                 return list;
+            }
+        }
+
+        public static class StudentActModel
+        {
+            public static List<IAStudentViewModel> GetActs(List<ImplementationStudentAct> acts)
+            {
+                List<IAStudentViewModel> list = new List<IAStudentViewModel>();
+                foreach (var act in acts)
+                {
+                    var item = GetAct(act);
+                    list.Add(item);
+                }
+                return list;
+            }
+
+            public static IAStudentViewModel GetAct(ImplementationStudentAct act)
+            {
+                IAStudentViewModel model = new IAStudentViewModel
+                {
+                    Id = act.Id,
+                    Author = act.Author,
+                    Department = act.Department,
+                    EconomicEfficiency = act.EconomicEfficiency,
+                    PracticalTasks = act.PracticalTasks,
+                    ProjectName = act.ProjectName,
+                    ProtocolDate = act.ProtocolDate,
+                    ProtocolNumber = act.ProtocolNumber,
+                    RegisterDate = act.RegisterDate,
+                    Result = act.Result,
+                    Scope = act.Scope,
+                    UserId = act.UserId,
+                    Commission = act.Comissions.ToList()                    
+                };
+                return model;
             }
         }
     }

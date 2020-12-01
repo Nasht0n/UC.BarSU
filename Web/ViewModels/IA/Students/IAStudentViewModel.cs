@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Common.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Web.Models;
 
 namespace Web.ViewModels.IA.Students
 {
@@ -59,6 +61,8 @@ namespace Web.ViewModels.IA.Students
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime RegisterDate { get; set; }
 
+        public int UserId { get; set; }
 
+        public List<ImplementationStudentActComission> Commission { get; set; } = new List<ImplementationStudentActComission>();
     }
 }

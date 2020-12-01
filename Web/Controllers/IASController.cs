@@ -3,6 +3,7 @@ using Microsoft.Owin.Security;
 using Repository.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web.Data;
@@ -16,13 +17,20 @@ namespace Web.Controllers
     {
         private readonly IUserRepository userRepository;
         private readonly IUserPermissionsRepository userPermissionsRepository;
+        private readonly IImplementationStudentActRepository actRepository;
+        private readonly IImplementationStudentActLifeCycleRepository lifeCycleRepository;
+        private readonly IImplementationStudentActComissionRepository comissionRepository;
 
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
-        public IASController(IUserRepository userRepository, IUserPermissionsRepository userPermissionsRepository)
+        public IASController(IUserRepository userRepository, IUserPermissionsRepository userPermissionsRepository, IImplementationStudentActRepository actRepository,
+                             IImplementationStudentActLifeCycleRepository lifeCycleRepository, IImplementationStudentActComissionRepository comissionRepository)
         {
             this.userRepository = userRepository;
             this.userPermissionsRepository = userPermissionsRepository;
+            this.actRepository = actRepository;
+            this.lifeCycleRepository = lifeCycleRepository;
+            this.comissionRepository = comissionRepository;
         }
 
         public ActionResult Index()
@@ -30,8 +38,19 @@ namespace Web.Controllers
             AppUser user = GetUserInfo();
             SetViewBags(user);
             IAStudentListViewModel model = new IAStudentListViewModel();
-            model.StudentActs = new List<IAStudentViewModel>();
+            List<ImplementationStudentAct> acts = GetActs(user);
+            model.StudentActs = DataConverter.StudentActModel.GetActs(acts);
             return View(model);
+        }
+
+        private List<ImplementationStudentAct> GetActs(AppUser user)
+        {
+            List<ImplementationStudentAct> result = new List<ImplementationStudentAct>();
+            var permissions = userPermissionsRepository.GetUserPermissions(user);
+            var all = permissions.Any(p => p.PermissionId == (int)PermissionTypes.IAS_LISTVIEW_ALL);
+            if (all) result = actRepository.GetActs();
+            else result = actRepository.GetActs(user);
+            return result;
         }
 
         public ActionResult Details(int id)
@@ -47,15 +66,37 @@ namespace Web.Controllers
         {
             AppUser user = GetUserInfo();
             SetViewBags(user);
-            IAStudentViewModel model = new IAStudentViewModel() { 
+            IAStudentViewModel model = new IAStudentViewModel()
+            {
                 ProtocolDate = DateTime.Now,
                 RegisterDate = DateTime.Now
             };
             return View(model);
         }
         [HttpPost]
-        public JsonResult Create(IAStudentViewModel model)
+        public JsonResult SaveAct(IAStudentViewModel model)
         {
+            AppUser user = GetUserInfo();
+            if (ModelState.IsValid)
+            {
+                model.UserId = user.Id;
+                if (model.Id != 0)
+                {
+                    var act = actRepository.GetAct(model.Id);
+                    foreach (var item in act.Comissions)
+                    {
+                        comissionRepository.Delete(item);
+                    }
+                }
+
+                var saved = ModelConverter.ImplementationStudentActModel.GetAct(model);
+                actRepository.Save(saved);
+
+                foreach (var item in saved.Comissions)
+                {
+                    comissionRepository.Save(new ImplementationStudentActComission { ActId = saved.Id, Fullname = item.Fullname, Post = item.Post });
+                }
+            }
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 

@@ -26,14 +26,14 @@
 
 function Remove(button) {
     var row = $(button).closest("TR");
-    var name = $("TD", row).eq(2).html();
-    if (confirm("Вы хотите удалить: " + name + " из состава комиссии проекта?")) {
+    var name = $("TD", row).eq(0).html();
+    if (confirm("Вы уверены, что хотите удалить сотрудника '"+ name +"' из состава комиссии проекта?")) {
         var table = $("#tblEmployees")[0];
         table.deleteRow(row[0].rowIndex);
     }
 };
 
-$("body").on("click", "#btnSave", function () {
+$("body").on("click", "#btnIASSave", function () {
 
     var model = {
         Id: $("#Id").val(),
@@ -60,12 +60,12 @@ $("body").on("click", "#btnSave", function () {
         };
         employees.push(employee);
     });
-    model.Casts = employees;
+    model.Commission = employees;
 
     var json = JSON.stringify(model);
     $.ajax({
         type: "POST",
-        url: "/SP/AddAct",
+        url: "/IAS/SaveAct",
         data: json,
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
