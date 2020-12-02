@@ -58,7 +58,10 @@ namespace Web.Controllers
             AppUser user = GetUserInfo();
             SetViewBags(user);
             IAStudentDetailsViewModel model = new IAStudentDetailsViewModel();
-
+            model.User = user;
+            model.Act = actRepository.GetAct(id);
+            model.Comissions = comissionRepository.GetComissions(model.Act);
+            model.LifeCycles = lifeCycleRepository.GetLifeCycles(model.Act);
             return View(model);
         }
 
@@ -96,6 +99,8 @@ namespace Web.Controllers
                 {
                     comissionRepository.Save(new ImplementationStudentActComission { ActId = saved.Id, Fullname = item.Fullname, Post = item.Post });
                 }
+
+                lifeCycleRepository.Save(new ImplementationStudentActLifeCycle { ActId = saved.Id, Date = DateTime.Now, Title = "Создание акта внедрения", Message = $"Научный проект студента успешно внедрен в производство." });
             }
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
@@ -109,6 +114,11 @@ namespace Web.Controllers
         }
         [HttpPost]
         public JsonResult Edit(IAStudentViewModel model)
+        {
+            return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult AddLifeCycleMessage(IAStudentDetailsViewModel model)
         {
             return Json("OK", JsonRequestBehavior.AllowGet);
         }

@@ -124,6 +124,7 @@ namespace Repository.Concrete
                 {
                     saved.ActId = lifeCycle.ActId;
                     saved.Date = lifeCycle.Date;
+                    saved.Title = lifeCycle.Title;
                     saved.Message = lifeCycle.Message;
                 }
                 else
@@ -149,6 +150,7 @@ namespace Repository.Concrete
                 {
                     saved.ActId = lifeCycle.ActId;
                     saved.Date = lifeCycle.Date;
+                    saved.Title = lifeCycle.Title;
                     saved.Message = lifeCycle.Message;
                 }
                 else

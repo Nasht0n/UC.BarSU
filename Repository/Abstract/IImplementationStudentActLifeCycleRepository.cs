@@ -14,5 +14,8 @@ namespace Repository.Abstract
 
         ImplementationStudentActLifeCycle GetLifeCycle(int id);
         Task<ImplementationStudentActLifeCycle> GetLifeCycleAsync(int id);
+
+        List<ImplementationStudentActLifeCycle> GetLifeCycles(ImplementationStudentAct act);
+        Task<List<ImplementationStudentActLifeCycle>> GetLifeCyclesAsync(ImplementationStudentAct act);
     }
 }

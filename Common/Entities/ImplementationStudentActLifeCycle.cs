@@ -15,6 +15,8 @@ namespace Common.Entities
         public DateTime Date { get; set; }
         [Required]
         [MaxLength(255)]
+        public string Title { get; set; }
+        [Required]
         public string Message { get; set; }
         [ForeignKey("ActId")]
         public ImplementationStudentAct Act { get; set; }

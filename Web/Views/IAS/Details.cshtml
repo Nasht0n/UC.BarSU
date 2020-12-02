@@ -5,5 +5,97 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>Details</h2>
+<section id="studentAct">
+    <div class="container">
+        <h2 class="section-title">Акт внедрения работы студента</h2>
+        <div class="pb-3">
+            <a class="rounded-btn" href="@Url.Action("Edit", "IAS", new { id = Model.Act.Id })">Редактировать</a>
+        </div>
+        <div class="row">
+            @* Details Act *@
+            <div class="col-md-7">
+                <div class="card mb-3">
+                    <h4 class="card-header text-center">@Model.Act.ProjectName</h4>
+                    <div class="card-body">
+                        <h5 class="card-title">Практические задачи</h5>
+                        <hr />
+                        <p class="card-subtitle text-muted">@Model.Act.PracticalTasks</p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Результаты</h5>
+                        <hr />
+                        <p class="card-subtitle text-muted">@Model.Act.Result</p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Экономическая эффективность</h5>
+                        <hr />
+                        <p class="card-subtitle text-muted">@Model.Act.EconomicEfficiency</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><b>ФИО автора проекта</b> @Model.Act.Author</li>
+                        <li class="list-group-item"><b>Отрасль</b>: @Model.Act.Scope</li>
+                        <li class="list-group-item"><b>Организация (подразделение)</b>: @Model.Act.Department</li>
+                    </ul>
+                    <div class="card-footer text-muted">
+                        Протокол №@Model.Act.ProtocolNumber от @Model.Act.ProtocolDate.ToShortDateString()
+                    </div>
+                </div>
+            </div>
+            @* LifeCycle List *@
+            <div class="col-md-5">
+                <div class="card mb-3">
+                    <h4 class="card-header text-center">Жизненный цикл проекта</h4>
+                    <div class="card-body m-0 p-1">
+                        <div class="list-group">
+                            @foreach (var item in Model.LifeCycles)
+                            {
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">@item.Title</h5>
+                                        <small>@item.Date.ToShortDateString()</small>
+                                    </div>
+                                    <p class="mb-1">@item.Message</p>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted pb-0">
+                        @using (Html.BeginForm("Message", "IAS", FormMethod.Post, new { id = "ias_lcForm", autocomplete = "off" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            @Html.LabelFor(model => model.MessageModel.Title, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.MessageModel.Title, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Message" } })
+                                            @Html.ValidationMessageFor(model => model.MessageModel.Title, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            @Html.LabelFor(model => model.MessageModel.Message, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.MessageModel.Message, new { htmlAttributes = new { @class = "form-control", rows="6", autocomplete = "off", id = "Message" } })
+                                            @Html.ValidationMessageFor(model => model.MessageModel.Message, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="ml-auto">
+                                            <button type="button" id="btnIASLifeCycleAdd" class="rounded-btn">
+                                                <span class="ml-1">Добавить</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 

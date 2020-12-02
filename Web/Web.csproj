@@ -614,6 +614,7 @@
     <Compile Include="ViewModels\IA\Students\IAStudentDetailsViewModel.cs" />
     <Compile Include="ViewModels\IA\Students\IAStudentListViewModel.cs" />
     <Compile Include="ViewModels\IA\Students\IAStudentViewModel.cs" />
+    <Compile Include="ViewModels\LifeCycleMessageModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\SP\ScienceProjectListViewModel.cs" />
     <Compile Include="ViewModels\SP\ScienceProjectViewModel.cs" />
