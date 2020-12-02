@@ -24,10 +24,9 @@
         <table class="table table-hover" id="ias_table">
             <thead>
                 <tr class="text-white">
-                    <td class="w-25">Наименование проекта</td>
+                    <td class="w-50">Наименование проекта</td>
                     <td class="w-25">Организация (подразделение)</td>
                     <td class="w-25">ФИО автора</td>
-                    <td class="w-25">Дата регистрации</td>
                 </tr>
             </thead>
             <tbody>
@@ -42,9 +41,6 @@
                         </td>
                         <td>
                             @item.Author
-                        </td>
-                        <td>
-                            @item.RegisterDate.ToShortDateString()
                         </td>
                     </tr>
                 }
