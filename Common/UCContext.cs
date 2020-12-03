@@ -35,6 +35,12 @@ namespace Common
 
         #endregion
 
+        #region Implementation Research Acts
+        public virtual DbSet<ImplementationResearchAct> ResearchActs { get; set; }
+        public virtual DbSet<ImplementationResearchActAuthors> ResearchActAuthors { get; set; }
+        public virtual DbSet<ImplementationResearchActEmployees> ResearchActEmployees { get; set; }
+        public virtual DbSet<ImplementationResearchActLifeCycle> ResearchActLifeCycles { get; set; }
+        #endregion
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AppUserPermissions>().HasKey(c => new { c.UserId, c.PermissionId });

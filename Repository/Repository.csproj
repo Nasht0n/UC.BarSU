@@ -55,6 +55,10 @@
     <Compile Include="Abstract\IDepartmentRepository.cs" />
     <Compile Include="Abstract\IFacultyRepository.cs" />
     <Compile Include="Abstract\IFeedbackRepository.cs" />
+    <Compile Include="Abstract\IImplementationResearchActAuthorsRepository.cs" />
+    <Compile Include="Abstract\IImplementationResearchActEmployeesRepository.cs" />
+    <Compile Include="Abstract\IImplementationResearchActLifeCycleRepository.cs" />
+    <Compile Include="Abstract\IImplementationResearchActRepository.cs" />
     <Compile Include="Abstract\IImplementationStudentActComissionRepository.cs" />
     <Compile Include="Abstract\IImplementationStudentActLifeCycleRepository.cs" />
     <Compile Include="Abstract\IImplementationStudentActRepository.cs" />
@@ -70,6 +74,10 @@
     <Compile Include="Concrete\DepartmentRepository.cs" />
     <Compile Include="Concrete\FacultyRepository.cs" />
     <Compile Include="Concrete\FeedbackRepository.cs" />
+    <Compile Include="Concrete\ImplementationResearchActAuthorsRepository.cs" />
+    <Compile Include="Concrete\ImplementationResearchActEmployeesRepository.cs" />
+    <Compile Include="Concrete\ImplementationResearchActLifeCycleRepository.cs" />
+    <Compile Include="Concrete\ImplementationResearchActRepository.cs" />
     <Compile Include="Concrete\ImplementationStudentActComissionRepository.cs" />
     <Compile Include="Concrete\ImplementationStudentActLifeCycleRepository.cs" />
     <Compile Include="Concrete\ImplementationStudentActRepository.cs" />
