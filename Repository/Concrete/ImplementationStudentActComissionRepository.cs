@@ -26,7 +26,7 @@ namespace Repository.Concrete
                 var deleted = context.StudentActComissions.SingleOrDefault(c => c.Id == comission.Id);
                 if (deleted != null)
                 {
-                    context.StudentActComissions.Remove(comission);
+                    context.StudentActComissions.Remove(deleted);
                     context.SaveChanges();
                 }
             }

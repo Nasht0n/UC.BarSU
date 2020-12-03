@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Web.Data;
 using Web.Models.Enum;
+using Web.ViewModels;
 using Web.ViewModels.IA.Students;
 
 namespace Web.Controllers
@@ -100,16 +101,18 @@ namespace Web.Controllers
                     comissionRepository.Save(new ImplementationStudentActComission { ActId = saved.Id, Fullname = item.Fullname, Post = item.Post });
                 }
 
-                lifeCycleRepository.Save(new ImplementationStudentActLifeCycle { ActId = saved.Id, Date = DateTime.Now, Title = "Создание акта внедрения", Message = $"Научный проект студента успешно внедрен в производство." });
+                var lifeCycles = lifeCycleRepository.GetLifeCycles(saved);
+                if(lifeCycles.Count==0) lifeCycleRepository.Save(new ImplementationStudentActLifeCycle { ActId = saved.Id, Date = DateTime.Now, Title = "Создание акта внедрения", Message = $"Научный проект студента успешно внедрен в производство." });
             }
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
             AppUser user = GetUserInfo();
-            SetViewBags(user);
-            IAStudentViewModel model = new IAStudentViewModel();
+            SetViewBags(user);             
+            var act = actRepository.GetAct(id);
+            IAStudentViewModel model = DataConverter.StudentActModel.GetAct(act);
             return View(model);
         }
         [HttpPost]
@@ -120,6 +123,15 @@ namespace Web.Controllers
 
         public JsonResult AddLifeCycleMessage(IAStudentDetailsViewModel model)
         {
+            return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Message(LifeCycleMessageModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                lifeCycleRepository.Save(new ImplementationStudentActLifeCycle { ActId = model.ActId, Date = DateTime.Now, Title = model.Title, Message = model.Message });
+            }
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 

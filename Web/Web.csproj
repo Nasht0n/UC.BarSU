@@ -361,6 +361,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\ia\ias\cast.data.js" />
     <Content Include="Scripts\app\ia\ias\datatables.js" />
+    <Content Include="Scripts\app\ia\ias\lifecycles.js" />
     <Content Include="Scripts\app\sp\cast.data.js" />
     <Content Include="Scripts\app\sp\datatables.js" />
     <Content Include="Scripts\app\sp\selectlist.init.js" />
