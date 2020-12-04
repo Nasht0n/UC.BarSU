@@ -593,6 +593,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Controllers\IARController.cs" />
     <Compile Include="Controllers\IASController.cs" />
     <Compile Include="Controllers\SPController.cs" />
     <Compile Include="Controllers\UCController.cs" />
@@ -648,6 +649,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\SP\" />
+    <Folder Include="Views\IAR\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

@@ -42,6 +42,13 @@ namespace Web.Infrastructure
             kernel.Bind<IImplementationStudentActLifeCycleRepository>().To<ImplementationStudentActLifeCycleRepository>();
             kernel.Bind<IImplementationStudentActRepository>().To<ImplementationStudentActRepository>();
             #endregion
+
+            #region IAR Repository
+            kernel.Bind<IImplementationResearchActAuthorsRepository>().To<ImplementationResearchActAuthorsRepository>();
+            kernel.Bind<IImplementationResearchActEmployeesRepository>().To<ImplementationResearchActEmployeesRepository>();
+            kernel.Bind<IImplementationResearchActLifeCycleRepository>().To<ImplementationResearchActLifeCycleRepository>();
+            kernel.Bind<IImplementationResearchActRepository>().To<ImplementationResearchActRepository>();
+            #endregion
         }
 
         public object GetService(Type serviceType)

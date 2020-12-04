@@ -115,12 +115,6 @@ namespace Web.Controllers
             IAStudentViewModel model = DataConverter.StudentActModel.GetAct(act);
             return View(model);
         }
-        [HttpPost]
-        public JsonResult Edit(IAStudentViewModel model)
-        {
-            return Json("OK", JsonRequestBehavior.AllowGet);
-        }
-
         public JsonResult AddLifeCycleMessage(IAStudentDetailsViewModel model)
         {
             return Json("OK", JsonRequestBehavior.AllowGet);

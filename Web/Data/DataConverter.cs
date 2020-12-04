@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Web.ViewModels;
+using Web.ViewModels.IA.Research;
 using Web.ViewModels.IA.Students;
 
 namespace Web.Data
@@ -76,6 +77,37 @@ namespace Web.Data
                     Scope = act.Scope,
                     UserId = act.UserId,
                     Commission = act.Comissions.ToList()                    
+                };
+                return model;
+            }
+        }
+
+        public static class ResearchActModel
+        {
+            public static List<IAResearchViewModel> GetActs(List<ImplementationResearchAct> acts)
+            {
+                List<IAResearchViewModel> list = new List<IAResearchViewModel>();
+                foreach (var act in acts)
+                {
+                    var item = GetAct(act);
+                    list.Add(item);
+                }
+                return list;
+            }
+
+            public static IAResearchViewModel GetAct(ImplementationResearchAct act)
+            {
+                IAResearchViewModel model = new IAResearchViewModel
+                {
+                    Id = act.Id,
+                    Characteristic = act.Characteristic,
+                    FeasibilityOfIntroducing = act.FeasibilityOfIntroducing,
+                    HeadUnit = act.HeadUnit,
+                    ImplementationForm = act.ImplementationForm,
+                    ImplementingResult = act.ImplementingResult,
+                    Process = act.Process,
+                    UserId = act.UserId,
+                    UnitUsing = act.UnitUsing                    
                 };
                 return model;
             }

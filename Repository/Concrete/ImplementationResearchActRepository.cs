@@ -92,6 +92,19 @@ namespace Repository.Concrete
             }
         }
 
+        public List<ImplementationResearchAct> GetActs(AppUser user)
+        {
+            try
+            {
+                return context.ResearchActs.Include(a => a.Authors).Include(a => a.Employees).Include(a => a.LifeCycles).Include(a => a.User).Where(a => a.UserId == user.Id).ToList();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetActs error: " + ex.InnerException.Message);
+                return null;
+            }
+        }
+
         public async Task<List<ImplementationResearchAct>> GetActsAsync()
         {
             try
@@ -105,11 +118,24 @@ namespace Repository.Concrete
             }
         }
 
+        public async Task<List<ImplementationResearchAct>> GetActsAsync(AppUser user)
+        {
+            try
+            {
+                return await context.ResearchActs.Include(a => a.Authors).Include(a => a.Employees).Include(a => a.LifeCycles).Include(a => a.User).Where(a => a.UserId == user.Id).ToListAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetActsAsync error: " + ex.InnerException.Message);
+                return null;
+            }
+        }
+
         public ImplementationResearchAct Save(ImplementationResearchAct act)
         {
             try
             {
-                var saved = context.ResearchActs.SingleOrDefault(a=>a.Id == act.Id);
+                var saved = context.ResearchActs.SingleOrDefault(a => a.Id == act.Id);
                 if (saved != null)
                 {
                     saved.UserId = act.UserId;
@@ -130,7 +156,7 @@ namespace Repository.Concrete
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("Save error: "+ex.InnerException.Message);
+                Console.WriteLine("Save error: " + ex.InnerException.Message);
                 return null;
             }
         }

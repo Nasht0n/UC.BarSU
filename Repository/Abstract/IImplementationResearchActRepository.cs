@@ -17,5 +17,8 @@ namespace Repository.Abstract
 
         List<ImplementationResearchAct> GetActs();
         Task<List<ImplementationResearchAct>> GetActsAsync();
+
+        List<ImplementationResearchAct> GetActs(AppUser user);
+        Task<List<ImplementationResearchAct>> GetActsAsync(AppUser user);
     }
 }

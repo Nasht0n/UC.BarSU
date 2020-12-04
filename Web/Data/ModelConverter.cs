@@ -1,6 +1,7 @@
 ﻿using Web.ViewModels;
 using Common.Entities;
 using Web.ViewModels.IA.Students;
+using Web.ViewModels.IA.Research;
 
 namespace Web.Data
 {
@@ -60,6 +61,28 @@ namespace Web.Data
                     UserId = model.UserId
                 };
                 if (model.Commission.Count != 0) result.Comissions = model.Commission;
+                return result;
+            }
+        }
+
+        public static class ImplementationResearchActModel
+        {
+            public static ImplementationResearchAct GetAct(IAResearchViewModel model)
+            {
+                ImplementationResearchAct result = new ImplementationResearchAct
+                {
+                    Id = model.Id,
+                    Characteristic = model.Characteristic,
+                    FeasibilityOfIntroducing = model.FeasibilityOfIntroducing,
+                    HeadUnit = model.HeadUnit,
+                    ImplementationForm = model.ImplementationForm,
+                    ImplementingResult = model.ImplementingResult,
+                    Process = model.Process,
+                    UnitUsing = model.UnitUsing,
+                    UserId = model.UserId
+                };
+                if (model.Authors.Count != 0) result.Authors = model.Authors;
+                if (model.Employees.Count != 0) result.Employees = model.Employees;
                 return result;
             }
         }
