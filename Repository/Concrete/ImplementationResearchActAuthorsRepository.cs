@@ -92,11 +92,37 @@ namespace Repository.Concrete
             }
         }
 
+        public List<ImplementationResearchActAuthors> GetAuthors(ImplementationResearchAct act)
+        {
+            try
+            {
+                return context.ResearchActAuthors.Include(a => a.Act).Where(a=>a.ActId == act.Id).ToList();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetAuthors error: " + ex.InnerException.Message);
+                return null;
+            }
+        }
+
         public async Task<List<ImplementationResearchActAuthors>> GetAuthorsAsync()
         {
             try
             {
                 return await context.ResearchActAuthors.Include(a => a.Act).ToListAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetAuthorsAsync error: " + ex.InnerException.Message);
+                return null;
+            }
+        }
+
+        public async Task<List<ImplementationResearchActAuthors>> GetAuthorsAsync(ImplementationResearchAct act)
+        {
+            try
+            {
+                return await context.ResearchActAuthors.Include(a => a.Act).Where(a=>a.ActId == act.Id).ToListAsync();
             }
             catch (SqlException ex)
             {

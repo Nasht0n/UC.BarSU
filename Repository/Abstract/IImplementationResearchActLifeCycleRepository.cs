@@ -17,5 +17,7 @@ namespace Repository.Abstract
 
         List<ImplementationResearchActLifeCycle> GetLifeCycles();
         Task<List<ImplementationResearchActLifeCycle>> GetLifeCyclesAsync();
+        List<ImplementationResearchActLifeCycle> GetLifeCycles(ImplementationResearchAct act);
+        Task<List<ImplementationResearchActLifeCycle>> GetLifeCyclesAsync(ImplementationResearchAct act);
     }
 }

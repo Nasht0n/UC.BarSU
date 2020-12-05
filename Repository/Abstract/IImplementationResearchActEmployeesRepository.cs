@@ -17,5 +17,8 @@ namespace Repository.Abstract
 
         List<ImplementationResearchActEmployees> GetEmployees();
         Task<List<ImplementationResearchActEmployees>> GetEmployeesAsync();
+
+        List<ImplementationResearchActEmployees> GetEmployees(ImplementationResearchAct act);
+        Task<List<ImplementationResearchActEmployees>> GetEmployeesAsync(ImplementationResearchAct act);
     }
 }

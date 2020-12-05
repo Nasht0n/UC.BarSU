@@ -17,5 +17,8 @@ namespace Repository.Abstract
 
         List<ImplementationResearchActAuthors> GetAuthors();
         Task<List<ImplementationResearchActAuthors>> GetAuthorsAsync();
+
+        List<ImplementationResearchActAuthors> GetAuthors(ImplementationResearchAct act);
+        Task<List<ImplementationResearchActAuthors>> GetAuthorsAsync(ImplementationResearchAct act);
     }
 }

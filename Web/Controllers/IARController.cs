@@ -1,10 +1,14 @@
 ﻿using Common.Entities;
+using Microsoft.Owin.Security;
 using Repository.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Web.Data;
 using Web.Models.Enum;
+using Web.ViewModels;
 using Web.ViewModels.IA.Research;
 
 namespace Web.Controllers
@@ -15,12 +19,21 @@ namespace Web.Controllers
         private readonly IImplementationResearchActRepository actRepository;
         private readonly IUserPermissionsRepository userPermissionsRepository;
         private readonly IUserRepository userRepository;
+        private readonly IImplementationResearchActAuthorsRepository authorsRepository;
+        private readonly IImplementationResearchActEmployeesRepository employeesRepository;
+        private readonly IImplementationResearchActLifeCycleRepository lifeCycleRepository;
 
-        public IARController(IImplementationResearchActRepository actRepository, IUserPermissionsRepository userPermissionsRepository, IUserRepository userRepository)
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+        public IARController(IImplementationResearchActRepository actRepository, IUserPermissionsRepository userPermissionsRepository, IUserRepository userRepository,
+                             IImplementationResearchActAuthorsRepository authorsRepository, IImplementationResearchActEmployeesRepository employeesRepository,
+                             IImplementationResearchActLifeCycleRepository lifeCycleRepository)
         {
             this.actRepository = actRepository;
             this.userPermissionsRepository = userPermissionsRepository;
             this.userRepository = userRepository;
+            this.authorsRepository = authorsRepository;
+            this.employeesRepository = employeesRepository;
+            this.lifeCycleRepository = lifeCycleRepository;
         }
 
         public ActionResult Index()
@@ -31,6 +44,85 @@ namespace Web.Controllers
             List<ImplementationResearchAct> acts = GetActs(user);
             model.ResearchActs = DataConverter.ResearchActModel.GetActs(acts);
             return View(model);
+        }
+
+        public ActionResult Details(int id)
+        {
+            AppUser user = GetUserInfo();
+            SetViewBags(user);
+            IAResearchDetailsViewModel model = new IAResearchDetailsViewModel();
+            model.User = user;
+            model.Act = actRepository.GetAct(id);
+            model.Employees = employeesRepository.GetEmployees(model.Act);
+            model.Authors = authorsRepository.GetAuthors(model.Act);
+            model.LifeCycles = lifeCycleRepository.GetLifeCycles(model.Act);
+            return View(model);
+        }
+
+        public ActionResult Create()
+        {
+            AppUser user = GetUserInfo();
+            SetViewBags(user);
+            IAResearchViewModel model = new IAResearchViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public JsonResult SaveAct(IAResearchViewModel model)
+        {
+            AppUser user = GetUserInfo();
+            if (ModelState.IsValid)
+            {
+                model.UserId = user.Id;
+                if (model.Id != 0)
+                {
+                    var act = actRepository.GetAct(model.Id);
+                    foreach (var item in act.Authors)
+                    {
+                        authorsRepository.Delete(item);
+                    }
+
+                    foreach (var item in act.Employees)
+                    {
+                        employeesRepository.Delete(item);
+                    }
+                }
+
+                var saved = ModelConverter.ImplementationResearchActModel.GetAct(model);
+                actRepository.Save(saved);
+
+                foreach (var item in saved.Authors)
+                {
+                    authorsRepository.Save(new ImplementationResearchActAuthors { ActId = saved.Id, Fullname = item.Fullname, Post = item.Post, AcademicDegree = item.AcademicDegree, AcademicStatus = item.AcademicStatus });
+                }
+
+                foreach (var item in saved.Employees)
+                {
+                    employeesRepository.Save(new ImplementationResearchActEmployees { ActId = saved.Id, Fullname = item.Fullname, Post = item.Post });
+                }
+
+                var lifeCycles = lifeCycleRepository.GetLifeCycles(saved);
+                if (lifeCycles.Count == 0) lifeCycleRepository.Save(new ImplementationResearchActLifeCycle { ActId = saved.Id, Date = DateTime.Now, Title = "Создание акта внедрения", Message = $"Научный проект студента успешно внедрен в производство." });
+            }
+            return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            AppUser user = GetUserInfo();
+            SetViewBags(user);
+            var act = actRepository.GetAct(id);
+            IAResearchViewModel model = DataConverter.ResearchActModel.GetAct(act);
+            return View(model);
+        }
+
+        public JsonResult Message(LifeCycleMessageModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                lifeCycleRepository.Save(new ImplementationResearchActLifeCycle { ActId = model.ActId, Date = DateTime.Now, Title = model.Title, Message = model.Message });
+            }
+            return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
         #region Help methods

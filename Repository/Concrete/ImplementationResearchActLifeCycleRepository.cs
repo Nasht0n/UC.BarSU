@@ -93,11 +93,37 @@ namespace Repository.Concrete
             }
         }
 
+        public List<ImplementationResearchActLifeCycle> GetLifeCycles(ImplementationResearchAct act)
+        {
+            try
+            {
+                return context.ResearchActLifeCycles.Include(lc => lc.Act).Where(lc=>lc.ActId == act.Id).ToList();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetLifeCycles error: " + ex.InnerException.Message);
+                return null;
+            }
+        }
+
         public async Task<List<ImplementationResearchActLifeCycle>> GetLifeCyclesAsync()
         {
             try
             {
                 return await context.ResearchActLifeCycles.Include(lc => lc.Act).ToListAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("GetLifeCyclesAsync error: " + ex.InnerException.Message);
+                return null;
+            }
+        }
+
+        public async Task<List<ImplementationResearchActLifeCycle>> GetLifeCyclesAsync(ImplementationResearchAct act)
+        {
+            try
+            {
+                return await context.ResearchActLifeCycles.Include(lc => lc.Act).Where(lc => lc.ActId == act.Id).ToListAsync();
             }
             catch (SqlException ex)
             {
