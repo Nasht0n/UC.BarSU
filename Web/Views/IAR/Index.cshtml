@@ -8,8 +8,44 @@
 <section id="iar_index">
     <div class="container">
         <h2 class="section-title">Акты внедрения результатов НИР</h2>
+        <div class="d-flex">
+            <div class="mr-auto py-2">
+                <a href="@Url.Action("Create","IAR")" class="rounded-btn">
+                    <i class="fa fa-file"></i>
+                    <span class="ml-1">Новая заявка</span>
+                </a>
+            </div>
+        </div>
+        <hr class="my-3 px-5" />
+
+        <table class="table table-hover" id="iar_table">
+            <thead>
+                <tr class="text-white">
+                    <td class="w-50">Наименование проекта</td>
+                    <td class="w-50">Организация (подразделение)</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ResearchActs)
+                {
+                    <tr onclick="location.href = '@Url.Action("Details", "IAR", new { id=item.Id })'">
+                        <td>
+                            @item.ProjectName
+                        </td>
+                        <td>
+                            @item.UnitUsing
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </section>
+
+@section Scripts{
+    <script src="~/Scripts/app/ia/iar/datatables.js"></script>
+    <script src="~/Scripts/app/ia/iar/employees.data.js"></script>    
+}
 
 
 

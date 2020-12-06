@@ -10,7 +10,9 @@ namespace Web.ViewModels.IA.Research
         public int Id { get; set; }
         [Display(Name = "Идентификатор пользователя, который добавил акт в систему")]
         public int UserId { get; set; }
-        
+        [Required(ErrorMessage = "Введите наименование проекта исследования")]
+        [Display(Name = "Наименование проекта НИР")]
+        public string ProjectName { get; set; }
         [Required(ErrorMessage = "Введите наименование внедряемых результатов")]
         [Display(Name = "Наименование внедряемых результатов")]
         [DataType(DataType.MultilineText)]

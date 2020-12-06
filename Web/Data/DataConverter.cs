@@ -107,7 +107,8 @@ namespace Web.Data
                     ImplementingResult = act.ImplementingResult,
                     Process = act.Process,
                     UserId = act.UserId,
-                    UnitUsing = act.UnitUsing                    
+                    UnitUsing = act.UnitUsing,
+                    ProjectName = act.ProjectName
                 };
                 return model;
             }

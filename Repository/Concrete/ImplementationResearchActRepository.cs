@@ -146,6 +146,7 @@ namespace Repository.Concrete
                     saved.UnitUsing = act.UnitUsing;
                     saved.FeasibilityOfIntroducing = act.FeasibilityOfIntroducing;
                     saved.HeadUnit = act.HeadUnit;
+                    saved.ProjectName = act.ProjectName;
                 }
                 else
                 {
@@ -176,6 +177,7 @@ namespace Repository.Concrete
                     saved.UnitUsing = act.UnitUsing;
                     saved.FeasibilityOfIntroducing = act.FeasibilityOfIntroducing;
                     saved.HeadUnit = act.HeadUnit;
+                    saved.ProjectName = act.ProjectName;
                 }
                 else
                 {

@@ -11,6 +11,8 @@ namespace Common.Entities
         [Required]
         public int UserId { get; set; }
         [Required]
+        public string ProjectName { get; set; }
+        [Required]
         public string ImplementingResult { get; set; }
         [Required]
         public string Process { get; set; }

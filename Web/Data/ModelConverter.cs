@@ -58,7 +58,7 @@ namespace Web.Data
                     RegisterDate = model.RegisterDate,
                     Result = model.Result,
                     Scope = model.Scope,
-                    UserId = model.UserId
+                    UserId = model.UserId                    
                 };
                 if (model.Commission.Count != 0) result.Comissions = model.Commission;
                 return result;
@@ -79,7 +79,8 @@ namespace Web.Data
                     ImplementingResult = model.ImplementingResult,
                     Process = model.Process,
                     UnitUsing = model.UnitUsing,
-                    UserId = model.UserId
+                    UserId = model.UserId,
+                    ProjectName = model.ProjectName
                 };
                 if (model.Authors.Count != 0) result.Authors = model.Authors;
                 if (model.Employees.Count != 0) result.Employees = model.Employees;
