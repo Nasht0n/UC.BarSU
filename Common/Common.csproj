@@ -55,6 +55,10 @@
     <Compile Include="Entities\AppPermission.cs" />
     <Compile Include="Entities\AppUser.cs" />
     <Compile Include="Entities\AppUserPermissions.cs" />
+    <Compile Include="Entities\BankYouth.cs" />
+    <Compile Include="Entities\BankYouthAwards.cs" />
+    <Compile Include="Entities\BankYouthDocumentation.cs" />
+    <Compile Include="Entities\BankYouthPublications.cs" />
     <Compile Include="Entities\Cast.cs" />
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Faculty.cs" />
