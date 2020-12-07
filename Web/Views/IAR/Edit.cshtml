@@ -5,5 +5,197 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>Edit</h2>
+<section id="ias_edit">
+    <div class="container">
+        <h2 class="section-title">Редактирование акта внедрения</h2>
 
+        @using (Html.BeginForm("Edit", "IAR", FormMethod.Post, new { id = "iar_editform", autocomplete = "off" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.HiddenFor(x => x.Id, htmlAttributes: new { id = "Id" })
+                @Html.HiddenFor(x => x.UserId, htmlAttributes: new { id = "UserId" })
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "ProjectName" } })
+                        @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.ImplementingResult, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.ImplementingResult, new { htmlAttributes = new { @class = "form-control", @rows = "3", autocomplete = "off", id = "ImplementingResult" } })
+                        @Html.ValidationMessageFor(model => model.ImplementingResult, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.Process, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Process, new { htmlAttributes = new { @class = "form-control", @rows = "3", autocomplete = "off", id = "Process" } })
+                        @Html.ValidationMessageFor(model => model.Process, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.Characteristic, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Characteristic, new { htmlAttributes = new { @class = "form-control", @rows = "5", autocomplete = "off", id = "Characteristic" } })
+                        @Html.ValidationMessageFor(model => model.Characteristic, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.ImplementationForm, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.ImplementationForm, new { htmlAttributes = new { @class = "form-control", @rows = "5", autocomplete = "off", id = "ImplementationForm" } })
+                        @Html.ValidationMessageFor(model => model.ImplementationForm, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.UnitUsing, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.UnitUsing, new { htmlAttributes = new { @class = "form-control", @rows = "3", autocomplete = "off", id = "UnitUsing" } })
+                        @Html.ValidationMessageFor(model => model.UnitUsing, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <hr />
+                <div id="employees">
+                    <h5 class="text-center">Cотрудники, использующих результаты НИР</h5>
+                </div>
+                <div class="form-group">
+                    <table class="table" id="tblEmployees">
+                        <thead class="thead-light">
+                            <tr class="text-center">
+                                <th class="w-25" scope="col">ФИО</th>
+                                <th class="w-50" scope="col">Должность</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Employees)
+                            {
+                                <tr>
+                                    <td>@item.Fullname</td>
+                                    <td>@item.Post</td>
+                                    <td><input type="button" onclick="RemoveEmployee(this);" class="btn btn-danger" value="Удалить" /></td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="text-center">
+                                <td>
+                                    <input class="form-control" type="text" id="txtFullname" autocomplete="off" />
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" id="txtPost" autocomplete="off" />
+                                </td>
+                                <td>
+                                    <input class="form-control rounded-btn m-0" type="button" id="btnAddEmployee" value="Добавить" />
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.FeasibilityOfIntroducing, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.FeasibilityOfIntroducing, new { htmlAttributes = new { @class = "form-control", @rows = "5", autocomplete = "off", id = "FeasibilityOfIntroducing" } })
+                        @Html.ValidationMessageFor(model => model.FeasibilityOfIntroducing, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <hr />
+
+                <div id="authors">
+                    <h5 class="text-center">Авторы исследования</h5>
+                </div>
+
+                <div class="form-group">
+                    <table class="table" id="tblAuthors">
+                        <thead class="thead-light">
+                            <tr class="text-center">
+                                <th class="w-25" scope="col">ФИО</th>
+                                <th class="w-25" scope="col">Должность</th>
+                                <th class="w-25" scope="col">Ученая степень</th>
+                                <th class="w-25" scope="col">Ученое звание</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Authors)
+                            {
+                            <tr>
+                                <td>@item.Fullname</td>
+                                <td>@item.Post</td>
+                                <td>@item.AcademicDegree</td>
+                                <td>@item.AcademicStatus</td>
+                                <td><input type="button" onclick="RemoveAuthor(this);" class="btn btn-danger" value="Удалить" /></td>
+                            </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="text-center">
+                                <td>
+                                    <input class="form-control" type="text" id="txtAuthorFullname" autocomplete="off" />
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" id="txtAuthorPost" autocomplete="off" />
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" id="txtDegree" autocomplete="off" />
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" id="txtStatus" autocomplete="off" />
+                                </td>
+                                <td>
+                                    <input class="form-control rounded-btn m-0" type="button" id="btnAddAuthor" value="Добавить" />
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <hr />
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.HeadUnit, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.HeadUnit, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "HeadUnit" } })
+                        @Html.ValidationMessageFor(model => model.HeadUnit, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    <div class="ml-auto p-2">
+                        <button type="button" id="btnIARBack" class="rounded-outline-btn">Вернуться к списку актов внедрения</button>
+                    </div>
+                    <div class="p-2">
+                        <button type="button" id="btnIARActSave" class="rounded-btn">
+                            <i class="fa fa-save"></i>
+                            <span class="ml-1">Сохранить</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/Scripts/app/ia/iar/datatables.js"></script>
+    <script src="~/Scripts/app/ia/iar/employees.data.js"></script>
+    <script src="~/Scripts/app/ia/iar/lifecycles.js"></script>
+}

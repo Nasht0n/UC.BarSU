@@ -71,7 +71,8 @@ $("body").on("click", "#btnIASSave", function () {
         dataType: "json",
         traditional: true,
         success: function (data) {
-            document.location.href = "/IAS/Details/" + model.Id;
+            if (model.Id == 0) document.location.href = "/IAS/Index";
+            else document.location.href = "/IAS/Details/" + model.Id;
         }
     });
 });

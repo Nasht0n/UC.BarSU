@@ -108,8 +108,10 @@ namespace Web.Data
                     Process = act.Process,
                     UserId = act.UserId,
                     UnitUsing = act.UnitUsing,
-                    ProjectName = act.ProjectName
-                };
+                    ProjectName = act.ProjectName,
+                    Employees = act.Employees,
+                    Authors = act.Authors
+                };                
                 return model;
             }
         }

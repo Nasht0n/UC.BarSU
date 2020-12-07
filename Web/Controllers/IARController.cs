@@ -87,7 +87,6 @@ namespace Web.Controllers
                         employeesRepository.Delete(item);
                     }
                 }
-
                 var saved = ModelConverter.ImplementationResearchActModel.GetAct(model);
                 actRepository.Save(saved);
 

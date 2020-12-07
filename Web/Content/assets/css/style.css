@@ -1550,3 +1550,25 @@ div.dataTables_wrapper div.dataTables_length select {
     #iar_table_filter input:focus {
         border-color: #5777ba;
     }
+
+#tblAuthors {
+}
+
+    #tblAuthors th {
+        background: #5777ba;
+        color: #fff;
+        font-weight: 400;
+        font-size: 12px;
+    }
+
+    #tblAuthors td {
+        color: #5777ba;
+        font-weight: 400;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    #tblAuthors tbody tr:hover {
+        cursor: pointer;
+        background: #e8ecf5;
+    }

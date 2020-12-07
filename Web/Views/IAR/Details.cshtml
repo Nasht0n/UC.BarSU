@@ -5,5 +5,142 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>Details</h2>
+<section id="studentAct">
+    <div class="container">
+        <h2 class="section-title">Акт внедрения результатов НИР</h2>
+
+        <div class="d-flex">
+            <div class="pb-3">
+                <a class="rounded-btn" href="@Url.Action("Edit", "IAR", new { id = Model.Act.Id })">Редактировать</a>
+            </div>
+            <div class="ml-auto pb-3">
+                <a class="rounded-outline-btn" href="@Url.Action("Print", "IAR", new { id = Model.Act.Id })">
+                    <i class="fa fa-print"></i>
+                    <span class="ml-1">Печать</span>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="row">
+            @* Details Act *@
+            <div class="col-md-7">
+                <div class="card mb-3">
+                    <h4 class="card-header text-center">@Model.Act.ProjectName</h4>
+                    <div class="card-body">
+                        <h5 class="card-title">Внедряемые результаты:</h5>
+                        <hr />
+                        <p class="card-subtitle text-muted">@Model.Act.ImplementingResult</p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Процесс иследования:</h5>
+                        <hr />
+                        <p class="card-subtitle text-muted">@Model.Act.Process</p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Характеристика объекта внедрения</h5>
+                        <hr />
+                        <p class="card-subtitle text-muted">@Model.Act.Characteristic</p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Форма внедрения результатов</h5>
+                        <hr />
+                        <p class="card-subtitle text-muted">@Model.Act.ImplementationForm</p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Подразделения, использующие результаты НИР</h5>
+                        <hr />
+                        <p class="card-subtitle text-muted">@Model.Act.UnitUsing</p>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Сотрудники, использующие результаты НИР</h5>
+                        <ul class="list-group list-group-flush">
+                            @foreach (var item in Model.Employees)
+                            {
+                                <li class="list-group-item"> @item.Fullname, @item.Post</li>
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Целесообразность внедрения НИР</h5>
+                        <hr />
+                        <p class="card-subtitle text-muted">@Model.Act.FeasibilityOfIntroducing</p>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Авторы НИР</h5>
+                        <ul class="list-group list-group-flush">
+                            @foreach (var item in Model.Authors)
+                            {
+                                <li class="list-group-item"> @item.Fullname, @item.Post, @item.AcademicDegree, @item.AcademicStatus </li>
+                            }
+                        </ul>
+                    </div>                    
+                </div>
+            </div>
+            @* LifeCycle List *@
+            <div class="col-md-5">
+                <div class="card mb-3">
+                    <h4 class="card-header text-center">Жизненный цикл проекта</h4>
+                    <div class="card-body m-0 p-1">
+                        <div class="list-group">
+                            @foreach (var item in Model.LifeCycles)
+                            {
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">@item.Title</h5>
+                                        <small>@item.Date.ToShortDateString()</small>
+                                    </div>
+                                    <p class="mb-1">@item.Message</p>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted pb-0">
+                        @using (Html.BeginForm("Message", "IAR", FormMethod.Post, new { id = "iar_lcForm", autocomplete = "off" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.HiddenFor(x => x.Act.Id, htmlAttributes: new { id = "ActId" })
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            @Html.LabelFor(model => model.MessageModel.Title, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.MessageModel.Title, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Title" } })
+                                            @Html.ValidationMessageFor(model => model.MessageModel.Title, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            @Html.LabelFor(model => model.MessageModel.Message, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.MessageModel.Message, new { htmlAttributes = new { @class = "form-control", rows = "6", autocomplete = "off", id = "Message" } })
+                                            @Html.ValidationMessageFor(model => model.MessageModel.Message, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="ml-auto">
+                                            <button type="button" id="btnIARLifeCycleAdd" class="rounded-btn">
+                                                <span class="ml-1">Добавить</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/Scripts/app/ia/iar/datatables.js"></script>
+    <script src="~/Scripts/app/ia/iar/employees.data.js"></script>
+    <script src="~/Scripts/app/ia/iar/lifecycles.js"></script>
+}
 

@@ -57,7 +57,7 @@ namespace Repository.Concrete
         {
             try
             {
-                return context.ResearchActs.SingleOrDefault(a => a.Id == id);
+                return context.ResearchActs.Include(a=>a.Authors).Include(a=>a.Employees).Include(a=>a.LifeCycles).SingleOrDefault(a => a.Id == id);
             }
             catch (SqlException ex)
             {
@@ -70,7 +70,7 @@ namespace Repository.Concrete
         {
             try
             {
-                return await context.ResearchActs.SingleOrDefaultAsync(a => a.Id == id);
+                return await context.ResearchActs.Include(a => a.Authors).Include(a => a.Employees).Include(a => a.LifeCycles).SingleOrDefaultAsync(a => a.Id == id);
             }
             catch (SqlException ex)
             {

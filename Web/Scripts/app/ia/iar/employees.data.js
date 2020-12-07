@@ -13,7 +13,7 @@
         cell = $(row.insertCell(-1));
         var btnRemove = $("<input />");
         btnRemove.attr("type", "button");
-        btnRemove.attr("onclick", "Remove(this);");
+        btnRemove.attr("onclick", "RemoveEmployee(this);");
         btnRemove.addClass("btn btn-danger");
         btnRemove.val("Удалить");
         cell.append(btnRemove);
@@ -24,18 +24,21 @@
     }
 });
 
-function Remove(button) {
+
+
+function RemoveEmployee(button) {
     var row = $(button).closest("TR");
     var name = $("TD", row).eq(0).html();
     if (confirm("Вы уверены, что хотите сотрудника '" + name + "', который использует результаты НИР?")) {
+        console.log(this);
         var table = $("#tblEmployees")[0];
         table.deleteRow(row[0].rowIndex);
     }
 };
 
 $("body").on("click", "#btnAddAuthor", function () {
-    var txtFullname = $("#txtFullname");
-    var txtPost = $("#txtPost");
+    var txtFullname = $("#txtAuthorFullname");
+    var txtPost = $("#txtAuthorPost");
     var txtDegree = $("#txtDegree");
     var txtStatus = $("#txtStatus");
 
@@ -59,21 +62,25 @@ $("body").on("click", "#btnAddAuthor", function () {
         cell = $(row.insertCell(-1));
         var btnRemove = $("<input />");
         btnRemove.attr("type", "button");
-        btnRemove.attr("onclick", "Remove(this);");
+        btnRemove.attr("onclick", "RemoveAuthor(this);");
         btnRemove.addClass("btn btn-danger");
         btnRemove.val("Удалить");
         cell.append(btnRemove);
+
         txtFullname.val("");
         txtPost.val("");
+        txtDegree.val("");
+        txtStatus.val("");
     } else {
         alert("Ошибка добавления автора(-ов) НИР. Проверьте правильность заполнения полей");
     }
 });
 
-function Remove(button) {
+function RemoveAuthor(button) {
     var row = $(button).closest("TR");
     var name = $("TD", row).eq(0).html();
     if (confirm("Вы уверены, что хотите удалить автора '" + name + "' из состава авторов НИР?")) {
+        console.log(this);
         var table = $("#tblAuthors")[0];
         table.deleteRow(row[0].rowIndex);
     }
@@ -83,6 +90,7 @@ $("body").on("click", "#btnIARActSave", function () {
 
     var model = {
         Id: $("#Id").val(),
+        ProjectName: $("#ProjectName").val(),
         ImplementingResult: $("#ImplementingResult").val(),
         Process: $("#Process").val(),
         Characteristic: $("#Characteristic").val(),
@@ -122,13 +130,14 @@ $("body").on("click", "#btnIARActSave", function () {
     var json = JSON.stringify(model);
     $.ajax({
         type: "POST",
-        url: "/IAS/SaveAct",
+        url: "/IAR/SaveAct",
         data: json,
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         traditional: true,
         success: function (data) {
-            document.location.href = "/IAR/Details/" + model.Id;
+            if (model.Id == 0) document.location.href = "/IAR/Index";
+            else document.location.href = "/IAR/Details/" + model.Id;
         }
     });
 });
