@@ -49,6 +49,13 @@ namespace Web.Infrastructure
             kernel.Bind<IImplementationResearchActLifeCycleRepository>().To<ImplementationResearchActLifeCycleRepository>();
             kernel.Bind<IImplementationResearchActRepository>().To<ImplementationResearchActRepository>();
             #endregion
+
+            #region BY Repository
+            kernel.Bind<IBankYouthRepository>().To<BankYouthRepository>();
+            kernel.Bind<IBankYouthAwardRepository>().To<BankYouthAwardRepository>();
+            kernel.Bind<IBankYouthPublicationRepository>().To<BankYouthPublicationRepository>();
+            kernel.Bind<IBankYouthDocumentationRepository>().To<BankYouthDocumentationRepository>();
+            #endregion
         }
 
         public object GetService(Type serviceType)

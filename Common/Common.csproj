@@ -56,9 +56,9 @@
     <Compile Include="Entities\AppUser.cs" />
     <Compile Include="Entities\AppUserPermissions.cs" />
     <Compile Include="Entities\BankYouth.cs" />
-    <Compile Include="Entities\BankYouthAwards.cs" />
+    <Compile Include="Entities\BankYouthAward.cs" />
     <Compile Include="Entities\BankYouthDocumentation.cs" />
-    <Compile Include="Entities\BankYouthPublications.cs" />
+    <Compile Include="Entities\BankYouthPublication.cs" />
     <Compile Include="Entities\Cast.cs" />
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Faculty.cs" />
@@ -90,6 +90,10 @@
     <Compile Include="Migrations\202012062005313_ResearchActAddProjectName.designer.cs">
       <DependentUpon>202012062005313_ResearchActAddProjectName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012080701110_InitBankYouthEntities.cs" />
+    <Compile Include="Migrations\202012080701110_InitBankYouthEntities.designer.cs">
+      <DependentUpon>202012080701110_InitBankYouthEntities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UCContext.cs" />
@@ -110,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012062005313_ResearchActAddProjectName.resx">
       <DependentUpon>202012062005313_ResearchActAddProjectName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012080701110_InitBankYouthEntities.resx">
+      <DependentUpon>202012080701110_InitBankYouthEntities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -51,6 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IBankYouthAwardRepository.cs" />
+    <Compile Include="Abstract\IBankYouthDocumentationRepository.cs" />
+    <Compile Include="Abstract\IBankYouthPublicationRepository.cs" />
+    <Compile Include="Abstract\IBankYouthRepository.cs" />
     <Compile Include="Abstract\ICastRepository.cs" />
     <Compile Include="Abstract\IDepartmentRepository.cs" />
     <Compile Include="Abstract\IFacultyRepository.cs" />
@@ -70,6 +74,10 @@
     <Compile Include="Abstract\IStageTypeRepository.cs" />
     <Compile Include="Abstract\IUserPermissionsRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
+    <Compile Include="Concrete\BankYouthAwardRepository.cs" />
+    <Compile Include="Concrete\BankYouthDocumentationRepository.cs" />
+    <Compile Include="Concrete\BankYouthPublicationRepository.cs" />
+    <Compile Include="Concrete\BankYouthRepository.cs" />
     <Compile Include="Concrete\CastRepository.cs" />
     <Compile Include="Concrete\DepartmentRepository.cs" />
     <Compile Include="Concrete\FacultyRepository.cs" />

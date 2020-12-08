@@ -2,6 +2,8 @@
 using Common.Entities;
 using Web.ViewModels.IA.Students;
 using Web.ViewModels.IA.Research;
+using Web.ViewModels.BY;
+using System.Linq;
 
 namespace Web.Data
 {
@@ -84,6 +86,44 @@ namespace Web.Data
                 };
                 if (model.Authors.Count != 0) result.Authors = model.Authors;
                 if (model.Employees.Count != 0) result.Employees = model.Employees;
+                return result;
+            }
+        }
+
+        public static class BankYouthModel
+        {
+            public static BankYouth GetBankYouth(BankYouthViewModel model)
+            {
+                BankYouth result = new BankYouth
+                {
+                    AcademicDegree = model.AcademicDegree,
+                    AcademicStatus = model.AcademicStatus,
+                    Area = model.Area,
+                    AverageBall = model.AverageBall,
+                    DateOfBirthday = model.DateOfBirthday,
+                    District = model.District,
+                    Email = model.Email,
+                    Firstname = model.Firstname,
+                    Fullname = model.Fullname,
+                    Incentives = model.Incentives,
+                    IsExcellentStudent = model.IsExcellentStudent,
+                    Merit = model.Merit,
+                    MobilePhone = model.MobilePhone,
+                    Patronymic = model.Patronymic,
+                    ProtocolDate = model.ProtocolDate,
+                    ProtocolNumber = model.ProtocolNumber,
+                    Post = model.Post,
+                    Qualification = model.Qualification,
+                    Settlement = model.Settlement,
+                    Speciality = model.Speciality,
+                    Surname = model.Surname,
+                    UserId = model.UserId,
+                    YearOfAddmission = model.YearOfAddmission,
+                    YearOfInclusion = model.YearOfInclusion
+                };
+                if (model.Awards.Count != 0) result.Awards = model.Awards.ToList();
+                if (model.Documentations.Count != 0) result.Documentations = model.Documentations.ToList();
+                if (model.Publications.Count != 0) result.Publications = model.Publications.ToList();
                 return result;
             }
         }

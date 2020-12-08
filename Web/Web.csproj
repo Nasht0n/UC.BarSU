@@ -596,6 +596,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Controllers\BYController.cs" />
     <Compile Include="Controllers\IARController.cs" />
     <Compile Include="Controllers\IASController.cs" />
     <Compile Include="Controllers\SPController.cs" />
@@ -612,6 +613,9 @@
     <Compile Include="Models\Enum\ProjectStates.cs" />
     <Compile Include="Models\Enum\StageTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BY\BankYouthListViewModel.cs" />
+    <Compile Include="ViewModels\BY\BankYouthViewModel.cs" />
+    <Compile Include="ViewModels\BY\BYDetailsViewModel.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\IA\Research\IAResearchDetailsViewModel.cs" />
     <Compile Include="ViewModels\IA\Research\IAResearchListViewModel.cs" />
@@ -656,6 +660,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\SP\" />
+    <Folder Include="Views\BY\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

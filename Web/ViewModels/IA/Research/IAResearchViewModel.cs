@@ -42,6 +42,7 @@ namespace Web.ViewModels.IA.Research
         public string HeadUnit { get; set; }
         public AppUser User { get; set; }
         [Required(ErrorMessage = "Укажите сотрудников, использующих результаты исследования")]
+
         [Display(Name = "Сотрудники, использующие результаты исследования")]
         public IList<ImplementationResearchActEmployees> Employees { get; set; }
         [Required(ErrorMessage = "Укажите авторов, результатов НИР")]

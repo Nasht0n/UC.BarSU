@@ -41,6 +41,13 @@ namespace Common
         public virtual DbSet<ImplementationResearchActEmployees> ResearchActEmployees { get; set; }
         public virtual DbSet<ImplementationResearchActLifeCycle> ResearchActLifeCycles { get; set; }
         #endregion
+
+        #region BankYouth
+        public virtual DbSet<BankYouth> BankYouths { get; set; }
+        public virtual DbSet<BankYouthAward> Awards { get; set; }
+        public virtual DbSet<BankYouthDocumentation> Documentations { get; set; }
+        public virtual DbSet<BankYouthPublication> Publications { get; set; }
+        #endregion
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AppUserPermissions>().HasKey(c => new { c.UserId, c.PermissionId });

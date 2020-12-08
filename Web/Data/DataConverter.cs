@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Web.ViewModels;
+using Web.ViewModels.BY;
 using Web.ViewModels.IA.Research;
 using Web.ViewModels.IA.Students;
 
@@ -113,6 +114,19 @@ namespace Web.Data
                     Authors = act.Authors
                 };                
                 return model;
+            }
+        }
+
+        public static class BankYouthModel
+        {
+            public static List<BankYouthViewModel> GetBankYouths(List<BankYouth> bankYouths)
+            {
+                return null;
+            }
+
+            public static BankYouthViewModel GetBankYouth(BankYouth bankYouth)
+            {
+                return null;
             }
         }
     }
