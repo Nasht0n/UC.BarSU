@@ -650,6 +650,10 @@
     <Content Include="Views\IAR\Details.cshtml" />
     <Content Include="Views\IAR\Create.cshtml" />
     <Content Include="Views\IAR\Edit.cshtml" />
+    <Content Include="Views\BY\Index.cshtml" />
+    <Content Include="Views\BY\Details.cshtml" />
+    <Content Include="Views\BY\Create.cshtml" />
+    <Content Include="Views\BY\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -660,7 +664,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\SP\" />
-    <Folder Include="Views\BY\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
