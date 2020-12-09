@@ -3,6 +3,7 @@ using Microsoft.Owin.Security;
 using Repository.Abstract;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -26,6 +27,7 @@ namespace Web.Controllers
 
         public BYController(IUserRepository userRepository, IUserPermissionsRepository userPermissionsRepository, IBankYouthRepository bankYouthRepository,
                             IBankYouthAwardRepository awardRepository, IBankYouthDocumentationRepository documentationRepository, IBankYouthPublicationRepository publicationRepository)
+                            
         {
             this.userRepository = userRepository;
             this.userPermissionsRepository = userPermissionsRepository;
@@ -136,6 +138,43 @@ namespace Web.Controllers
             var bankYouth = bankYouthRepository.GetBankYouth(id);
             BankYouthViewModel model = DataConverter.BankYouthModel.GetBankYouth(bankYouth);
             return View(model);
+        }
+        [HttpPost]
+        public ActionResult AttachPublication(BYDetailsViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // путь к сохранению файлов
+                string uploadPath = Server.MapPath("~/Files/BY/") + $"{model.PublicationModel.Id}/";
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+
+                foreach (var file in model.PublicationModel.PublicationFiles)
+                {
+                    // получаем имя файла
+                    string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    // получаем расширение файла
+                    string fileExtension = Path.GetExtension(file.FileName);
+                    // получение полного пути к файлу
+                    var filePath = uploadPath + fileName.Trim() + "_" + model.PublicationModel.Id + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + fileExtension;
+                    file.SaveAs(filePath);
+
+                    BankYouthPublication publication = new BankYouthPublication
+                    {
+                        Filename = fileName,
+                        Path = filePath,
+                        BankYouthId = model.BankYouth.Id,
+                        
+                    };
+
+                    publicationRepository.Save(publication);
+                }
+
+                return Json("OK",JsonRequestBehavior.AllowGet);
+            }
+            return View();
         }
 
         #region Help methods

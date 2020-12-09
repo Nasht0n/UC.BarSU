@@ -120,7 +120,7 @@
                                     </h5>
                                 </div>
                                 <div>
-                                    <button class="btn btn-link" type="button">
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#publicationModalCenter">
                                         <i class="fa fa-plus-circle"></i>
                                     </button>
                                 </div>
@@ -129,9 +129,7 @@
 
                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
-
                                 Список публикаций
-
                             </div>
                         </div>
                     </div>
@@ -146,7 +144,7 @@
                                     </h5>
                                 </div>
                                 <div>
-                                    <button class="btn btn-link" type="button">
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#documentationModalCenter">
                                         <i class="fa fa-plus-circle"></i>
                                     </button>
                                 </div>
@@ -154,9 +152,7 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                             <div class="card-body">
-
                                 Список документов
-
                             </div>
                         </div>
                     </div>
@@ -171,7 +167,7 @@
                                     </h5>
                                 </div>
                                 <div>
-                                    <button class="btn btn-link" type="button">
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#awardModalCenter">
                                         <i class="fa fa-plus-circle"></i>
                                     </button>
                                 </div>
@@ -179,9 +175,7 @@
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                             <div class="card-body">
-
                                 Список наград
-
                             </div>
                         </div>
                     </div>
@@ -191,6 +185,166 @@
     </div>
 </section>
 
+<!-- Modal -->
+<div class="modal fade" id="publicationModalCenter" tabindex="-1" role="dialog" aria-labelledby="publicationModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="publicationModalLongTitle">Загрузка публикации</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AttachPublication", "BY", FormMethod.Post, new { id = "attachPub", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.BankYouth.Id, htmlAttributes: new { id = "Id", Name = "Model.BankYouth.Id" })
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.PublicationModel.Description, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.PublicationModel.Description, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.PublicationModel.Description" } })
+                                @Html.ValidationMessageFor(model => model.PublicationModel.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.PublicationModel.PublicationFiles, htmlAttributes: new { @class = "control-label" })
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputFile" onchange="" name="Model.PublicationModel.PublicationFiles" lang="ru" multiple required accept=".pdf, .xls, .xlsx, .doc, .docx, .txt">
+                                <label class="custom-file-label" for="inputFile">Выберите загружаемые файлы</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer my-3">
+                        <button type="button" class="rounded-outline-btn" data-dismiss="modal">Отмена</button>
+                        <button type="button" id="btnAttachPub" class="rounded-btn">Загрузить</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="documentationModalCenter" tabindex="-1" role="dialog" aria-labelledby="documentationModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="documentationModalLongTitle">Загрузка публикации</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AttachDocumentation", "BY", FormMethod.Post, new { id = "attachDoc", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.BankYouth.Id, htmlAttributes: new { id = "Id", Name = "Model.BankYouth.Id" })
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.DocumentationModel.Description, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.DocumentationModel.Description, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.DocumentationModel.Description" } })
+                                    @Html.ValidationMessageFor(model => model.DocumentationModel.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.DocumentationModel.RegDate, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.DocumentationModel.RegDate, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.DocumentationModel.RegDate" } })
+                                    @Html.ValidationMessageFor(model => model.DocumentationModel.RegDate, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.DocumentationModel.RegNumber, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.DocumentationModel.RegNumber, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.DocumentationModel.RegNumber" } })
+                                    @Html.ValidationMessageFor(model => model.DocumentationModel.RegNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.DocumentationModel.DocumentationFiles, htmlAttributes: new { @class = "control-label" })
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputFile" onchange="" name="Model.DocumentationModel.DocumentationFiles" lang="ru" multiple required accept=".pdf, .xls, .xlsx, .doc, .docx, .txt">
+                                    <label class="custom-file-label" for="inputFile">Выберите загружаемые файлы</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer my-3">
+                        <button type="button" class="rounded-outline-btn" data-dismiss="modal">Отмена</button>
+                        <button type="button" id="btnAttachDoc" class="rounded-btn">Загрузить</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="awardModalCenter" tabindex="-1" role="dialog" aria-labelledby="awardModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="awardModalLongTitle">Загрузка публикации</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AttachAward", "BY", FormMethod.Post, new { id = "attachAward", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.BankYouth.Id, htmlAttributes: new { id = "Id", Name = "Model.BankYouth.Id" })
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.AwardModel.Description, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.AwardModel.Description, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.AwardModel.Description" } })
+                                    @Html.ValidationMessageFor(model => model.AwardModel.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.AwardModel.Date, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.AwardModel.Date, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.AwardModel.Date" } })
+                                    @Html.ValidationMessageFor(model => model.AwardModel.Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.AwardModel.AwardFiles, htmlAttributes: new { @class = "control-label" })
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputFile" onchange="" name="Model.AwardModel.AwardFiles" lang="ru" multiple required accept=".pdf, .xls, .xlsx, .doc, .docx, .txt">
+                                    <label class="custom-file-label" for="inputFile">Выберите загружаемые файлы</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer my-3">
+                        <button type="button" class="rounded-outline-btn" data-dismiss="modal">Отмена</button>
+                        <button type="button" id="btnAttachDoc" class="rounded-btn">Загрузить</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
     <script src="~/Scripts/app/by/datatables.js"></script>

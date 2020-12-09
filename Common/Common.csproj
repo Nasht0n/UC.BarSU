@@ -74,25 +74,9 @@
     <Compile Include="Entities\ScienceProjectReport.cs" />
     <Compile Include="Entities\Stage.cs" />
     <Compile Include="Entities\StageType.cs" />
-    <Compile Include="Migrations\202011261926151_Init.cs" />
-    <Compile Include="Migrations\202011261926151_Init.designer.cs">
-      <DependentUpon>202011261926151_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012021200549_AddTitleFieldToLifeCycle.cs" />
-    <Compile Include="Migrations\202012021200549_AddTitleFieldToLifeCycle.designer.cs">
-      <DependentUpon>202012021200549_AddTitleFieldToLifeCycle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012031715123_AddingResearchActsEntities.cs" />
-    <Compile Include="Migrations\202012031715123_AddingResearchActsEntities.designer.cs">
-      <DependentUpon>202012031715123_AddingResearchActsEntities.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012062005313_ResearchActAddProjectName.cs" />
-    <Compile Include="Migrations\202012062005313_ResearchActAddProjectName.designer.cs">
-      <DependentUpon>202012062005313_ResearchActAddProjectName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012080701110_InitBankYouthEntities.cs" />
-    <Compile Include="Migrations\202012080701110_InitBankYouthEntities.designer.cs">
-      <DependentUpon>202012080701110_InitBankYouthEntities.cs</DependentUpon>
+    <Compile Include="Migrations\202012091851387_Init.cs" />
+    <Compile Include="Migrations\202012091851387_Init.designer.cs">
+      <DependentUpon>202012091851387_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,20 +87,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011261926151_Init.resx">
-      <DependentUpon>202011261926151_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012021200549_AddTitleFieldToLifeCycle.resx">
-      <DependentUpon>202012021200549_AddTitleFieldToLifeCycle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012031715123_AddingResearchActsEntities.resx">
-      <DependentUpon>202012031715123_AddingResearchActsEntities.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012062005313_ResearchActAddProjectName.resx">
-      <DependentUpon>202012062005313_ResearchActAddProjectName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012080701110_InitBankYouthEntities.resx">
-      <DependentUpon>202012080701110_InitBankYouthEntities.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202012091851387_Init.resx">
+      <DependentUpon>202012091851387_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
