@@ -1501,6 +1501,8 @@ div.dataTables_wrapper div.dataTables_length select {
     background: none !important;
 }
 
+
+
 #ias_table {
     background: #5777ba;
 }
@@ -1572,3 +1574,39 @@ div.dataTables_wrapper div.dataTables_length select {
         cursor: pointer;
         background: #e8ecf5;
     }
+
+
+#by_table {
+    background: #5777ba;
+}
+
+    #by_table th {
+        color: #5777ba;
+        font-weight: 400;
+        font-size: 12px;
+    }
+
+    #by_table tbody:hover {
+        cursor: pointer;
+        background: #e8ecf5;
+    }
+
+#by_table_filter input {
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
+}
+
+    #by_table_filter input:focus {
+        border-color: #5777ba;
+    }
+
+.card-title{
+    font-weight:600;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

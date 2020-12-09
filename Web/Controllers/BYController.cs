@@ -42,6 +42,7 @@ namespace Web.Controllers
             BankYouthListViewModel model = new BankYouthListViewModel();
             List<BankYouth> bankYouths = GetList(user);
             model.BankYouthModels = DataConverter.BankYouthModel.GetBankYouths(bankYouths);
+
             return View(model);
         }
 
@@ -62,8 +63,27 @@ namespace Web.Controllers
         {
             AppUser user = GetUserInfo();
             SetViewBags(user);
-            BankYouthViewModel model = new BankYouthViewModel();
+            BankYouthViewModel model = new BankYouthViewModel() { DateOfBirthday = DateTime.Now, ProtocolDate = DateTime.Now, YearOfAddmission = DateTime.Now.Year, YearOfInclusion = DateTime.Now.Year };
+            SelectList list = new SelectList(
+                 new List<SelectListItem> {
+                     new SelectListItem { Text = "Да", Value = "True"},
+                     new SelectListItem { Text = "Нет", Value = "False"},
+                    }, "Value", "Text");
+            model.ExcellentStudentList = list;
             return View(model);
+        }
+        [HttpPost]
+        public ActionResult Create(BankYouthViewModel model)
+        {
+            AppUser user = GetUserInfo();
+            if (ModelState.IsValid)
+            {
+                BankYouth bankYouth = ModelConverter.BankYouthModel.GetBankYouth(model);
+                bankYouth.UserId = user.Id;
+                bankYouthRepository.Save(bankYouth);
+                return RedirectToAction("Details", "BY", new { id = bankYouth.Id });
+            }
+            return View();
         }
 
         [HttpPost]
@@ -101,10 +121,10 @@ namespace Web.Controllers
                     documentationRepository.Save(new BankYouthDocumentation { BankYouthId = item.BankYouthId, Description = item.Description, Filename = item.Filename, Path = item.Path, RegDate = item.RegDate, RegNumber = item.RegNumber });
                 }
 
-                foreach(var item in saved.Publications)
+                foreach (var item in saved.Publications)
                 {
-                    publicationRepository.Save(new BankYouthPublication { BankYouthId =item.BankYouthId, Description = item.Description, Filename = item.Filename, Path = item.Path });
-                }            
+                    publicationRepository.Save(new BankYouthPublication { BankYouthId = item.BankYouthId, Description = item.Description, Filename = item.Filename, Path = item.Path });
+                }
             }
             return Json("OK", JsonRequestBehavior.AllowGet);
         }

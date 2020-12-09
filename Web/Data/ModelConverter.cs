@@ -121,9 +121,6 @@ namespace Web.Data
                     YearOfAddmission = model.YearOfAddmission,
                     YearOfInclusion = model.YearOfInclusion
                 };
-                if (model.Awards.Count != 0) result.Awards = model.Awards.ToList();
-                if (model.Documentations.Count != 0) result.Documentations = model.Documentations.ToList();
-                if (model.Publications.Count != 0) result.Publications = model.Publications.ToList();
                 return result;
             }
         }

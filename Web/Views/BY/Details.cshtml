@@ -5,5 +5,196 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>Details</h2>
+<section id="studentAct">
+    <div class="container">
+        <h2 class="section-title">Банк данных одарённой молодежи</h2>
 
+        <div class="d-flex">
+            <div class="pb-3">
+                <a class="rounded-btn" href="@Url.Action("Edit", "BY", new { id = Model.BankYouth.Id })">Редактировать</a>
+            </div>
+            <div class="ml-auto pb-3">
+                <a class="rounded-outline-btn" href="@Url.Action("Print", "BY", new { id = Model.BankYouth.Id })">
+                    <i class="fa fa-print"></i>
+                    <span class="ml-1">Печать</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <h4 class="card-header text-center">Идентификационная карта студента</h4>
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="mr-auto">
+                                <h6 class="card-title">ФИО Студента:</h6>
+                                <p class="card-subtitle text-muted">@Model.BankYouth.Surname @Model.BankYouth.Firstname @Model.BankYouth.Patronymic</p>
+                            </div>
+                            <div>
+                                <h6 class="card-title">Дата рождения:</h6>
+                                <p class="card-subtitle text-muted text-right">@Model.BankYouth.DateOfBirthday.ToShortDateString()</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="mr-auto">
+                                <h6 class="card-title">Номер мобильного телефона:</h6>
+                                <p class="card-subtitle text-muted">@Model.BankYouth.MobilePhone</p>
+                            </div>
+
+                            <div>
+                                <h6 class="card-title">Электронная почта:</h6>
+                                <p class="card-subtitle text-muted text-right">@Model.BankYouth.Email</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Информация о поступлении</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"> Год поступления: @Model.BankYouth.YearOfAddmission </li>
+                            <li class="list-group-item"> Специальность: @Model.BankYouth.Speciality </li>
+                            <li class="list-group-item"> Квалификация: @Model.BankYouth.Qualification </li>
+                        </ul>
+                    </div>
+                    @if (Model.BankYouth.IsExcellentStudent)
+                    {
+                        <div class="card-footer">
+                            <p class="card-subtitle text-muted text-sm-center my-3 small">Баллы только "9" и "10" (или только одна отметка "8" по непрофильной учебной дисциплине)</p>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <h4 class="card-header text-center">Основание для включения</h4>
+
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="mr-auto">
+                                <h6 class="card-title">Год включения в банк данных</h6>
+                                <p class="card-subtitle text-muted">@Model.BankYouth.YearOfInclusion</p>
+                            </div>
+                            <div>
+                                <h6 class="card-title">Средний балл:</h6>
+                                <p class="card-subtitle text-muted text-right">@Model.BankYouth.AverageBall</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h6 class="card-title">Заслуги</h6>
+                        <p class="card-subtitle text-muted">@Model.BankYouth.Merit</p>
+                    </div>
+
+                    <div class="card-body">
+                        <h6 class="card-title">Поощрения спецфонда Президента Республики Беларусь</h6>
+                        <p class="card-subtitle text-muted">@Model.BankYouth.Incentives</p>
+                    </div>
+
+                    <div class="card-body">
+                        <h6 class="card-title">Научный руководитель</h6>
+                        <p class="card-subtitle text-muted">@Model.BankYouth.Fullname, @Model.BankYouth.Post, @Model.BankYouth.AcademicDegree, @Model.BankYouth.AcademicStatus</p>
+                    </div>
+
+                    <div class="card-footer">
+                        <h6 class="card-title">Протокол решения спецфонда </h6>
+                        <p class="card-subtitle text-muted">№@Model.BankYouth.ProtocolNumber, @Model.BankYouth.ProtocolDate.ToShortDateString()</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <div class="d-flex">
+                                <div class="mr-auto">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Перечень публикаций
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div>
+                                    <button class="btn btn-link" type="button">
+                                        <i class="fa fa-plus-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+
+                                Список публикаций
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <div class="d-flex">
+                                <div class="mr-auto">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                            Документы о внедрении результатов НИР
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div>
+                                    <button class="btn btn-link" type="button">
+                                        <i class="fa fa-plus-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+
+                                Список документов
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <div class="d-flex">
+                                <div class="mr-auto">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                            Награды и другие достижения
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div>
+                                    <button class="btn btn-link" type="button">
+                                        <i class="fa fa-plus-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+
+                                Список наград
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts{
+    <script src="~/Scripts/app/by/datatables.js"></script>
+    <script src="~/Scripts/app/by/awards.data.js"></script>
+    <script src="~/Scripts/app/by/documentation.data.js"></script>
+    <script src="~/Scripts/app/by/publication.data.js"></script>
+}

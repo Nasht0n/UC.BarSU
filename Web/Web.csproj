@@ -359,6 +359,10 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app\by\awards.data.js" />
+    <Content Include="Scripts\app\by\datatables.js" />
+    <Content Include="Scripts\app\by\documentation.data.js" />
+    <Content Include="Scripts\app\by\publication.data.js" />
     <Content Include="Scripts\app\ia\iar\employees.data.js" />
     <Content Include="Scripts\app\ia\iar\datatables.js" />
     <Content Include="Scripts\app\ia\iar\lifecycles.js" />

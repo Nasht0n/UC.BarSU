@@ -121,12 +121,46 @@ namespace Web.Data
         {
             public static List<BankYouthViewModel> GetBankYouths(List<BankYouth> bankYouths)
             {
-                return null;
+                List<BankYouthViewModel> list = new List<BankYouthViewModel>();
+                foreach(var bankYouth in bankYouths)
+                {
+                    var item = GetBankYouth(bankYouth);
+                    list.Add(item);
+                }
+                return list;
             }
 
             public static BankYouthViewModel GetBankYouth(BankYouth bankYouth)
             {
-                return null;
+                BankYouthViewModel model = new BankYouthViewModel
+                {
+                    Id = bankYouth.Id,
+                    AcademicDegree = bankYouth.AcademicDegree,
+                    AcademicStatus = bankYouth.AcademicStatus,
+                    Area = bankYouth.Area,
+                    AverageBall = bankYouth.AverageBall,
+                    DateOfBirthday = bankYouth.DateOfBirthday,
+                    District = bankYouth.District,
+                    Email = bankYouth.Email,
+                    Firstname = bankYouth.Firstname,
+                    Fullname = bankYouth.Fullname,
+                    Incentives = bankYouth.Incentives,
+                    IsExcellentStudent = bankYouth.IsExcellentStudent,
+                    Merit = bankYouth.Merit,
+                    MobilePhone = bankYouth.MobilePhone,
+                    Patronymic = bankYouth.Patronymic,
+                    Post = bankYouth.Post,
+                    ProtocolDate = bankYouth.ProtocolDate,
+                    ProtocolNumber = bankYouth.ProtocolNumber,
+                    Qualification = bankYouth.Qualification,
+                    Settlement = bankYouth.Settlement,
+                    Speciality = bankYouth.Speciality,
+                    Surname = bankYouth.Surname,
+                    UserId = bankYouth.UserId,
+                    YearOfAddmission = bankYouth.YearOfAddmission,
+                    YearOfInclusion = bankYouth.YearOfInclusion
+                };
+                return model;
             }
         }
     }

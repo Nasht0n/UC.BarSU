@@ -5,5 +5,277 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>Create</h2>
+<section id="iar_create">
+    <h2 class="section-title">
+        Добавление новой записи в банк данных "Одаренная молодежь"
+    </h2>
+    <hr />
+    
+    <div class="container">
+       
+        @using (Html.BeginForm("Create", "BY", FormMethod.Post, new { id = "by_createform", autocomplete = "off" }))
+        {
+            @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+            @Html.HiddenFor(x => x.Id, htmlAttributes: new { id = "Id" })
+            @Html.HiddenFor(x => x.UserId, htmlAttributes: new { id = "UserId" })
+          
+            <h3 class="section-title">Идентификация студента</h3>
+          
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Surname" } })
+                            @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Firstname" } })
+                            @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Patronymic, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Patronymic, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Patronymic" } })
+                            @Html.ValidationMessageFor(model => model.Patronymic, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.DateOfBirthday, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.DateOfBirthday, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "DateOfBirthday" } })
+                            @Html.ValidationMessageFor(model => model.DateOfBirthday, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.MobilePhone, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.MobilePhone, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "MobilePhone" } })
+                            @Html.ValidationMessageFor(model => model.MobilePhone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h5 class="section-title">Место жительства (регистрации)</h5>
+       
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Area, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Area" } })
+                            @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.District, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.District, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "District" } })
+                            @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Settlement, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Settlement, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Settlement" } })
+                            @Html.ValidationMessageFor(model => model.Settlement, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.YearOfAddmission, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.YearOfAddmission, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "YearOfAddmission" } })
+                            @Html.ValidationMessageFor(model => model.YearOfAddmission, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Speciality, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Speciality, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Speciality" } })
+                            @Html.ValidationMessageFor(model => model.Speciality, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Qualification, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Qualification, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Speciality" } })
+                    @Html.ValidationMessageFor(model => model.Qualification, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <h3 class="section-title">Основание для включения в банк данных</h3>
+     
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.YearOfInclusion, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.YearOfInclusion, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "YearOfInclusion" } })
+                    @Html.ValidationMessageFor(model => model.YearOfInclusion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Merit, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Merit, new { htmlAttributes = new { @class = "form-control", @rows = "3", autocomplete = "off", id = "Merit" } })
+                    @Html.ValidationMessageFor(model => model.Merit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.AverageBall, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.AverageBall, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "AverageBall" } })
+                            @Html.ValidationMessageFor(model => model.AverageBall, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(x => Model.IsExcellentStudent, htmlAttributes: new { @class = "control-label col-md" })
+                            @Html.DropDownListFor(x => Model.IsExcellentStudent, Model.ExcellentStudentList, htmlAttributes: new { @class = "form-control", id = "IsExcellentStudent" })
+                            @Html.ValidationMessageFor(x => x.IsExcellentStudent, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.Incentives, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Incentives, new { htmlAttributes = new { @class = "form-control", @rows = "3", autocomplete = "off", id = "AverageBall" } })
+                    @Html.ValidationMessageFor(model => model.Incentives, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.ProtocolNumber, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ProtocolNumber, new { htmlAttributes = new { @class = "form-control", @rows = "3", autocomplete = "off", id = "ProtocolNumber" } })
+                            @Html.ValidationMessageFor(model => model.ProtocolNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.ProtocolDate, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ProtocolDate, new { htmlAttributes = new { @class = "form-control", @rows = "3", autocomplete = "off", id = "ProtocolDate" } })
+                            @Html.ValidationMessageFor(model => model.ProtocolDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h5 class="section-title">Научный руководитель (куратор)</h5>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Fullname, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Fullname" } })
+                            @Html.ValidationMessageFor(model => model.Fullname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Post, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Post, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Post" } })
+                            @Html.ValidationMessageFor(model => model.Post, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.AcademicDegree, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.AcademicDegree, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "AcademicDegree" } })
+                            @Html.ValidationMessageFor(model => model.AcademicDegree, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.AcademicStatus, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.AcademicStatus, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "AcademicStatus" } })
+                            @Html.ValidationMessageFor(model => model.AcademicStatus, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <div class="d-flex">
+                <div class="ml-auto p-2">
+                    <button type="button" id="btnIARBack" class="rounded-outline-btn">Вернуться к списку актов внедрения</button>
+                </div>
+                <div class="p-2">
+                    <button type="submit" id="btnIARActSave" class="rounded-btn">
+                        <i class="fa fa-save"></i>
+                        <span class="ml-1">Сохранить</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/Scripts/app/by/datatables.js"></script>
+    <script src="~/Scripts/app/by/awards.data.js"></script>
+    <script src="~/Scripts/app/by/documentation.data.js"></script>
+    <script src="~/Scripts/app/by/publication.data.js"></script>
+}

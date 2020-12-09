@@ -5,5 +5,53 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>Index</h2>
+<section id="by_index">
+    <div class="container">
+        <h2 class="section-title">Банк данных одаренной молодежи</h2>
+        <div class="d-flex">
+            <div class="mr-auto py-2">
+                <a href="@Url.Action("Create","BY")" class="rounded-btn">
+                    <i class="fa fa-file"></i>
+                    <span class="ml-1">Новая запись</span>
+                </a>
+            </div>
+        </div>
+        <hr class="my-3 px-5" />
+
+        <table class="table table-hover" id="by_table">
+            <thead>
+                <tr class="text-white">
+                    <td class="w-25">ФИО студента</td>
+                    <td class="w-50">Специальность</td>
+                    <td class="w-25">Год включения</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.BankYouthModels)
+                {
+                    <tr onclick="location.href = '@Url.Action("Details", "BY", new { id=item.Id })'">
+                        <td>
+                            @item.Surname @item.Firstname @item.Patronymic
+                        </td>
+                        <td>
+                            @item.Speciality
+                        </td>
+                        <td>
+                            @item.YearOfInclusion
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/Scripts/app/by/datatables.js"></script>
+    <script src="~/Scripts/app/by/awards.data.js"></script>
+    <script src="~/Scripts/app/by/documentation.data.js"></script>
+    <script src="~/Scripts/app/by/publication.data.js"></script>
+}
+
+
 

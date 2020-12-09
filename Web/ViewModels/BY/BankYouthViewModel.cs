@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Web.ViewModels.BY
 {
@@ -69,6 +70,7 @@ namespace Web.ViewModels.BY
         [Display(Name = "Средний балл")]
         public double AverageBall { get; set; }
         [Required]
+        [Display(Name = "Баллы только '9' и '10' (или только одна отметка '8' по непрофильной учебной дисциплине)")]
         public bool IsExcellentStudent { get; set; }
         [Required(ErrorMessage = "Заполните поле поощрения студента")]
         [Display(Name = "Поощрения студента")]
@@ -84,24 +86,22 @@ namespace Web.ViewModels.BY
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ProtocolDate { get; set; }
         [Required(ErrorMessage = "Укажите ФИО руководителя")]
-        [Display(Name = "ФИО руководителя")]
+        [Display(Name = "ФИО")]
         [MaxLength(255, ErrorMessage = "Длина не должна превышать 255 символов")]
         public string Fullname { get; set; }
-        [Required(ErrorMessage = "Укажите должность руководителя")]
-        [Display(Name = "Должность руководителя")]
+        [Required(ErrorMessage = "Укажите должность")]
+        [Display(Name = "Должность")]
         [MaxLength(255, ErrorMessage = "Длина не должна превышать 255 символов")]
         public string Post { get; set; }
-        [Required(ErrorMessage = "Укажите ученое звание руководителя")]
-        [Display(Name = "Ученое звание руководителя")]
+        [Required(ErrorMessage = "Укажите ученое звание")]
+        [Display(Name = "Ученое звание")]
         [MaxLength(255, ErrorMessage = "Длина не должна превышать 255 символов")]
         public string AcademicStatus { get; set; }
         [Required(ErrorMessage = "Укажите ученую степень руководителя")]
-        [Display(Name = "Ученая степень руководителя")]
+        [Display(Name = "Ученая степень")]
         [MaxLength(255, ErrorMessage = "Длина не должна превышать 255 символов")]
         public string AcademicDegree { get; set; }
 
-        public IList<BankYouthAward> Awards { get; set; }
-        public IList<BankYouthPublication> Publications { get; set; }
-        public IList<BankYouthDocumentation> Documentations { get; set; }
+        public SelectList ExcellentStudentList { get; set; }
     }
 }
