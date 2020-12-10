@@ -27,7 +27,7 @@ namespace Web.Controllers
 
         public BYController(IUserRepository userRepository, IUserPermissionsRepository userPermissionsRepository, IBankYouthRepository bankYouthRepository,
                             IBankYouthAwardRepository awardRepository, IBankYouthDocumentationRepository documentationRepository, IBankYouthPublicationRepository publicationRepository)
-                            
+
         {
             this.userRepository = userRepository;
             this.userPermissionsRepository = userPermissionsRepository;
@@ -57,6 +57,7 @@ namespace Web.Controllers
             model.BankYouth = bankYouthRepository.GetBankYouth(id);
             model.Awards = awardRepository.GetAwards(model.BankYouth);
             model.Documentations = documentationRepository.GetDocumentations(model.BankYouth);
+            model.PublicationModel = new BankYouthPublicationViewModel();
             model.Publications = publicationRepository.GetPublications(model.BankYouth);
             return View(model);
         }
@@ -139,42 +140,164 @@ namespace Web.Controllers
             BankYouthViewModel model = DataConverter.BankYouthModel.GetBankYouth(bankYouth);
             return View(model);
         }
+
         [HttpPost]
         public ActionResult AttachPublication(BYDetailsViewModel model)
         {
-            if (ModelState.IsValid)
+            // путь к сохранению файлов
+            string uploadPath = Server.MapPath("~/Files/BY/") + $"{model.BankYouth.Id}";
+            if (!Directory.Exists(uploadPath))
             {
-                // путь к сохранению файлов
-                string uploadPath = Server.MapPath("~/Files/BY/") + $"{model.PublicationModel.Id}/";
-                if (!Directory.Exists(uploadPath))
-                {
-                    Directory.CreateDirectory(uploadPath);
-                }
-
-                foreach (var file in model.PublicationModel.PublicationFiles)
-                {
-                    // получаем имя файла
-                    string fileName = Path.GetFileNameWithoutExtension(file.FileName);
-                    // получаем расширение файла
-                    string fileExtension = Path.GetExtension(file.FileName);
-                    // получение полного пути к файлу
-                    var filePath = uploadPath + fileName.Trim() + "_" + model.PublicationModel.Id + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + fileExtension;
-                    file.SaveAs(filePath);
-
-                    BankYouthPublication publication = new BankYouthPublication
-                    {
-                        Filename = fileName,
-                        Path = filePath,
-                        BankYouthId = model.BankYouth.Id,
-                        
-                    };
-
-                    publicationRepository.Save(publication);
-                }
-
-                return Json("OK",JsonRequestBehavior.AllowGet);
+                Directory.CreateDirectory(uploadPath);
             }
-            return View();
+
+            foreach (var file in model.PublicationModel.PublicationFiles)
+            {
+                // получаем имя файла
+                string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                // получаем расширение файла
+                string fileExtension = Path.GetExtension(file.FileName);
+                // получение полного пути к файлу
+                var filePath = uploadPath + "\\" + fileName.Trim() + "_" + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + fileExtension;
+                file.SaveAs(filePath);
+
+                BankYouthPublication publication = new BankYouthPublication
+                {
+                    Filename = fileName,
+                    Path = filePath,
+                    BankYouthId = model.BankYouth.Id,
+                    Description = model.PublicationModel.Description
+                };
+
+                publicationRepository.Save(publication);
+            }
+            return RedirectToAction("Details", "BY", new { id = model.BankYouth.Id });
+        }
+
+        public FileResult DownloadPublication(int id)
+        {
+            // получение данных о прикрепленном файле
+            var file = publicationRepository.GetPublication(id);
+            // инициализация наименование файла
+            string filename = file.Filename + Path.GetExtension(file.Path);
+            // получение типа файла
+            string file_type = MimeMapping.GetMimeMapping(filename);
+            // скачиваем выбранный файл с сервера
+            return File(file.Path, file_type, filename);
+        }
+
+        public ActionResult DeletePublication(int id)
+        {
+            var file = publicationRepository.GetPublication(id);
+            publicationRepository.Delete(file);
+            return RedirectToAction("Details", "BY", new { id = file.BankYouthId});
+        }
+
+        [HttpPost]
+        public ActionResult AttachDocumentation(BYDetailsViewModel model)
+        {
+            // путь к сохранению файлов
+            string uploadPath = Server.MapPath("~/Files/BY/") + $"{model.BankYouth.Id}";
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+
+            foreach (var file in model.DocumentationModel.DocumentationFiles)
+            {
+                // получаем имя файла
+                string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                // получаем расширение файла
+                string fileExtension = Path.GetExtension(file.FileName);
+                // получение полного пути к файлу
+                var filePath = uploadPath + "\\" + fileName.Trim() + "_"  + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + fileExtension;
+                file.SaveAs(filePath);
+
+                BankYouthDocumentation documentation = new BankYouthDocumentation
+                {
+                    Filename = fileName,
+                    Path = filePath,
+                    BankYouthId = model.BankYouth.Id,
+                    Description = model.DocumentationModel.Description,
+                    RegDate = model.DocumentationModel.RegDate,
+                    RegNumber = model.DocumentationModel.RegNumber
+                };
+
+                documentationRepository.Save(documentation);
+            }
+            return RedirectToAction("Details", "BY", new { id = model.BankYouth.Id });
+        }
+
+        public FileResult DownloadDocumentation(int id)
+        {
+            // получение данных о прикрепленном файле
+            var file = documentationRepository.GetDocumentation(id);
+            // инициализация наименование файла
+            string filename = file.Filename + Path.GetExtension(file.Path);
+            // получение типа файла
+            string file_type = MimeMapping.GetMimeMapping(filename);
+            // скачиваем выбранный файл с сервера
+            return File(file.Path, file_type, filename);
+        }
+
+        public ActionResult DeleteDocumentation(int id)
+        {
+            var file = documentationRepository.GetDocumentation(id);
+            documentationRepository.Delete(file);
+            return RedirectToAction("Details", "BY", new { id = file.BankYouthId });
+        }
+
+        [HttpPost]
+        public ActionResult AttachAward(BYDetailsViewModel model)
+        {
+            // путь к сохранению файлов
+            string uploadPath = Server.MapPath("~/Files/BY/") + $"{model.BankYouth.Id}";
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+
+            foreach (var file in model.AwardModel.AwardFiles)
+            {
+                // получаем имя файла
+                string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                // получаем расширение файла
+                string fileExtension = Path.GetExtension(file.FileName);
+                // получение полного пути к файлу
+                var filePath = uploadPath + "\\" + fileName.Trim() + "_"  + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + fileExtension;
+                file.SaveAs(filePath);
+
+                BankYouthAward award = new BankYouthAward
+                {
+                    Filename = fileName,
+                    Path = filePath,
+                    BankYouthId = model.BankYouth.Id,
+                    Description = model.AwardModel.Description,
+                    Date = model.AwardModel.Date
+                };
+
+                awardRepository.Save(award);
+            }
+            return RedirectToAction("Details", "BY", new { id = model.BankYouth.Id });
+        }
+
+        public FileResult DownloadAward(int id)
+        {
+            // получение данных о прикрепленном файле
+            var file = awardRepository.GetAward(id);
+            // инициализация наименование файла
+            string filename = file.Filename + Path.GetExtension(file.Path);
+            // получение типа файла
+            string file_type = MimeMapping.GetMimeMapping(filename);
+            // скачиваем выбранный файл с сервера
+            return File(file.Path, file_type, filename);
+        }
+
+        public ActionResult DeleteAward(int id)
+        {
+            var file = awardRepository.GetAward(id);
+            awardRepository.Delete(file);
+            return RedirectToAction("Details", "BY", new { id = file.BankYouthId });
         }
 
         #region Help methods

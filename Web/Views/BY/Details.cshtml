@@ -129,7 +129,26 @@
 
                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
-                                Список публикаций
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var item in Model.Publications)
+                                    {
+                                        <li class="list-group-item">
+                                            <div class="d-flex">
+                                                <div class="mr-auto">
+                                                    <a href="@Url.Action("DownloadPublication","BY",new { id = item.Id })">
+                                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                                        <span class="ml-1">@item.Filename</span>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <a href="@Url.Action("DeletePublication","BY",new { id = item.Id })">
+                                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -152,7 +171,26 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                             <div class="card-body">
-                                Список документов
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var item in Model.Documentations)
+                                    {
+                                        <li class="list-group-item">
+                                            <div class="d-flex">
+                                                <div class="mr-auto">
+                                                    <a href="@Url.Action("DownloadDocumentation","BY",new { id = item.Id })">
+                                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                                        <span class="ml-1">@item.Filename</span>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <a href="@Url.Action("DeleteDocumentation","BY",new { id = item.Id })">
+                                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -175,7 +213,26 @@
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                             <div class="card-body">
-                                Список наград
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var item in Model.Awards)
+                                    {
+                                        <li class="list-group-item">
+                                            <div class="d-flex">
+                                                <div class="mr-auto">
+                                                    <a href="@Url.Action("DownloadAward","BY",new { id = item.Id })">
+                                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                                        <span class="ml-1">@item.Filename</span>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <a href="@Url.Action("DeleteAward","BY",new { id = item.Id })">
+                                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -205,21 +262,21 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 @Html.LabelFor(model => model.PublicationModel.Description, htmlAttributes: new { @class = "control-label" })
-                                @Html.EditorFor(model => model.PublicationModel.Description, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.PublicationModel.Description" } })
+                                @Html.EditorFor(model => model.PublicationModel.Description, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", Name = "Model.PublicationModel.Description" } })
                                 @Html.ValidationMessageFor(model => model.PublicationModel.Description, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-12">
                             @Html.LabelFor(model => model.PublicationModel.PublicationFiles, htmlAttributes: new { @class = "control-label" })
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputFile" onchange="" name="Model.PublicationModel.PublicationFiles" lang="ru" multiple required accept=".pdf, .xls, .xlsx, .doc, .docx, .txt">
+                                <input type="file" class="custom-file-input" id="inputFile" onchange="" name="Model.PublicationModel.PublicationFiles" lang="ru" required accept=".pdf, .xls, .xlsx, .doc, .docx, .txt">
                                 <label class="custom-file-label" for="inputFile">Выберите загружаемые файлы</label>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer my-3">
                         <button type="button" class="rounded-outline-btn" data-dismiss="modal">Отмена</button>
-                        <button type="button" id="btnAttachPub" class="rounded-btn">Загрузить</button>
+                        <button type="submit" id="btnAttachPub" class="rounded-btn">Загрузить</button>
                     </div>
                 }
             </div>
@@ -248,7 +305,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     @Html.LabelFor(model => model.DocumentationModel.Description, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.DocumentationModel.Description, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.DocumentationModel.Description" } })
+                                    @Html.EditorFor(model => model.DocumentationModel.Description, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", Name = "Model.DocumentationModel.Description" } })
                                     @Html.ValidationMessageFor(model => model.DocumentationModel.Description, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -258,12 +315,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     @Html.LabelFor(model => model.DocumentationModel.RegDate, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.DocumentationModel.RegDate, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.DocumentationModel.RegDate" } })
+                                    @Html.EditorFor(model => model.DocumentationModel.RegDate, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", Name = "Model.DocumentationModel.RegDate" } })
                                     @Html.ValidationMessageFor(model => model.DocumentationModel.RegDate, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-6">
                                     @Html.LabelFor(model => model.DocumentationModel.RegNumber, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.DocumentationModel.RegNumber, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.DocumentationModel.RegNumber" } })
+                                    @Html.EditorFor(model => model.DocumentationModel.RegNumber, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", Name = "Model.DocumentationModel.RegNumber" } })
                                     @Html.ValidationMessageFor(model => model.DocumentationModel.RegNumber, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -281,7 +338,7 @@
                     </div>
                     <div class="modal-footer my-3">
                         <button type="button" class="rounded-outline-btn" data-dismiss="modal">Отмена</button>
-                        <button type="button" id="btnAttachDoc" class="rounded-btn">Загрузить</button>
+                        <button type="submit" id="btnAttachDoc" class="rounded-btn">Загрузить</button>
                     </div>
                 }
             </div>
@@ -310,7 +367,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     @Html.LabelFor(model => model.AwardModel.Description, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.AwardModel.Description, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.AwardModel.Description" } })
+                                    @Html.EditorFor(model => model.AwardModel.Description, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", Name = "Model.AwardModel.Description" } })
                                     @Html.ValidationMessageFor(model => model.AwardModel.Description, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -320,7 +377,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     @Html.LabelFor(model => model.AwardModel.Date, htmlAttributes: new { @class = "control-label" })
-                                    @Html.EditorFor(model => model.AwardModel.Date, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Model.AwardModel.Date" } })
+                                    @Html.EditorFor(model => model.AwardModel.Date, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", Name = "Model.AwardModel.Date" } })
                                     @Html.ValidationMessageFor(model => model.AwardModel.Date, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -347,6 +404,7 @@
 </div>
 
 @section Scripts{
+    <script src="~/Scripts/app/file-input.js"></script>
     <script src="~/Scripts/app/by/datatables.js"></script>
     <script src="~/Scripts/app/by/awards.data.js"></script>
     <script src="~/Scripts/app/by/documentation.data.js"></script>
