@@ -102,6 +102,9 @@ namespace Web.ViewModels.BY
         [MaxLength(255, ErrorMessage = "Длина не должна превышать 255 символов")]
         public string AcademicDegree { get; set; }
 
+        public DateTime CreateDate { get; set; }
+        public DateTime EditDate { get; set; }
+
         public SelectList ExcellentStudentList { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Web.Data;
 using Web.Models.Enum;
+using Web.Report;
 using Web.ViewModels.BY;
 
 namespace Web.Controllers
@@ -83,6 +84,7 @@ namespace Web.Controllers
             {
                 BankYouth bankYouth = ModelConverter.BankYouthModel.GetBankYouth(model);
                 bankYouth.UserId = user.Id;
+                bankYouth.CreateDate = DateTime.Now;
                 bankYouthRepository.Save(bankYouth);
                 return RedirectToAction("Details", "BY", new { id = bankYouth.Id });
             }
@@ -190,7 +192,7 @@ namespace Web.Controllers
         {
             var file = publicationRepository.GetPublication(id);
             publicationRepository.Delete(file);
-            return RedirectToAction("Details", "BY", new { id = file.BankYouthId});
+            return RedirectToAction("Details", "BY", new { id = file.BankYouthId });
         }
 
         [HttpPost]
@@ -210,7 +212,7 @@ namespace Web.Controllers
                 // получаем расширение файла
                 string fileExtension = Path.GetExtension(file.FileName);
                 // получение полного пути к файлу
-                var filePath = uploadPath + "\\" + fileName.Trim() + "_"  + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + fileExtension;
+                var filePath = uploadPath + "\\" + fileName.Trim() + "_" + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + fileExtension;
                 file.SaveAs(filePath);
 
                 BankYouthDocumentation documentation = new BankYouthDocumentation
@@ -264,7 +266,7 @@ namespace Web.Controllers
                 // получаем расширение файла
                 string fileExtension = Path.GetExtension(file.FileName);
                 // получение полного пути к файлу
-                var filePath = uploadPath + "\\" + fileName.Trim() + "_"  + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + fileExtension;
+                var filePath = uploadPath + "\\" + fileName.Trim() + "_" + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + fileExtension;
                 file.SaveAs(filePath);
 
                 BankYouthAward award = new BankYouthAward
@@ -298,6 +300,17 @@ namespace Web.Controllers
             var file = awardRepository.GetAward(id);
             awardRepository.Delete(file);
             return RedirectToAction("Details", "BY", new { id = file.BankYouthId });
+        }
+
+        public FileResult Print(int id)
+        {
+            string template = Server.MapPath("~/Files/Templates/TBY.docx");
+            string outputFolder = Server.MapPath("~/Files/BY/");
+            var bankYouth = bankYouthRepository.GetBankYouth(id);
+            string outputPath = ReportManager.GenerateBYBlank(template, outputFolder, bankYouth);
+            string filename = $"BY-{bankYouth.Surname}-{bankYouth.YearOfInclusion}.docx";
+            string file_type = MimeMapping.GetMimeMapping(filename);
+            return File(outputPath, file_type, filename);
         }
 
         #region Help methods

@@ -158,7 +158,9 @@ namespace Web.Data
                     Surname = bankYouth.Surname,
                     UserId = bankYouth.UserId,
                     YearOfAddmission = bankYouth.YearOfAddmission,
-                    YearOfInclusion = bankYouth.YearOfInclusion
+                    YearOfInclusion = bankYouth.YearOfInclusion,
+                    CreateDate = bankYouth.CreateDate,
+                    EditDate = bankYouth.EditDate
                 };
                 return model;
             }

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Web.Data;
 using Web.Models.Enum;
+using Web.Report;
 using Web.ViewModels;
 using Web.ViewModels.IA.Research;
 
@@ -122,6 +123,17 @@ namespace Web.Controllers
                 lifeCycleRepository.Save(new ImplementationResearchActLifeCycle { ActId = model.ActId, Date = DateTime.Now, Title = model.Title, Message = model.Message });
             }
             return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+
+        public FileResult Print(int id)
+        {
+            string template = Server.MapPath("~/Files/Templates/TIAR.docx");
+            string outputFolder = Server.MapPath("~/Files/IAR/");
+            var act = actRepository.GetAct(id);
+            string outputPath = ReportManager.GenerateResearchAct(template, outputFolder, act);
+            string filename = $"IAR-{act.ProjectName}.docx";
+            string file_type = MimeMapping.GetMimeMapping(filename);
+            return File(outputPath, file_type, filename);
         }
 
         #region Help methods

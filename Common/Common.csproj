@@ -78,6 +78,10 @@
     <Compile Include="Migrations\202012091851387_Init.designer.cs">
       <DependentUpon>202012091851387_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012150923104_AddCreateAndEditDateToBY.cs" />
+    <Compile Include="Migrations\202012150923104_AddCreateAndEditDateToBY.designer.cs">
+      <DependentUpon>202012150923104_AddCreateAndEditDateToBY.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UCContext.cs" />
@@ -89,6 +93,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202012091851387_Init.resx">
       <DependentUpon>202012091851387_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012150923104_AddCreateAndEditDateToBY.resx">
+      <DependentUpon>202012150923104_AddCreateAndEditDateToBY.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

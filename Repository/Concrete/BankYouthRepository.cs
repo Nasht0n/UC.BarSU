@@ -188,6 +188,8 @@ namespace Repository.Concrete
                     saved.UserId = youth.UserId;
                     saved.YearOfAddmission = youth.YearOfAddmission;
                     saved.YearOfInclusion = youth.YearOfInclusion;
+                    saved.CreateDate = youth.CreateDate;
+                    saved.EditDate = youth.EditDate;
                 }
                 else
                 {
@@ -234,6 +236,8 @@ namespace Repository.Concrete
                     saved.UserId = youth.UserId;
                     saved.YearOfAddmission = youth.YearOfAddmission;
                     saved.YearOfInclusion = youth.YearOfInclusion;
+                    saved.CreateDate = youth.CreateDate;
+                    saved.EditDate = youth.EditDate;
                 }
                 else
                 {

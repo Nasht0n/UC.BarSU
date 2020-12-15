@@ -80,6 +80,10 @@ namespace Common.Entities
         public string AcademicDegree { get; set; }
         #endregion
 
+        [Required]
+        public DateTime CreateDate { get; set; }
+        public DateTime EditDate { get; set; }
+
         public List<BankYouthAward> Awards { get; set; }
         public List<BankYouthPublication> Publications { get; set; }
         public List<BankYouthDocumentation> Documentations { get; set; }

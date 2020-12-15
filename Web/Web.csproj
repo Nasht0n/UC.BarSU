@@ -82,6 +82,15 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Spire.Doc, Version=7.11.0.41046, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.7.11.0\lib\net46\Spire.Doc.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.7.46, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.7.11.0\lib\net46\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=5.11.0.2046, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.7.11.0\lib\net46\Spire.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -507,6 +516,9 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="Files\Templates\TBY.docx" />
+    <Content Include="Files\Templates\TIAR.doc" />
+    <Content Include="Files\Templates\TIAS.doc" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -618,6 +630,7 @@
     <Compile Include="Models\Enum\ProjectStates.cs" />
     <Compile Include="Models\Enum\StageTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ReportManager.cs" />
     <Compile Include="ViewModels\BY\BankYouthAwardViewModel.cs" />
     <Compile Include="ViewModels\BY\BankYouthDocumentationViewModel.cs" />
     <Compile Include="ViewModels\BY\BankYouthListViewModel.cs" />
@@ -671,6 +684,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\BY\" />
+    <Folder Include="Files\IAR\" />
+    <Folder Include="Files\IAS\" />
     <Folder Include="Files\SP\" />
   </ItemGroup>
   <ItemGroup>

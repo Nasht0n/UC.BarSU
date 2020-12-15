@@ -119,7 +119,9 @@ namespace Web.Data
                     Surname = model.Surname,
                     UserId = model.UserId,
                     YearOfAddmission = model.YearOfAddmission,
-                    YearOfInclusion = model.YearOfInclusion
+                    YearOfInclusion = model.YearOfInclusion,
+                    CreateDate = model.CreateDate,
+                    EditDate = model.EditDate
                 };
                 return result;
             }

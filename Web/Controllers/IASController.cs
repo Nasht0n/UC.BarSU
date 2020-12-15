@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Web.Data;
 using Web.Models.Enum;
+using Web.Report;
 using Web.ViewModels;
 using Web.ViewModels.IA.Students;
 
@@ -102,7 +103,7 @@ namespace Web.Controllers
                 }
 
                 var lifeCycles = lifeCycleRepository.GetLifeCycles(saved);
-                if(lifeCycles.Count==0) lifeCycleRepository.Save(new ImplementationStudentActLifeCycle { ActId = saved.Id, Date = DateTime.Now, Title = "Создание акта внедрения", Message = $"Научный проект студента успешно внедрен в производство." });
+                if (lifeCycles.Count == 0) lifeCycleRepository.Save(new ImplementationStudentActLifeCycle { ActId = saved.Id, Date = DateTime.Now, Title = "Создание акта внедрения", Message = $"Научный проект студента успешно внедрен в производство." });
             }
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
@@ -110,11 +111,23 @@ namespace Web.Controllers
         public ActionResult Edit(int id)
         {
             AppUser user = GetUserInfo();
-            SetViewBags(user);             
+            SetViewBags(user);
             var act = actRepository.GetAct(id);
             IAStudentViewModel model = DataConverter.StudentActModel.GetAct(act);
             return View(model);
         }
+
+        public FileResult Print(int id)
+        {
+            string template = Server.MapPath("~/Files/Templates/TIAS.docx");
+            string outputFolder = Server.MapPath("~/Files/IAS/");
+            var act = actRepository.GetAct(id);
+            string outputPath = ReportManager.GenerateStudentAct(template, outputFolder, act);
+            string filename = $"IAS-{act.ProjectName}.docx";
+            string file_type = MimeMapping.GetMimeMapping(filename);
+            return File(outputPath, file_type, filename);
+        }
+
         public JsonResult AddLifeCycleMessage(IAStudentDetailsViewModel model)
         {
             return Json("OK", JsonRequestBehavior.AllowGet);
