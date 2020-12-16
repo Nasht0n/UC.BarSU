@@ -111,9 +111,10 @@ namespace Web.Report
                 {
                     TableRow row = commissionTable.AddRow();
                     Paragraph authorColumn = row.Cells[3].AddParagraph();
-                    TextRange fullname = authorColumn.AppendText($"{commission.Fullname}, {commission.Post.Trim().ToLower()}");
+                    TextRange fullname = authorColumn.AppendText($"{commission.Fullname}");
                     commissionTable.Rows.Insert(index,row);
                     fullname.CharacterFormat.FontSize = 12;
+                    authorColumn.Format.HorizontalAlignment = HorizontalAlignment.Center;
                     index++;
                 }
                 document.Replace("$RegisterDate", act.ProtocolDate.ToShortDateString(), false, true);

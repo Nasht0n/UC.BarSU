@@ -91,16 +91,18 @@ namespace Web.Controllers
                 var saved = ModelConverter.ImplementationResearchActModel.GetAct(model);
                 actRepository.Save(saved);
 
-                foreach (var item in saved.Authors)
+                if (model.Id != 0)
                 {
-                    authorsRepository.Save(new ImplementationResearchActAuthors { ActId = saved.Id, Fullname = item.Fullname, Post = item.Post, AcademicDegree = item.AcademicDegree, AcademicStatus = item.AcademicStatus });
-                }
+                    foreach (var item in saved.Authors)
+                    {
+                        authorsRepository.Save(new ImplementationResearchActAuthors { ActId = saved.Id, Fullname = item.Fullname, Post = item.Post, AcademicDegree = item.AcademicDegree, AcademicStatus = item.AcademicStatus });
+                    }
 
-                foreach (var item in saved.Employees)
-                {
-                    employeesRepository.Save(new ImplementationResearchActEmployees { ActId = saved.Id, Fullname = item.Fullname, Post = item.Post });
+                    foreach (var item in saved.Employees)
+                    {
+                        employeesRepository.Save(new ImplementationResearchActEmployees { ActId = saved.Id, Fullname = item.Fullname, Post = item.Post });
+                    }
                 }
-
                 var lifeCycles = lifeCycleRepository.GetLifeCycles(saved);
                 if (lifeCycles.Count == 0) lifeCycleRepository.Save(new ImplementationResearchActLifeCycle { ActId = saved.Id, Date = DateTime.Now, Title = "Создание акта внедрения", Message = $"Научный проект студента успешно внедрен в производство." });
             }

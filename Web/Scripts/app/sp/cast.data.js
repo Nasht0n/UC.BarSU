@@ -89,7 +89,8 @@ $("body").on("click", "#btnSave", function () {
         dataType: "json",
         traditional: true,
         success: function (data) {
-            document.location.href = "/SP/Index";
+            if (model.Id == 0) document.location.href = "/SP/Index";
+            else document.location.href = "/SP/Details/" + model.Id;
         }
     });
 });

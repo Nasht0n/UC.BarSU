@@ -97,11 +97,13 @@ namespace Web.Controllers
                 var saved = ModelConverter.ImplementationStudentActModel.GetAct(model);
                 actRepository.Save(saved);
 
-                foreach (var item in saved.Comissions)
+                if (model.Id != 0)
                 {
-                    comissionRepository.Save(new ImplementationStudentActComission { ActId = saved.Id, Fullname = item.Fullname, Post = item.Post });
+                    foreach (var item in saved.Comissions)
+                    {
+                        comissionRepository.Save(new ImplementationStudentActComission { ActId = saved.Id, Fullname = item.Fullname, Post = item.Post });
+                    }
                 }
-
                 var lifeCycles = lifeCycleRepository.GetLifeCycles(saved);
                 if (lifeCycles.Count == 0) lifeCycleRepository.Save(new ImplementationStudentActLifeCycle { ActId = saved.Id, Date = DateTime.Now, Title = "Создание акта внедрения", Message = $"Научный проект студента успешно внедрен в производство." });
             }

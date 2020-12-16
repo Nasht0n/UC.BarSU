@@ -48,7 +48,7 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             AppUser user = GetUserInfo();
-            SetViewBags(user);                       
+            SetViewBags(user);
             ScienceProjectListViewModel model = new ScienceProjectListViewModel();
             List<ScienceProject> scienceProjects = GetProjectList(user);
             model.ScienceProjects = DataConverter.ScienceProjectModel.GetScienceProjects(scienceProjects);
@@ -58,7 +58,7 @@ namespace Web.Controllers
         private List<ScienceProject> GetProjectList(AppUser user)
         {
             List<ScienceProject> result = new List<ScienceProject>();
-            var permissions = userPermissionsRepository.GetUserPermissions(user);            
+            var permissions = userPermissionsRepository.GetUserPermissions(user);
             var all = permissions.Any(p => p.PermissionId == (int)PermissionTypes.SP_PROJECTLISTVIEW_ALL);
             if (all) result = projectRepository.GetProjects();
             else result = projectRepository.GetProjects(user);
@@ -69,7 +69,7 @@ namespace Web.Controllers
         {
             AppUser user = GetUserInfo();
             SetViewBags(user);
-            
+
             SPDetailsViewModel model = new SPDetailsViewModel();
             model.Project = projectRepository.GetProject(id);
             model.Stages = stageRepository.GetStages(model.Project);
@@ -84,7 +84,7 @@ namespace Web.Controllers
         {
             AppUser user = GetUserInfo();
             SetViewBags(user);
-            ScienceProjectViewModel model = new ScienceProjectViewModel() { OrderDate = DateTime.Now, RegistrationDate = DateTime.Now, StartDate = DateTime.Now, EndDate=DateTime.Now };
+            ScienceProjectViewModel model = new ScienceProjectViewModel() { OrderDate = DateTime.Now, RegistrationDate = DateTime.Now, StartDate = DateTime.Now, EndDate = DateTime.Now };
             InitSelectList(model);
             return View(model);
         }
@@ -92,26 +92,31 @@ namespace Web.Controllers
         public JsonResult AddScienceProject(ScienceProjectViewModel model)
         {
             var user = GetUserInfo();
-
-            if(model.StateId == 0) {
+            if (model.StateId == 0)
+            {
                 model.UserId = user.Id;
                 model.StateId = (int)ProjectStates.JustCreated;
             }
 
-            var project = projectRepository.GetProject(model.Id);
-            foreach (var item in project.Casts)
+            if (model.Id != 0)
             {
-                castRepository.Delete(item);
+                var project = projectRepository.GetProject(model.Id);
+                foreach (var item in project.Casts)
+                {
+                    castRepository.Delete(item);
+                }
             }
 
             var saved = ModelConverter.ScienceProjectModel.GetScienceProject(model);
             projectRepository.Save(saved);
 
-            foreach(var item in saved.Casts)
+            if (model.Id != 0)
             {
-                castRepository.Save(new Cast { Degree = item.Degree, Fullname = item.Fullname, IsManager = item.IsManager, Post = item.Post, ProjectId = saved.Id, Status = item.Status });
+                foreach (var item in saved.Casts)
+                {
+                    castRepository.Save(new Cast { Degree = item.Degree, Fullname = item.Fullname, IsManager = item.IsManager, Post = item.Post, ProjectId = saved.Id, Status = item.Status });
+                }
             }
-
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
@@ -123,7 +128,7 @@ namespace Web.Controllers
 
         [HttpGet]
         public ActionResult GetDepartments(string faculty)
-        {            
+        {
             IEnumerable<SelectListItem> departments = helper.GetDepartments(faculty, departmentRepository);
             return Json(departments, JsonRequestBehavior.AllowGet);
         }
@@ -228,8 +233,8 @@ namespace Web.Controllers
             {
                 ProjectId = model.Project.Id,
                 StageTypeId = model.SelectedStageType
-            };           
-            stage = stageRepository.Save(stage);            
+            };
+            stage = stageRepository.Save(stage);
             // путь к сохранению файлов
             string uploadPath = Server.MapPath("~/Files/SP/") + $"{model.Project.Id}";
             if (!Directory.Exists(uploadPath))
@@ -241,7 +246,7 @@ namespace Web.Controllers
                 // получаем имя файла
                 string fileName = Path.GetFileNameWithoutExtension(file.FileName);
                 // получаем расширение файла
-                string fileExtension = Path.GetExtension(file.FileName);                             
+                string fileExtension = Path.GetExtension(file.FileName);
                 // получение полного пути к файлу
                 var filePath = uploadPath + fileName.Trim() + "_" + stage.Id + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + fileExtension;
                 file.SaveAs(filePath);
@@ -256,7 +261,7 @@ namespace Web.Controllers
                 reportRepository.Save(report);
             }
 
-            if (stage.StageTypeId == (int) StageTypes.Final)
+            if (stage.StageTypeId == (int)StageTypes.Final)
             {
                 var project = projectRepository.GetProject(model.Project.Id);
                 project.StateId = (int)ProjectStates.Finished;
@@ -277,5 +282,6 @@ namespace Web.Controllers
             // скачиваем выбранный файл с сервера
             return File(file.Path, file_type, filename);
         }
+
     }
 }

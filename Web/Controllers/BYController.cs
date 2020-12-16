@@ -140,7 +140,27 @@ namespace Web.Controllers
             SetViewBags(user);
             var bankYouth = bankYouthRepository.GetBankYouth(id);
             BankYouthViewModel model = DataConverter.BankYouthModel.GetBankYouth(bankYouth);
+            SelectList list = new SelectList(
+                 new List<SelectListItem> {
+                     new SelectListItem { Text = "Да", Value = "True"},
+                     new SelectListItem { Text = "Нет", Value = "False"},
+                    }, "Value", "Text", model.IsExcellentStudent.ToString() );
+            model.ExcellentStudentList = list;
             return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(BankYouthViewModel model)
+        {
+            AppUser user = GetUserInfo();
+            if (ModelState.IsValid)
+            {
+                BankYouth bankYouth = ModelConverter.BankYouthModel.GetBankYouth(model);
+                bankYouth.UserId = user.Id;
+                bankYouth.EditDate = DateTime.Now;
+                bankYouthRepository.Save(bankYouth);
+                return RedirectToAction("Details", "BY", new { id = bankYouth.Id });
+            }
+            return View();
         }
 
         [HttpPost]
