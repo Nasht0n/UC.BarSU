@@ -7,13 +7,13 @@ namespace Common.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddCreateAndEditDateToBY : IMigrationMetadata
+    public sealed partial class Init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddCreateAndEditDateToBY));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
         
         string IMigrationMetadata.Id
         {
-            get { return "202012150923104_AddCreateAndEditDateToBY"; }
+            get { return "202012210729218_Init"; }
         }
         
         string IMigrationMetadata.Source

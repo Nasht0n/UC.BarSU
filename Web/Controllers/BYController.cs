@@ -85,6 +85,7 @@ namespace Web.Controllers
                 BankYouth bankYouth = ModelConverter.BankYouthModel.GetBankYouth(model);
                 bankYouth.UserId = user.Id;
                 bankYouth.CreateDate = DateTime.Now;
+                bankYouth.EditDate = DateTime.Now;
                 bankYouthRepository.Save(bankYouth);
                 return RedirectToAction("Details", "BY", new { id = bankYouth.Id });
             }

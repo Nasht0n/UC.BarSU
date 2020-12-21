@@ -74,13 +74,9 @@
     <Compile Include="Entities\ScienceProjectReport.cs" />
     <Compile Include="Entities\Stage.cs" />
     <Compile Include="Entities\StageType.cs" />
-    <Compile Include="Migrations\202012091851387_Init.cs" />
-    <Compile Include="Migrations\202012091851387_Init.designer.cs">
-      <DependentUpon>202012091851387_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012150923104_AddCreateAndEditDateToBY.cs" />
-    <Compile Include="Migrations\202012150923104_AddCreateAndEditDateToBY.designer.cs">
-      <DependentUpon>202012150923104_AddCreateAndEditDateToBY.cs</DependentUpon>
+    <Compile Include="Migrations\202012210729218_Init.cs" />
+    <Compile Include="Migrations\202012210729218_Init.designer.cs">
+      <DependentUpon>202012210729218_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,11 +87,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202012091851387_Init.resx">
-      <DependentUpon>202012091851387_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012150923104_AddCreateAndEditDateToBY.resx">
-      <DependentUpon>202012150923104_AddCreateAndEditDateToBY.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202012210729218_Init.resx">
+      <DependentUpon>202012210729218_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
