@@ -63,6 +63,7 @@ namespace Web.ViewModels.IA.Students
 
         public int UserId { get; set; }
 
+        public List<ImplementationStudentActLifeCycle> LifeCycles { get; set; } = new List<ImplementationStudentActLifeCycle>();
         public List<ImplementationStudentActComission> Commission { get; set; } = new List<ImplementationStudentActComission>();
     }
 }

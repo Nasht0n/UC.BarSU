@@ -187,7 +187,7 @@
                 <hr />
                 <div class="d-flex">
                     <div class="ml-auto p-2">
-                        <button type="button" class="rounded-outline-btn">Вернуться к списку научных проектов</button>
+                        <a href="@Url.Action("Details","SP",new { id = Model.Id })" class="btn btn-outline-secondary">Вернуться к списку научных проектов</a>
                     </div>
                     <div class="p-2">
                         <button type="button" id="btnSave" class="rounded-btn">

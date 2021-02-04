@@ -77,7 +77,8 @@ namespace Web.Data
                     Result = act.Result,
                     Scope = act.Scope,
                     UserId = act.UserId,
-                    Commission = act.Comissions.ToList()                    
+                    Commission = act.Comissions.ToList(),
+                    LifeCycles = act.LifeCycles.ToList()
                 };
                 return model;
             }
@@ -111,7 +112,8 @@ namespace Web.Data
                     UnitUsing = act.UnitUsing,
                     ProjectName = act.ProjectName,
                     Employees = act.Employees,
-                    Authors = act.Authors
+                    Authors = act.Authors,
+                    LifeCycles = act.LifeCycles
                 };                
                 return model;
             }

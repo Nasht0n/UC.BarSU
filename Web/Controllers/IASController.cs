@@ -36,7 +36,7 @@ namespace Web.Controllers
         }
 
         public ActionResult Index()
-        {
+        {            
             AppUser user = GetUserInfo();
             SetViewBags(user);
             IAStudentListViewModel model = new IAStudentListViewModel();

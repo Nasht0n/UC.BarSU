@@ -48,5 +48,6 @@ namespace Web.ViewModels.IA.Research
         [Required(ErrorMessage = "Укажите авторов, результатов НИР")]
         [Display(Name = "Авторы результатов НИР")]
         public IList<ImplementationResearchActAuthors> Authors { get; set; }
+        public IList<ImplementationResearchActLifeCycle> LifeCycles { get; set; } = new List<ImplementationResearchActLifeCycle>();
     }
 }
