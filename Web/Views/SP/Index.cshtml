@@ -63,17 +63,18 @@
         </div>
         <hr class="my-3 px-5" />
         <h6 class="ml-3 my-1">Поиск за период</h6>
+
         <div class="row mx-3 my-3">
-            <div class="col-md-5 p-0">
+            <div class="col-md-5 mt-1">
                 <input name="min" id="min" type="text" placeholder="Стартовая дата периода" class="form-control d-inline" autocomplete="off">
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 mt-1">
                 <input name="max" id="max" type="text" placeholder="Конец периода" class="form-control d-inline" autocomplete="off">
             </div>
-            <div class="col-md-2 p-0">
-                <button class="btn btn-outline-primary w-100" id="btnClear">
+            <div class="col-md-2">
+                <button class="rounded-outline-btn" id="btnClear">
                     <i class="fa fa-eraser"></i>
-                    <span>Очистить</span>
+                    <span style="font-size:14px;">Очистить</span>
                 </button>
             </div>
         </div>
@@ -108,11 +109,18 @@
                                 <span class="badge badge-success">Завершен</span>
                             }
                         </td>
-                        <td class="small" >
+                        <td class="small">
                             <span class="ml-3">@item.Name</span>
                         </td>
                         <td class="text-center small">
-                            <span>@item.Casts.SingleOrDefault(c => c.IsManager).Fullname</span>
+                            @if (item.Casts != null)
+                            {
+
+                                <span>
+                                    @item.Casts.SingleOrDefault(c => c.IsManager).Fullname
+                                </span>
+
+                            }
                         </td>
 
                         <td class="text-center small">
