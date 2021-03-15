@@ -1,0 +1,138 @@
+﻿@model Web.ViewModels.PS.PaidServiceViewModel
+
+@{
+    ViewBag.Title = "Редактирование хозяйственного договора";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<section id="ps_create">
+    <h2 class="section-title">Редактирование хозяйственного договора</h2>
+    <div class="container">
+        @using (Html.BeginForm("EditPaidService", "PaidService", FormMethod.Post, new { id = "editPaidServiceForm" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.HiddenFor(x => x.Id, htmlAttributes: new { id = "Id" })
+                @Html.HiddenFor(x => x.UserId, htmlAttributes: new { id = "UserId" })
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.OrderNumber, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.OrderNumber, new { htmlAttributes = new { @class = "form-control", id = "OrderNumber" } })
+                                @Html.ValidationMessageFor(model => model.OrderNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.OrderDate, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @class = "form-control", id = "OrderDate" } })
+                                @Html.ValidationMessageFor(model => model.OrderDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Name" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Address" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.ServiceName, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.ServiceName, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "ServiceName" } })
+                        @Html.ValidationMessageFor(model => model.ServiceName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row m-1">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Fullname, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Fullname" } })
+                        @Html.ValidationMessageFor(model => model.Fullname, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Post, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Post, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Post" } })
+                        @Html.ValidationMessageFor(model => model.Post, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Degree, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Degree, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Degree" } })
+                        @Html.ValidationMessageFor(model => model.Degree, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", id = "Status" } })
+                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.PeriodOfExecution, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.PeriodOfExecution, new { htmlAttributes = new { @class = "form-control", id = "PeriodOfExecution" } })
+                                @Html.ValidationMessageFor(model => model.PeriodOfExecution, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.TotalCost, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.TotalCost, new { htmlAttributes = new { @class = "form-control", id = "TotalCost" } })
+                                @Html.ValidationMessageFor(model => model.TotalCost, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="d-flex">
+                    <div class="ml-auto p-2">
+                        <a href="@Url.Action("Index","PS")" class="btn btn-outline-secondary">Вернуться к списку научных проектов</a>
+                    </div>
+                    <div class="p-2">
+                        <button type="button" id="btnSave" class="btn btn-primary">
+                            <i class="fa fa-save"></i>
+                            <span class="ml-1">Сохранить</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+
+@section Scripts{
+    <script src="~/Scripts/app/sp/datatables.js"></script>
+    <script src="~/Scripts/app/sp/cast.data.js"></script>
+    <script src="~/Scripts/app/sp/selectlist.init.js"></script>
+    <script src="~/Scripts/app/sp/stages.js"></script>
+}
+
+
+

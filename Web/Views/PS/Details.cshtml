@@ -1,0 +1,58 @@
+﻿@model Web.ViewModels.PS.PaidServiceViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<section id="sp_details">
+    <div class="container">
+        <div class="d-flex my-1">
+            <div class="py-2">
+                <a class="rounded-btn" href="@Url.Action("Edit", "PS", new { id = Model.Id })">Редактировать</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <div>
+                            <h3>@Model.ServiceName</h3>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Наименование заказчика</h5>
+                        <h6 class="card-subtitle text-muted">@Model.Name</h6>
+                        <h5 class="card-title">Местоположение заказчика</h5>
+                        <h6 class="card-subtitle text-muted">@Model.Address</h6>
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><b>Договор </b> №@Model.OrderNumber от @Model.OrderDate.ToShortDateString()</li>
+                        <li class="list-group-item"><b>Исполнитель</b> @Model.Fullname, @Model.Post, @Model.Degree, @Model.Status</li>
+                        <li class="list-group-item"><b>Срок выполнения работы:</b> @Model.PeriodOfExecution</li>
+                        <li class="list-group-item"><b>Общая стоимость:</b> @Model.TotalCost</li>
+                    </ul>
+                    <div class="card-footer text-muted">
+                        <div class="d-flex">
+                            <div class="ml-auto">
+                                Добавил в систему: @Model.User.Fullname
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/Scripts/app/sp/datatables.js"></script>
+    <script src="~/Scripts/app/sp/cast.data.js"></script>
+    <script src="~/Scripts/app/sp/selectlist.init.js"></script>
+    <script src="~/Scripts/app/sp/stages.js"></script>
+}
+
+

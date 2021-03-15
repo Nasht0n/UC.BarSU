@@ -56,6 +56,10 @@ namespace Web.Infrastructure
             kernel.Bind<IBankYouthPublicationRepository>().To<BankYouthPublicationRepository>();
             kernel.Bind<IBankYouthDocumentationRepository>().To<BankYouthDocumentationRepository>();
             #endregion
+
+            #region PS Repository
+            kernel.Bind<IPaidServicesRepository>().To<PaidServicesRepository>();
+            #endregion
         }
 
         public object GetService(Type serviceType)

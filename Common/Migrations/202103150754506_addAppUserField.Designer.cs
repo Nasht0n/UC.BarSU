@@ -7,13 +7,13 @@ namespace Common.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class addAppUserField : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addAppUserField));
         
         string IMigrationMetadata.Id
         {
-            get { return "202012210729218_Init"; }
+            get { return "202103150754506_addAppUserField"; }
         }
         
         string IMigrationMetadata.Source

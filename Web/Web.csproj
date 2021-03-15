@@ -660,6 +660,7 @@
     <Compile Include="Controllers\BYController.cs" />
     <Compile Include="Controllers\IARController.cs" />
     <Compile Include="Controllers\IASController.cs" />
+    <Compile Include="Controllers\PSController.cs" />
     <Compile Include="Controllers\SPController.cs" />
     <Compile Include="Controllers\UCController.cs" />
     <Compile Include="Data\DataConverter.cs" />
@@ -690,6 +691,8 @@
     <Compile Include="ViewModels\IA\Students\IAStudentViewModel.cs" />
     <Compile Include="ViewModels\LifeCycleMessageModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\PS\PaidServiceListViewModel.cs" />
+    <Compile Include="ViewModels\PS\PaidServiceViewModel.cs" />
     <Compile Include="ViewModels\SP\ScienceProjectListViewModel.cs" />
     <Compile Include="ViewModels\SP\ScienceProjectViewModel.cs" />
     <Compile Include="ViewModels\SP\SPDetailsViewModel.cs" />
@@ -719,6 +722,10 @@
     <Content Include="Views\BY\Details.cshtml" />
     <Content Include="Views\BY\Create.cshtml" />
     <Content Include="Views\BY\Edit.cshtml" />
+    <Content Include="Views\PS\Index.cshtml" />
+    <Content Include="Views\PS\Details.cshtml" />
+    <Content Include="Views\PS\Create.cshtml" />
+    <Content Include="Views\PS\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

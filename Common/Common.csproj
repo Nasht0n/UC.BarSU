@@ -69,14 +69,19 @@
     <Compile Include="Entities\ImplementationStudentAct.cs" />
     <Compile Include="Entities\ImplementationStudentActComission.cs" />
     <Compile Include="Entities\ImplementationStudentActLifeCycle.cs" />
+    <Compile Include="Entities\PaidServices.cs" />
     <Compile Include="Entities\ProjectState.cs" />
     <Compile Include="Entities\ScienceProject.cs" />
     <Compile Include="Entities\ScienceProjectReport.cs" />
     <Compile Include="Entities\Stage.cs" />
     <Compile Include="Entities\StageType.cs" />
-    <Compile Include="Migrations\202012210729218_Init.cs" />
-    <Compile Include="Migrations\202012210729218_Init.designer.cs">
-      <DependentUpon>202012210729218_Init.cs</DependentUpon>
+    <Compile Include="Migrations\202103150709041_Init.cs" />
+    <Compile Include="Migrations\202103150709041_Init.designer.cs">
+      <DependentUpon>202103150709041_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103150754506_addAppUserField.cs" />
+    <Compile Include="Migrations\202103150754506_addAppUserField.designer.cs">
+      <DependentUpon>202103150754506_addAppUserField.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,8 +92,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202012210729218_Init.resx">
-      <DependentUpon>202012210729218_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202103150709041_Init.resx">
+      <DependentUpon>202103150709041_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103150754506_addAppUserField.resx">
+      <DependentUpon>202103150754506_addAppUserField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

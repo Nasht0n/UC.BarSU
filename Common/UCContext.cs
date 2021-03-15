@@ -48,6 +48,9 @@ namespace Common
         public virtual DbSet<BankYouthDocumentation> Documentations { get; set; }
         public virtual DbSet<BankYouthPublication> Publications { get; set; }
         #endregion
+
+        public virtual DbSet<PaidServices> PaidServices { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AppUserPermissions>().HasKey(c => new { c.UserId, c.PermissionId });

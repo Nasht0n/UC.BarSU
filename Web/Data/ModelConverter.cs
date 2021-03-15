@@ -4,6 +4,7 @@ using Web.ViewModels.IA.Students;
 using Web.ViewModels.IA.Research;
 using Web.ViewModels.BY;
 using System.Linq;
+using Web.ViewModels.PS;
 
 namespace Web.Data
 {
@@ -122,6 +123,30 @@ namespace Web.Data
                     YearOfInclusion = model.YearOfInclusion,
                     CreateDate = model.CreateDate,
                     EditDate = model.EditDate
+                };
+                return result;
+            }
+        }
+
+        public static class PaidServiceModel
+        {
+            public static PaidServices GetPaidService(PaidServiceViewModel model)
+            {
+                PaidServices result = new PaidServices
+                {
+                    Id = model.Id,
+                    Address = model.Address,
+                    Degree = model.Degree,
+                    Fullname = model.Fullname,
+                    Name = model.Name,
+                    OrderDate = model.OrderDate,
+                    OrderNumber = model.OrderNumber,
+                    PeriodOfExecution = model.PeriodOfExecution,
+                    Post = model.Post,
+                    ServiceName = model.ServiceName,
+                    Status = model.Status,
+                    TotalCost = model.TotalCost,
+                    UserId = model.UserId
                 };
                 return result;
             }

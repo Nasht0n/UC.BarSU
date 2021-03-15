@@ -6,6 +6,7 @@ using Web.ViewModels;
 using Web.ViewModels.BY;
 using Web.ViewModels.IA.Research;
 using Web.ViewModels.IA.Students;
+using Web.ViewModels.PS;
 
 namespace Web.Data
 {
@@ -163,6 +164,41 @@ namespace Web.Data
                     YearOfInclusion = bankYouth.YearOfInclusion,
                     CreateDate = bankYouth.CreateDate,
                     EditDate = bankYouth.EditDate
+                };
+                return model;
+            }
+        }
+
+        public static class PaidServiceModel
+        {
+            public static List<PaidServiceViewModel> GetPaidServices(List<PaidServices> paidServices)
+            {
+                List<PaidServiceViewModel> list = new List<PaidServiceViewModel>();
+                foreach (var paidService in paidServices)
+                {
+                    var item = GetPaidService(paidService);
+                    list.Add(item);
+                }
+                return list;
+            }
+
+            public static PaidServiceViewModel GetPaidService(PaidServices paidService)
+            {
+                PaidServiceViewModel model = new PaidServiceViewModel
+                {
+                    Id = paidService.Id,
+                    Address = paidService.Address,
+                    Degree = paidService.Degree,
+                    Fullname = paidService.Fullname,
+                    Name = paidService.Name,
+                    OrderDate = paidService.OrderDate,
+                    OrderNumber = paidService.OrderNumber,
+                    PeriodOfExecution = paidService.PeriodOfExecution,
+                    Post = paidService.Post,
+                    ServiceName = paidService.ServiceName,
+                    Status = paidService.Status,
+                    TotalCost = paidService.TotalCost,
+                    UserId = paidService.UserId
                 };
                 return model;
             }
